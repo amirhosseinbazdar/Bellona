@@ -5,6 +5,9 @@ out/
 *.tsbuildinfo
 next-env.d.ts
 
+# saved leads (LEAD_STORE_DIR) and other runtime data: never commit
+/data/
+
 # secrets and local env
 .env
 .env.local

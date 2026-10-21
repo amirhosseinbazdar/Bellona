@@ -46,11 +46,11 @@ export function ContactForm({ locale, copy, defaultNeed }: { locale: Locale; cop
 
   useEffect(() => {
     if (state.status === "idle") return;
-    track(state.status === "success" ? "form_success" : state.status === "invalid" ? "form_invalid" : "form_error", { locale });
+    track(state.status === "success" ? "form_success" : state.status === "stored" ? "form_stored" : state.status === "invalid" ? "form_invalid" : "form_error", { locale });
     statusRef.current?.focus();
   }, [state, locale]);
 
-  if (state.status === "success") {
+  if (state.status === "success" || state.status === "stored") {
     return (
       <div className="card flex flex-col items-start gap-4 border border-line-dark bg-ink-2 p-8">
         <span aria-hidden="true" className="flex size-12 items-center justify-center rounded-full bg-orange text-ink">
@@ -59,7 +59,7 @@ export function ContactForm({ locale, copy, defaultNeed }: { locale: Locale; cop
           </svg>
         </span>
         <p ref={statusRef} tabIndex={-1} role="status" className="text-2xl font-bold outline-none">
-          {copy.success}
+          {state.status === "stored" ? copy.stored : copy.success}
         </p>
       </div>
     );

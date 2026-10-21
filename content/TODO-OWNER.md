@@ -57,7 +57,7 @@ Everything here is your call or needs your input. Nothing on this list has been 
 **Still open**
 - [ ] **AI Real Estate OS (kharazie.at):** the PDF calls it a private delivery, so its card shows a cube house, not a screenshot of the client's site. Send approved screenshots of the system (workflows, CRM) if you want them shown.
 - [ ] **Prowem:** prowem.com shows only "Coming soon", so the card uses a cube illustration. Send app screenshots (iOS/Android) to replace it.
-- [ ] **Bellona AI Agency (old site):** listed last, linking to bellonaagency.com. Once this new site goes live on that domain, remove `url` from the `bellona-v1` entry (or the whole entry).
+- [x] **Bellona AI Agency (old site):** removed from the projects (owner request, 2026-10-22). Project order now starts Kharazie, Codechee, Yasin, Konjed, Microshamim; the home page shows the first three.
 - [ ] **School-Builders and Elm-Kala:** both Railway addresses in the PDF (`jkh-production…` and `app-production-7816…`) return 404 "Not Found". Their cards use cube illustrations and have no "visit" link. Send their live addresses (or screenshots) and add `url` / `cover` / `gallery` back.
 - [ ] **Mojasame Saidi:** mojasamesaidi.ir timed out from our network, so there are no screenshots yet (a cube illustration for now). The link is kept. Send screenshots, or let Claude retry once it loads.
 

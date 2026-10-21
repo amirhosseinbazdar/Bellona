@@ -708,6 +708,7 @@ export const en: Dict = {
       submit: "Send request",
       sending: "Sending…",
       success: "Got it. We'll reply within [24 h].",
+      stored: "Got it. Your message is saved on our server, but our notification link is down right now, so our reply may take a little longer than usual.",
       error: "Something went wrong on our side. Please email us at bellona.ai.team@gmail.com.",
       errors: {
         name: "Please tell us your name.",

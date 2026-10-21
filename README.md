@@ -85,7 +85,9 @@ npm run lint && npm run build
 - The form posts to a server action (`app/actions/contact.ts`). It validates with zod, drops bots (honeypot field + minimum fill time), then:
   1. POSTs JSON to `LEAD_WEBHOOK_URL` (your n8n / Make flow), with the optional `x-bellona-secret` header.
   2. Falls back to an email via Resend (`RESEND_API_KEY`, `LEAD_FROM_EMAIL`, `LEAD_TO_EMAIL`) if the webhook is missing or fails.
-  3. In development without either, it logs the lead to the server console instead.
+  3. If both fail (e.g. international internet is cut) and `LEAD_STORE_DIR` is set, it appends the lead to `<dir>/leads-YYYY-MM.jsonl` on this server and tells the visitor it was saved but the reply may be slower. Without a store the visitor sees an error: the form never reports success for a lead it did not keep. The directory must be persistent disk, and `/data/` is git-ignored.
+  4. In development without any transport, it logs the lead to the server console instead.
+- Each external call times out after 6 s, so a hanging international route delays the visitor by at most ~12 s.
 - **Webhook payload:**
   ```json
   {
@@ -97,6 +99,24 @@ npm run lint && npm run build
   ```
 - **Prefilling:** `/contact?need=ai`, `?industry=finance` (used by the pillar and industry CTAs).
 - **Booking:** set `BOOKING_URL` (Cal.com / Calendly). Every "Book a 30-min free call" button links there; without it they go to `/contact`.
+
+## International cut-off (offline readiness)
+
+If international connectivity from Iran is lost but this server and the local network stay up, the site keeps working: every page, image, font (Plus Jakarta Sans, JetBrains Mono, Lalezar, Estedad), script, animation and the 3D section is served from this server. Nothing loads from a CDN at runtime, and `next build` needs no font downloads (all fonts are files in `app/fonts/`).
+
+What still depends on international access:
+
+| Dependency | When it matters | What happens during a cut-off |
+|---|---|---|
+| `LEAD_WEBHOOK_URL` if hosted abroad (n8n cloud, Make) | every form submit | Times out; Resend is tried next. Point it at a self-hosted n8n on the local network to avoid this. |
+| Resend (`api.resend.com`) | form fallback | Fails; the lead is saved locally if `LEAD_STORE_DIR` is set, otherwise the visitor sees an error. |
+| Lead emails to Gmail (`LEAD_TO_EMAIL`) | reading leads | Even when sent, Gmail may be unreachable from Iran. Read `LEAD_STORE_DIR` files or the local n8n instead. |
+| `BOOKING_URL` (Cal.com / Calendly) | only if set | "Book a call" buttons open a site that won't load. Leave it empty to keep them on `/contact`. |
+| Google Analytics (`NEXT_PUBLIC_ANALYTICS_ID`) | only if set | Stops recording; one console error; the page is unaffected. |
+| Outbound links: Instagram, the Gmail `mailto` address, project sites hosted abroad (konjed.top, niraperfume.com, the *.vercel.app sites, kharazie.at, prowem.com) | visitor clicks | Those external pages won't open; .ir project sites depend on where they are hosted. The site itself is unaffected. |
+| `npm ci` (registry.npmjs.org) | building / deploying | A fresh install needs the npm registry or an Iranian mirror. Running an existing build does not. |
+
+How it was verified: production build and server run with every non-local connection blocked (a test-only Node preload), every page loaded in headless Chrome with all non-local requests aborted, and the contact form submitted against an unreachable, a hanging, and a local-network webhook.
 
 ## Analytics
 

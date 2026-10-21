@@ -294,6 +294,8 @@ export interface Dict {
       submit: string;
       sending: string;
       success: string;
+      /** Saved on our server because every delivery route was down; the reply may be slower. */
+      stored: string;
       error: string;
       errors: { name: string; email: string; needs: string; message: string };
       privacy: string;

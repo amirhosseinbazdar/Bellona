@@ -20,7 +20,8 @@ export type Lead = z.infer<typeof leadSchema>;
 export type LeadField = "name" | "email" | "needs" | "message";
 
 export interface LeadState {
-  status: "idle" | "success" | "invalid" | "error";
+  /** "stored": every external delivery route failed, but the lead is saved on our own server (LEAD_STORE_DIR). */
+  status: "idle" | "success" | "stored" | "invalid" | "error";
   /** Increments on every server response so the form can re-mount with the returned values. */
   attempt: number;
   errors?: Partial<Record<LeadField, true>>;
