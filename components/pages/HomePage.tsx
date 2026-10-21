@@ -28,11 +28,12 @@ export function HomePage({ locale }: { locale: Locale }) {
       <Flow d={d} />
       <Industries d={d} />
       <div className="pt-24 lg:pt-32">
-        <Why d={d} />
+        <Why d={d} withCompare={false} />
       </div>
       <Team d={d} />
       <Testimonials d={d} />
-      <Faq d={d} />
+      {/* Short list on the home page; the rest live on the service pages. */}
+      <Faq d={d} items={[0, 1, 4, 5].map((i) => d.faq.items[i])} />
       <Contact d={d} />
     </>
   );

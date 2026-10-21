@@ -24,28 +24,30 @@ export function Problems({ d }: { d: Dict }) {
           </>
         }
       >
-        <ul className="grid gap-4 md:grid-cols-2">
+        <ul className="flex flex-col gap-4">
           {problems.cards.map((c, i) => (
             <li
               key={c.title}
               data-reveal=""
-              style={{ "--d": i % 2 } as CSSProperties}
-              className="card lift group flex flex-col gap-5 border border-line p-7 hover:border-ink"
+              style={{ "--d": i } as CSSProperties}
+              className="card lift group grid items-center gap-6 border border-line p-6 hover:border-ink sm:grid-cols-[auto_1fr] sm:p-7"
             >
-              <div className="flex items-start justify-between gap-4">
-                <VoxelArt model={PILLAR_MODEL[c.pillar]} className="h-32 w-auto" />
-                <span className="chip bg-surface text-ink">{pillarShort(d, c.pillar)}</span>
-              </div>
-              <h3 className="t-h3">{c.title}</h3>
-              {/* Bullets only, to keep the home page scannable; the full quotes live on the AI page. */}
-              <ul className="mt-auto flex flex-col gap-2 border-t border-line pt-5">
+              <VoxelArt model={PILLAR_MODEL[c.pillar]} className="h-28 w-auto" />
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-wrap items-center gap-3">
+                  <h3 className="t-h3">{c.title}</h3>
+                  <span className="chip bg-surface text-ink">{pillarShort(d, c.pillar)}</span>
+                </div>
+                {/* Bullets only, to keep the home page scannable; the full quotes live on the AI page. */}
+                <ul className="flex flex-col gap-1.5">
                 {c.bullets.map((b) => (
                   <li key={b} className="flex items-start gap-3 text-[15px] text-muted">
                     <MiniCube className="mt-1.5 size-3 shrink-0" />
                     {b}
                   </li>
                 ))}
-              </ul>
+                </ul>
+              </div>
             </li>
           ))}
         </ul>

@@ -6,31 +6,36 @@ import { INDUSTRY_MODEL } from "../voxel/models";
 import { ArrowIcon, Chips, Eyebrow, LLink, StickySplit } from "../ui";
 
 /**
- * Home: heading held in place beside a 2-column card grid.
- * `full` (on /industries): 3-column grid with "what we'd build" chips and anchors.
+ * Home: heading held in place beside compact cards (shape, name, one line).
+ * `full` (on /industries): larger cards with "what we'd build" chips, a CTA and anchors.
  */
 export function Industries({ d, full = false }: { d: Dict; full?: boolean }) {
   const { industries, locale } = d;
 
   const cards = (
-    <ul className={`grid gap-4 sm:grid-cols-2 ${full ? "lg:grid-cols-3" : ""}`}>
+    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {industries.items.map((ind, i) => (
         <li
           key={ind.id}
           id={full ? ind.id : undefined}
           data-reveal=""
-          style={{ "--d": i % (full ? 3 : 2) } as CSSProperties}
-          className={`card lift group flex scroll-mt-6 flex-col gap-5 p-7 ${full ? "border border-line" : "bg-paper"}`}
+          style={{ "--d": i % 3 } as CSSProperties}
+          className={`card lift group flex scroll-mt-6 flex-col ${full ? "gap-5 border border-line p-7" : "gap-3 bg-paper p-5"}`}
         >
-          <VoxelArt model={INDUSTRY_MODEL[ind.id] ?? "stack"} className="h-40 w-auto self-start sm:h-48" gap="stroke-paper" />
-          <h3 className="t-h3">{ind.title}</h3>
-          <p className="flex-grow leading-relaxed text-muted">{ind.text}</p>
+          <VoxelArt
+            model={INDUSTRY_MODEL[ind.id] ?? "stack"}
+            className={`w-auto self-start ${full ? "h-40 sm:h-48" : "h-28"}`}
+            gap="stroke-paper"
+          />
+          <h3 className={full ? "t-h3" : "text-xl font-bold tracking-[-0.01em] rtl:font-extrabold rtl:tracking-normal"}>{ind.title}</h3>
+          <p className={`flex-grow leading-relaxed text-muted ${full ? "" : "text-[15px]"}`}>{ind.text}</p>
           {full && (
             <div className="flex flex-col gap-3">
               <p className="t-eyebrow text-orange-text">{industries.buildLabel}</p>
               <Chips items={ind.build} />
             </div>
           )}
+          {full && (
           <LLink
             locale={locale}
             href={`/contact?industry=${ind.id}`}
@@ -40,6 +45,7 @@ export function Industries({ d, full = false }: { d: Dict; full?: boolean }) {
             {industries.cardCta}
             <ArrowIcon size={16} />
           </LLink>
+          )}
         </li>
       ))}
     </ul>

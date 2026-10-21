@@ -113,12 +113,6 @@ export const en: Dict = {
         bullets: ["Slow pages and unclear offers", "Forms nobody fills in", "Every change needs a developer"],
       },
       {
-        pillar: "product",
-        title: "Tools That Don't Fit",
-        quote: "You run the business on spreadsheets and apps that don't talk to each other. The product you need doesn't exist off the shelf.",
-        bullets: ["Data copied by hand between tools", "No single view of the numbers", "A product idea stuck in the backlog"],
-      },
-      {
         pillar: "ai",
         title: "Manual Operations",
         quote:
@@ -131,18 +125,6 @@ export const en: Dict = {
         quote:
           "Leads come in. Follow-ups slip. Your CRM is a graveyard of missed opportunities because nobody has time to nurture properly.",
         bullets: ["Leads going cold within hours", "Follow-ups always ‘tomorrow’", "Pipeline data you can't trust"],
-      },
-      {
-        pillar: "ai",
-        title: "Broken Automations",
-        quote: "You didn't start a business to spend weekends fixing Zapier flows or wondering why your integrations broke again.",
-        bullets: ["Integrations that silently fail", "Tools that don't talk to each other", "Weekends lost to tech debt"],
-      },
-      {
-        pillar: "bizdev",
-        title: "Growth Without a Plan",
-        quote: "You know you should grow, but nobody owns the plan. Campaigns start and stop, and nobody can say what worked.",
-        bullets: ["No clear target market or offer", "Campaigns without tracking", "Partnerships that never get followed up"],
       },
     ],
     close: "The strategy isn't the problem. **You've never had enough systems.**",
