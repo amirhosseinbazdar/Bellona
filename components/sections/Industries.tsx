@@ -26,6 +26,7 @@ export function Industries({ d, full = false }: { d: Dict; full?: boolean }) {
             model={INDUSTRY_MODEL[ind.id] ?? "stack"}
             className={`w-auto self-start ${full ? "h-40 sm:h-48" : "h-28"}`}
             gap="stroke-paper"
+            anim="rise"
           />
           <h3 className={full ? "t-h3" : "text-xl font-bold tracking-[-0.01em] rtl:font-extrabold rtl:tracking-normal"}>{ind.title}</h3>
           <p className={`flex-grow leading-relaxed text-muted ${full ? "" : "text-[15px]"}`}>{ind.text}</p>

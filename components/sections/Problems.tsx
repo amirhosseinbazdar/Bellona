@@ -28,11 +28,11 @@ export function Problems({ d }: { d: Dict }) {
           {problems.cards.map((c, i) => (
             <li
               key={c.title}
-              data-reveal=""
+              data-reveal="side"
               style={{ "--d": i } as CSSProperties}
               className="card lift group grid items-center gap-6 border border-line p-6 hover:border-ink sm:grid-cols-[auto_1fr] sm:p-7"
             >
-              <VoxelArt model={PILLAR_MODEL[c.pillar]} className="h-28 w-auto" />
+              <VoxelArt model={PILLAR_MODEL[c.pillar]} className="h-28 w-auto" anim="pop" />
               <div className="flex flex-col gap-3">
                 <div className="flex flex-wrap items-center gap-3">
                   <h3 className="t-h3">{c.title}</h3>

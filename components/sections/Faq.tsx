@@ -9,7 +9,7 @@ export function FaqList({ items }: { items: FaqItem[] }) {
   return (
     <ul className="rule-list flex flex-col border-y border-line">
       {items.map((f, i) => (
-        <li key={f.q} data-reveal="" style={{ "--d": Math.min(i, 4) } as CSSProperties}>
+        <li key={f.q} data-reveal="fade" style={{ "--d": Math.min(i, 4) } as CSSProperties}>
           <details className="group">
             <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-semibold [&::-webkit-details-marker]:hidden">
               {f.q}

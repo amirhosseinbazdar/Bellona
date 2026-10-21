@@ -35,6 +35,7 @@ export function VoxelArt({
   swap,
   label,
   headroom = 18,
+  anim,
 }: {
   model?: ModelName;
   voxels?: Vox[];
@@ -47,6 +48,8 @@ export function VoxelArt({
   label?: string;
   /** Space above the model for the hover lift and drop-in. */
   headroom?: number;
+  /** How the cubes assemble on reveal: drop (default), rise from below, or pop from their footprint. */
+  anim?: "drop" | "rise" | "pop";
 }) {
   const list = voxels ?? (model ? MODELS[model] : []);
   const occupied = new Set(list.map(([x, y, z]) => `${x},${y},${z}`));
@@ -91,6 +94,7 @@ export function VoxelArt({
     <svg
       viewBox={viewBox}
       className={`vox overflow-visible ${className}`}
+      data-anim={anim}
       role={label ? "img" : undefined}
       aria-label={label}
       aria-hidden={label ? undefined : true}

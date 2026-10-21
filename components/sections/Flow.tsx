@@ -21,7 +21,7 @@ export function Flow({ d }: { d: Dict }) {
           <SectionHead id="flow-title" eyebrow={flow.eyebrow} title={flow.title} sub={flow.sub} size="t-h2-sm" />
           <ol className="flex flex-col">
             {flow.nodes.map((node, i) => (
-              <li key={node.label} data-reveal="" style={{ "--d": i } as CSSProperties} className="flex flex-col items-start">
+              <li key={node.label} data-reveal="side" style={{ "--d": i } as CSSProperties} className="flex flex-col items-start">
                 <div
                   className={`lift flex w-full items-center gap-4 rounded-2xl px-5 py-4 ${
                     i === last ? "bg-orange text-ink" : i === 0 ? "bg-ink text-paper" : "border border-line bg-paper"

@@ -153,7 +153,7 @@ export function Work({ d }: { d: Dict }) {
         />
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((p, i) => (
-            <li key={p.slug} data-reveal="" style={{ "--d": i } as CSSProperties}>
+            <li key={p.slug} data-reveal="clip" style={{ "--d": i } as CSSProperties}>
               <ProjectCard project={p} d={d} variant="compact" />
             </li>
           ))}

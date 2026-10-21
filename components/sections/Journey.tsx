@@ -24,7 +24,7 @@ export function Journey({ d, full = false, headless = false }: { d: Dict; full?:
           {journey.steps.map((step, i) => (
             <li
               key={step.title}
-              data-reveal=""
+              data-reveal="fade"
               style={{ "--d": i } as CSSProperties}
               className="group relative flex gap-5 pb-10 lg:flex-col lg:gap-6 lg:pb-0 lg:pe-5"
             >

@@ -54,7 +54,7 @@ export function Pillars({ d, stats = true }: { d: Dict; stats?: boolean }) {
         <SectionHead id="pillars-title" eyebrow={d.pillars.eyebrow} title={d.pillars.title} sub={d.pillars.sub} dark />
         <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
           {d.pillars.items.map((p, i) => (
-            <li key={p.id} data-reveal="" style={{ "--d": i } as CSSProperties} className={`${spans[i]} ${i === 4 ? "md:col-span-2" : ""} flex`}>
+            <li key={p.id} data-reveal="pop" style={{ "--d": i } as CSSProperties} className={`${spans[i]} ${i === 4 ? "md:col-span-2" : ""} flex`}>
               <PillarCard p={p} d={d} className="w-full" />
             </li>
           ))}

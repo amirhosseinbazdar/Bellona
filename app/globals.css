@@ -102,7 +102,8 @@
 
   /* Type scale. EN pairs 300/400 with 600; FA pairs 300 with 800 and is never letter-spaced. */
   .t-hero {
-    font-size: clamp(40px, 6.2vw, 92px);
+    /* Height-aware so the CTA fits the first screen on laptop windows (~1366×657). */
+    font-size: clamp(40px, min(6.2vw, 9.5svh), 92px);
     line-height: 0.98;
     font-weight: 400;
     letter-spacing: -0.055em;
@@ -170,7 +171,7 @@
   }
 
   :lang(fa) .t-hero {
-    font-size: clamp(36px, 5.2vw, 80px);
+    font-size: clamp(36px, min(5.2vw, 8svh), 80px);
     line-height: 1.3;
     font-weight: 500;
     letter-spacing: 0;
@@ -326,22 +327,47 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Scroll reveal: [data-reveal] rises and fades in; --d staggers siblings. */
+/*
+ * Scroll reveal. Each section uses its own entrance so the page never repeats one effect:
+ *   ""     rise (default)        "side"  slide in from the start edge
+ *   "pop"  small scale-up        "clip"  wipe up from the bottom (images)
+ *   "fade" opacity only
+ * --d staggers siblings.
+ */
 .reveal-ready [data-reveal] {
   opacity: 0;
   transform: translate3d(0, 18px, 0);
   /* Hover (.lift) animates translate/rotate, which compose with this transform and get no stagger delay. */
-  transition-property: opacity, transform, translate, rotate, background-color, border-color, color;
-  transition-duration: 0.9s, 1s, 0.5s, 0.5s, 0.3s, 0.3s, 0.3s;
+  transition-property: opacity, transform, clip-path, translate, rotate, background-color, border-color, color;
+  transition-duration: 0.9s, 1s, 1.1s, 0.5s, 0.5s, 0.3s, 0.3s, 0.3s;
   transition-timing-function: var(--ease-out);
-  transition-delay: calc(var(--d, 0) * 90ms), calc(var(--d, 0) * 90ms), 0s, 0s, 0s, 0s, 0s;
+  transition-delay: calc(var(--d, 0) * 90ms), calc(var(--d, 0) * 90ms), calc(var(--d, 0) * 90ms), 0s, 0s, 0s, 0s, 0s;
 }
-.reveal-ready [data-reveal="scale"] {
-  transform: scale(0.98) translate3d(0, 12px, 0);
+.reveal-ready [data-reveal="side"] {
+  transform: translate3d(-28px, 0, 0);
+}
+.reveal-ready [dir="rtl"] [data-reveal="side"],
+.reveal-ready[dir="rtl"] [data-reveal="side"] {
+  transform: translate3d(28px, 0, 0);
+}
+.reveal-ready [data-reveal="pop"] {
+  transform: scale(0.94);
+  transition-timing-function: var(--ease-spring);
+}
+.reveal-ready [data-reveal="clip"] {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(100% 0 0 0 round 28px);
+}
+.reveal-ready [data-reveal="fade"] {
+  transform: none;
 }
 .reveal-ready [data-reveal].is-in {
   opacity: 1;
   transform: none;
+}
+.reveal-ready [data-reveal="clip"].is-in {
+  clip-path: inset(0 0 0 0 round 28px);
 }
 
 /* Hero intro (CSS only, runs before hydration). The h1 only moves, so it still counts for LCP at once. */
@@ -393,6 +419,30 @@
 .reveal-ready .vox.is-in .vx {
   animation: vxDrop 0.9s var(--ease-out) backwards;
   animation-delay: calc(var(--i) * 75ms);
+}
+/* Variants, chosen per section: layers rise from below, or pop in from their footprint. */
+@keyframes vxRise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+}
+@keyframes vxPop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+.reveal-ready .vox[data-anim="rise"].is-in .vx {
+  animation-name: vxRise;
+}
+.reveal-ready .vox[data-anim="pop"] .vx {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.reveal-ready .vox[data-anim="pop"].is-in .vx {
+  animation-name: vxPop;
+  animation-timing-function: var(--ease-spring);
 }
 .group:hover .vox:not(.vox-static) .vx,
 .group:focus-visible .vox:not(.vox-static) .vx {
@@ -463,6 +513,22 @@
     stroke-dashoffset: -260;
   }
 }
+/* Hero floor fades out under the headline instead of ending at a hard edge (mask only, no colour gradient). */
+.hero-floor {
+  -webkit-mask-image: linear-gradient(to right, transparent 12%, #000 62%), linear-gradient(to bottom, #000 72%, transparent);
+  mask-image: linear-gradient(to right, transparent 12%, #000 62%), linear-gradient(to bottom, #000 72%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+[dir="rtl"] .hero-floor {
+  -webkit-mask-image: linear-gradient(to left, transparent 12%, #000 62%), linear-gradient(to bottom, #000 72%, transparent);
+  mask-image: linear-gradient(to left, transparent 12%, #000 62%), linear-gradient(to bottom, #000 72%, transparent);
+}
+.hero-floor-mobile {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 28%, #000 80%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 28%, #000 80%, transparent);
+}
+
 /* Paused until Motion adds .anim-on once the page is idle, so they don't compete with first load. */
 .iso-float {
   animation: isoFloat 4.8s ease-in-out infinite paused;
