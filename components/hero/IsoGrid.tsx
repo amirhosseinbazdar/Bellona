@@ -116,7 +116,16 @@ const onSide = (x: number, side: DecorSide) => side === "all" || (side === "righ
  * `decor` keeps the orange pieces away from the headline: on the full-width desktop floor only the
  * logo's half is decorated, the text half shows plain grey tiles that fade out.
  */
-export function IsoGrid({ className, decor = "all" }: { className?: string; decor?: DecorSide }) {
+export function IsoGrid({
+  className,
+  decor = "all",
+  cubes: showCubes = true,
+}: {
+  className?: string;
+  decor?: DecorSide;
+  /** Small floor cubes. Off on the desktop floor, where Hero places them around the logo instead. */
+  cubes?: boolean;
+}) {
   return (
     <svg viewBox="0 0 1440 560" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden="true" focusable="false">
       <g>
@@ -141,7 +150,7 @@ export function IsoGrid({ className, decor = "all" }: { className?: string; deco
       <g className="stroke-paper" strokeWidth={1.5} strokeLinejoin="round">
         {cubes.map(([n, m, h], i) => {
           const [cx, cy] = center(n, m);
-          if (!onSide(cx, decor)) return null;
+          if (!showCubes || !onSide(cx, decor)) return null;
           return Array.from({ length: h }, (_, level) => <Cube key={`${n}-${m}-${level}`} cx={cx} cy={cy + HH * 0.35} level={level} i={i} />);
         })}
       </g>
