@@ -6,14 +6,19 @@ import { Rich } from "../Rich";
 import { MiniCube, VoxelArt } from "../voxel/Voxel";
 import type { Vox } from "../voxel/models";
 
-// Positions are relative to the logo column; the logo fills roughly its middle 50%.
-const FLOATERS: { x: string; y: string; size: string; v: Vox[] }[] = [
-  { x: "4%", y: "18%", size: "h-10 w-auto", v: [[0, 0, 0, "o"]] },
-  { x: "88%", y: "26%", size: "h-14 w-auto", v: [[0, 0, 0, "o"], [0, 0, 1, "o"]] },
-  { x: "10%", y: "74%", size: "h-12 w-auto", v: [[0, 0, 0, "k"], [1, 0, 0, "o"]] },
-  { x: "84%", y: "78%", size: "h-9 w-auto", v: [[0, 0, 0, "o"]] },
-];
 import { ArrowIcon, LLink } from "../ui";
+
+/**
+ * Small cubes around the logo, positioned relative to the logo's own box and always outside it:
+ * a loose ring on the floor, larger and lower in front, smaller and higher behind (depth).
+ * Mirrored automatically in RTL (inline-start).
+ */
+const SATELLITES: { x: string; y: string; size: string; v: Vox[] }[] = [
+  { x: "-42%", y: "68%", size: "h-14", v: [[0, 0, 0, "k"], [1, 0, 0, "o"]] }, // front, start side
+  { x: "-26%", y: "16%", size: "h-8", v: [[0, 0, 0, "o"]] }, // back, start side
+  { x: "114%", y: "26%", size: "h-9", v: [[0, 0, 0, "o"]] }, // back, end side
+  { x: "110%", y: "70%", size: "h-16", v: [[0, 0, 0, "o"], [0, 0, 1, "o"]] }, // front, end side
+];
 
 /**
  * Hero: headline on one side, the animated cube mark on the tiled floor on the other (desktop),
@@ -57,16 +62,17 @@ export function Hero({ d }: { d: Dict }) {
         </div>
         <div className="relative -mx-4 h-[340px] sm:-mx-6 sm:h-[460px] lg:mx-0 lg:h-[min(640px,calc(100svh-120px))]">
           <IsoGrid className="hero-floor-mobile absolute inset-0 size-full lg:hidden" cubes={false} />
-          {/* A few small cubes in fixed spots well clear of the logo, so they never touch it. */}
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden lg:block">
-            {FLOATERS.map((c, i) => (
-              <span key={i} className="iso-float absolute" style={{ insetInlineStart: c.x, top: c.y, "--i": i } as CSSProperties}>
-                <VoxelArt voxels={c.v} className={c.size} headroom={0} anim="pop" />
-              </span>
-            ))}
-          </div>
           <div className="relative flex h-full items-center justify-center">
-            <HeroMark className="h-auto w-[210px] sm:w-[290px] lg:w-[min(360px,40svh)]" />
+            <div className="relative">
+              <HeroMark className="h-auto w-[210px] sm:w-[290px] lg:w-[min(380px,44svh)]" />
+              <div aria-hidden="true" className="pointer-events-none hidden lg:block">
+                {SATELLITES.map((c, i) => (
+                  <span key={i} className="iso-float absolute" style={{ insetInlineStart: c.x, top: c.y, "--i": i } as CSSProperties}>
+                    <VoxelArt voxels={c.v} className={`${c.size} w-auto`} headroom={0} anim="pop" />
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
