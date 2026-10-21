@@ -4,6 +4,7 @@ import { Rich } from "../Rich";
 import { VoxelArt } from "../voxel/Voxel";
 import { INDUSTRY_MODEL } from "../voxel/models";
 import { ArrowIcon, Chips, Eyebrow, LLink, StickySplit } from "../ui";
+import { RollText } from "../RollText";
 
 /**
  * Home: heading held in place beside compact cards (shape, name, one line).
@@ -78,7 +79,7 @@ export function Industries({ d, full = false }: { d: Dict; full?: boolean }) {
             <p className="t-lead text-body">{industries.sub}</p>
             <p className="text-muted">{industries.more}</p>
             <LLink locale={locale} href="/industries" className="btn btn-sm btn-outline self-start">
-              {industries.seeAll}
+              <RollText>{industries.seeAll}</RollText>
             </LLink>
           </>
         }

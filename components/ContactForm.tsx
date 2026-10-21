@@ -8,6 +8,7 @@ import type { Dict, Locale } from "@/content/types";
 import { localePath } from "@/lib/i18n";
 import { initialLeadState, MODEL_IDS, NEED_IDS } from "@/lib/lead";
 import { track } from "./Analytics";
+import { RollText } from "./RollText";
 
 type FormCopy = Dict["contact"]["form"];
 
@@ -99,7 +100,7 @@ export function ContactForm({ locale, copy, defaultNeed }: { locale: Locale; cop
           {copy.needs.map((n) => (
             <label
               key={n.id}
-              className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line-input px-4 text-sm font-semibold transition-colors has-checked:border-orange has-checked:bg-orange has-checked:text-ink has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-orange"
+              className="chip-check inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line-input px-4 text-sm font-semibold transition-colors has-checked:border-orange has-checked:bg-orange has-checked:text-ink has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-orange"
             >
               <input
                 type="checkbox"
@@ -125,7 +126,7 @@ export function ContactForm({ locale, copy, defaultNeed }: { locale: Locale; cop
           {copy.budgets.map((b) => (
             <label
               key={b.id}
-              className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line-input px-4 text-sm font-semibold transition-colors has-checked:border-paper has-checked:bg-paper has-checked:text-ink has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-orange"
+              className="chip-check inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line-input px-4 text-sm font-semibold transition-colors has-checked:border-paper has-checked:bg-paper has-checked:text-ink has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-orange"
             >
               <input type="radio" name="budget" value={b.label} defaultChecked={v.budget === b.label} className="size-4 accent-ink focus:outline-none" />
               {b.label}
@@ -207,7 +208,7 @@ export function ContactForm({ locale, copy, defaultNeed }: { locale: Locale; cop
       )}
 
       <button type="submit" disabled={pending} className="btn btn-primary w-full disabled:cursor-wait disabled:opacity-70">
-        {pending ? copy.sending : copy.submit}
+        <RollText>{pending ? copy.sending : copy.submit}</RollText>
       </button>
       <p className="text-sm text-muted-dark">
         {copy.privacy}{" "}

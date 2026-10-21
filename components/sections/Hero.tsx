@@ -7,6 +7,7 @@ import { MiniCube, VoxelArt } from "../voxel/Voxel";
 import type { Vox } from "../voxel/models";
 
 import { ArrowIcon, LLink } from "../ui";
+import { RollText } from "../RollText";
 
 /**
  * Small cubes around the logo, positioned relative to the logo's own box and always outside it:
@@ -42,11 +43,11 @@ export function Hero({ d }: { d: Dict }) {
           <p className="t-lead max-w-[600px] text-body">{hero.sub}</p>
           <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
             <LLink locale={locale} href="/contact" className="btn btn-primary" track="hero_start">
-              {hero.primary}
+              <RollText>{hero.primary}</RollText>
               <ArrowIcon />
             </LLink>
             <LLink locale={locale} href="/work" className="btn btn-outline bg-paper" track="hero_work">
-              {hero.secondary}
+              <RollText>{hero.secondary}</RollText>
             </LLink>
           </div>
           <ul className="inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-1 rounded-[28px] bg-surface px-5 py-3 text-[15px] text-body sm:rounded-full">

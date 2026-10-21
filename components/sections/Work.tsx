@@ -6,6 +6,7 @@ import type { Dict, PillarId } from "@/content/types";
 import { featuredProjects, type Project, type ProjectTone } from "@/content/work";
 import { localePath } from "@/lib/i18n";
 import { ArrowIcon, LLink, SectionHead } from "../ui";
+import { RollText } from "../RollText";
 
 const toneCls: Record<ProjectTone, { box: string; label: string }> = {
   ink: { box: "bg-ink", label: "text-muted-dark" },
@@ -146,7 +147,7 @@ export function Work({ d }: { d: Dict }) {
           title={d.work.title}
           action={
             <LLink locale={d.locale} href="/work" className="btn btn-sm btn-ink" track="work_all">
-              {d.work.all}
+              <RollText>{d.work.all}</RollText>
               <ArrowIcon />
             </LLink>
           }

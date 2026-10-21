@@ -17,6 +17,7 @@ import { Compare, Why } from "../sections/Why";
 import { pillarShort, ProjectCard } from "../sections/Work";
 import { ArrowIcon, Chips, Eyebrow, LLink, PageHero } from "../ui";
 import { WorkFilter } from "../WorkFilter";
+import { RollText } from "../RollText";
 
 export function PartnerPage({ locale }: { locale: Locale }) {
   const d = getDict(locale);
@@ -134,7 +135,7 @@ export function CaseStudyPage({ locale, slug }: { locale: Locale; slug: string }
             data-track="cta"
             data-track-label={`work_visit_${project.slug}`}
           >
-            {cs.visit}
+            <RollText>{cs.visit}</RollText>
             <ArrowIcon />
             <span className="sr-only"> {d.common.opensNewTab}</span>
           </a>
@@ -224,11 +225,13 @@ export function CaseStudyPage({ locale, slug }: { locale: Locale; slug: string }
       )}
       <nav aria-label={cs.back} className="wrap flex flex-wrap justify-between gap-4 py-16">
         <LLink locale={locale} href="/work" className="btn btn-outline">
-          {cs.back}
+          <RollText>{cs.back}</RollText>
         </LLink>
         {next && (
           <LLink locale={locale} href={`/work/${next.slug}`} className="btn btn-ink">
-            {cs.next}: {next[locale].title}
+            <RollText>
+              {cs.next}: {next[locale].title}
+            </RollText>
             <ArrowIcon />
           </LLink>
         )}

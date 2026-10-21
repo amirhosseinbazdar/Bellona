@@ -6,6 +6,7 @@ import { bookingUrl } from "@/lib/site";
 import { Icon } from "./Icon";
 import { MiniCube } from "./voxel/Voxel";
 import { Rich } from "./Rich";
+import { RollText } from "./RollText";
 
 /** Section eyebrow (mono, uppercase in EN; Estedad bold in FA). */
 export function Eyebrow({ children, dark = false, className = "" }: { children: ReactNode; dark?: boolean; className?: string }) {
@@ -94,7 +95,7 @@ export function BookLink({
   children?: ReactNode;
   track: string;
 }) {
-  const content = children ?? d.common.bookCall;
+  const content = <RollText>{children ?? d.common.bookCall}</RollText>;
   if (bookingUrl) {
     return (
       <a

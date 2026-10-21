@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import type { Dict } from "@/content/types";
 import { stepNum } from "@/lib/format";
 import { ArrowIcon, LLink, SectionHead } from "../ui";
+import { RollText } from "../RollText";
 
 /**
  * Strategy → Design → Build → Automate → Grow → Support.
@@ -65,7 +66,7 @@ export function Journey({ d, full = false, headless = false }: { d: Dict; full?:
           <p className="max-w-2xl text-lg text-body">{journey.startAnywhere}</p>
           {!full && (
             <LLink locale={locale} href="/partner" className="btn btn-ink" track="journey_partner">
-              {journey.cta}
+              <RollText>{journey.cta}</RollText>
               <ArrowIcon />
             </LLink>
           )}

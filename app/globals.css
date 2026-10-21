@@ -106,31 +106,31 @@
     /* Height-aware so the CTA fits the first screen on laptop windows (~1366×657). */
     font-size: clamp(40px, min(6.2vw, 9.5svh), 92px);
     line-height: 0.98;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.055em;
   }
   .t-h1 {
     font-size: clamp(42px, 6.4vw, 96px);
     line-height: 1;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.05em;
   }
   .t-h2 {
     font-size: clamp(36px, 5vw, 72px);
     line-height: 1;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.045em;
   }
   .t-h2-sm {
     font-size: clamp(32px, 4vw, 56px);
     line-height: 1.05;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.04em;
   }
   .t-statement {
     font-size: clamp(28px, 4vw, 56px);
     line-height: 1.12;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.035em;
   }
   .t-h3 {
@@ -156,11 +156,11 @@
     line-height: 1;
   }
   .accent {
-    font-weight: 700;
+    font-weight: 800;
     color: var(--color-orange);
   }
   .accent-ink {
-    font-weight: 700;
+    font-weight: 800;
   }
   .hl {
     background: var(--color-ink);
@@ -174,20 +174,20 @@
   :lang(fa) .t-hero {
     font-size: clamp(36px, min(5.2vw, 8svh), 80px);
     line-height: 1.3;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0;
   }
   :lang(fa) .t-h1 {
     font-size: clamp(34px, 5vw, 72px);
     line-height: 1.35;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0;
   }
   :lang(fa) .t-h2,
   :lang(fa) .t-h2-sm {
     font-size: clamp(30px, 4.2vw, 60px);
     line-height: 1.35;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0;
   }
   :lang(fa) .t-h2-sm {
@@ -196,7 +196,7 @@
   :lang(fa) .t-statement {
     font-size: clamp(24px, 3.2vw, 44px);
     line-height: 1.6;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0;
   }
   :lang(fa) .t-h3 {
@@ -206,7 +206,7 @@
   }
   :lang(fa) .t-lead {
     line-height: 1.9;
-    font-weight: 600;
+    font-weight: 700;
   }
   :lang(fa) .t-eyebrow {
     font-family: var(--font-fa);
@@ -217,7 +217,7 @@
   }
   :lang(fa) .t-num {
     letter-spacing: 0;
-    font-weight: 600;
+    font-weight: 700;
   }
   :lang(fa) .accent,
   :lang(fa) .accent-ink {
@@ -464,6 +464,42 @@
   translate: 0 -1px;
 }
 
+/* Rolling labels (components/RollText.tsx), inspired by dmazing.studio: on hover the text slides
+   up and its copy (a text-shadow, read once by screen readers) slides in from below. */
+.roll {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  line-height: 1.3;
+  padding-block: 0.06em;
+}
+.roll > span {
+  display: inline-block;
+  text-shadow: 0 1.5em currentColor;
+  transition: transform 0.45s var(--ease-out);
+}
+:is(a, button):hover .roll > span,
+:is(a, button):focus-visible .roll > span {
+  transform: translate3d(0, -1.5em, 0);
+}
+
+/* Click: a short press, then a springy release. */
+.btn:active,
+.btn:hover:active {
+  transform: scale(0.96);
+  transition-duration: 0.08s;
+}
+
+/* Form choice chips pop once when picked. */
+@keyframes chipPop {
+  50% {
+    transform: scale(1.07);
+  }
+}
+.chip-check:has(:checked) {
+  animation: chipPop 0.38s var(--ease-spring);
+}
+
 /* Buttons: small lift, arrow nudges forward. */
 .btn {
   transition:
@@ -584,8 +620,14 @@ html.lenis {
   }
   .btn:hover,
   .btn:hover svg,
-  .group:hover .vox .vx {
+  .btn:active,
+  .group:hover .vox .vx,
+  :is(a, button):hover .roll > span,
+  :is(a, button):focus-visible .roll > span {
     transform: none;
+  }
+  .chip-check:has(:checked) {
+    animation: none;
   }
 }
 

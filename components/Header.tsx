@@ -6,6 +6,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { Dict, Locale } from "@/content/types";
 import { localePath, stripLocale } from "@/lib/i18n";
 import { LogoMark } from "./LogoMark";
+import { RollText } from "./RollText";
 
 export interface HeaderProps {
   locale: Locale;
@@ -117,7 +118,7 @@ export function Header({ locale, common, pillars, servicesLabel, book }: HeaderP
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className="block whitespace-nowrap rounded-full px-4 py-3.5 text-base font-medium 2xl:px-5 2xl:text-[17px] transition-colors hover:bg-paper aria-[current=page]:bg-ink aria-[current=page]:text-paper"
                 >
-                  {item.label}
+                  <RollText>{item.label}</RollText>
                 </Link>
               </li>
             ))}
@@ -158,7 +159,7 @@ export function Header({ locale, common, pillars, servicesLabel, book }: HeaderP
             <span aria-hidden="true" className="flex size-12 items-center justify-center rounded-full bg-orange text-xl font-extrabold text-ink">
               {common.bookInitial}
             </span>
-            <span className="whitespace-nowrap text-base font-semibold 2xl:text-[17px]">{common.bookCall}</span>
+            <span className="whitespace-nowrap text-base font-semibold 2xl:text-[17px]"><RollText>{common.bookCall}</RollText></span>
             {book.external && <span className="sr-only"> {common.opensNewTab}</span>}
           </a>
         </div>
@@ -222,7 +223,7 @@ export function Header({ locale, common, pillars, servicesLabel, book }: HeaderP
                 </ul>
                 <div className="mt-auto flex flex-col gap-4">
                   <a {...bookProps} className="btn btn-primary self-start" data-track="cta" data-track-label="menu_book">
-                    {common.bookCall}
+                    <RollText>{common.bookCall}</RollText>
                   </a>
                   {common.footer.social.map((s) => (
                     <a key={s.href} href={s.href} target="_blank" rel="noopener noreferrer" className="text-muted-dark hover:text-paper">

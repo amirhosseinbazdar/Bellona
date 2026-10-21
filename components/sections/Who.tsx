@@ -3,6 +3,7 @@ import { clientLogos } from "@/content/proof";
 import type { Dict } from "@/content/types";
 import { Rich } from "../Rich";
 import { Eyebrow, LLink } from "../ui";
+import { RollText } from "../RollText";
 
 /** Client logo strip. Renders nothing until content/proof.ts has real logos. */
 export function ClientStrip({ d }: { d: Dict }) {
@@ -36,7 +37,7 @@ export function Who({ d }: { d: Dict }) {
           </p>
         </div>
         <LLink locale={d.locale} href="/about" className="btn btn-outline" track="who_story">
-          {d.who.cta}
+          <RollText>{d.who.cta}</RollText>
         </LLink>
       </div>
     </section>
