@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...en.pillars.items.map((p) => `/services/${p.slug}`),
     "/partner",
     "/industries",
+    ...en.industries.items.map((i) => `/industries/${i.id}`),
     "/work",
     ...projects.filter((p) => p.status === "published").map((p) => `/work/${p.slug}`),
     "/about",

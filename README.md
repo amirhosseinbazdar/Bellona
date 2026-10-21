@@ -3,6 +3,8 @@
 Bilingual marketing site for **Bellona**: English at `/`, Persian (RTL) at `/fa`.
 Next.js 16 (App Router) + TypeScript + Tailwind CSS 4. Fonts and brand assets are self-hosted.
 
+**Type:** English uses Plus Jakarta Sans. Persian (/fa only, `app/fonts/`, OFL) uses Lalezar for display (h1/h2, display classes, big numbers, `.fa-display`; always weight 400, emphasis by colour only) and Estedad for everything else (body 700, UI 800, captions 600). The rules live at the end of `app/globals.css` ("Persian type").
+
 ```
 app/                 routes: (en)/… and (fa)/fa/… are two root layouts (different <html lang/dir>)
   actions/contact.ts contact form server action (zod + honeypot → webhook → Resend fallback)
@@ -21,7 +23,7 @@ content/
   factory.ts         Persian copy for the 3D machine
   AUDIT.md COPY.md SITEMAP.md INSPIRATION.md TODO-OWNER.md   planning docs
 public/work/<slug>/  project screenshots (cover.jpg, shot-N.jpg, mobile.jpg)
-assets/              brand source files (logo SVGs, fonts, motion spec)
+assets/              brand source files (logo SVGs, motion spec)
 ```
 
 ## Run it
@@ -70,7 +72,7 @@ npm run lint && npm run build
    - Copy in **both** `en` and `fa`: title, client, sector, summary, challenge, built.
    - `results` only with sourced numbers. Leave it empty otherwise.
    - Optional:
-     - `industries`: industry ids such as `"education"`. The project is then linked from that card on `/industries`.
+     - `industries`: industry ids such as `"education"`. The project is then listed on that sector page (`/industries/<id>`) and linked from its card on `/industries` and the "By industry" links on `/work`.
      - `model`: a voxel shape (`components/voxel/models.ts`) shown in place of screenshots, for private work or sites that are down.
      - `partner` (per language): shown as "In collaboration with".
 3. The list is ranked: put stronger projects first.
@@ -88,7 +90,7 @@ npm run lint && npm run build
   ```json
   {
     "name": "", "email": "", "company": "", "message": "",
-    "needs": ["web", "ai"], "budget": "", "model": "project",
+    "needs": ["web", "ai"], "model": "project",
     "industry": "finance", "locale": "en", "page": "/contact",
     "source": "bellonaagency.com", "receivedAt": "ISO date"
   }
@@ -110,7 +112,7 @@ Leave it empty to load nothing.
 - `sitemap.xml` and `robots.txt` are generated (`app/sitemap.ts`, `app/robots.ts`).
 - JSON-LD: `ProfessionalService` on every page, plus `FAQPage` and `BreadcrumbList` where relevant.
 - OG images come from `/api/og?locale=en&title=…`. The OG renderer can't shape Persian reliably, so Persian cards show the Latin lockup; the Persian title still goes in `og:title`.
-- The old site's `/industries/<name>` URLs 301-redirect to `/industries#<anchor>` (`next.config.ts`).
+- Each industry has its own page, `/industries/<id>` (description, what we'd build, its case studies). The old site's `/industries/realEstate` 301-redirects to `/industries/real-estate` (`next.config.ts`); the other old URLs now match the new pages.
 
 ## Motion
 

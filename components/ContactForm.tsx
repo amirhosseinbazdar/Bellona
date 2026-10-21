@@ -120,21 +120,6 @@ export function ContactForm({ locale, copy, defaultNeed }: { locale: Locale; cop
         )}
       </fieldset>
 
-      <fieldset className="flex flex-col gap-3">
-        <legend className="mb-3 text-base font-bold">{copy.budgetLegend}</legend>
-        <div className="flex flex-wrap gap-2">
-          {copy.budgets.map((b) => (
-            <label
-              key={b.id}
-              className="chip-check inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line-input px-4 text-sm font-semibold transition-colors has-checked:border-paper has-checked:bg-paper has-checked:text-ink has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-orange"
-            >
-              <input type="radio" name="budget" value={b.label} defaultChecked={v.budget === b.label} className="size-4 accent-ink focus:outline-none" />
-              {b.label}
-            </label>
-          ))}
-        </div>
-      </fieldset>
-
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="flex flex-col gap-2 text-sm text-muted-dark">
           {copy.name}

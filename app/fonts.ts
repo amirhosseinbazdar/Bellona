@@ -21,15 +21,33 @@ export const jetbrains = JetBrains_Mono({
   preload: false,
 });
 
-// Estedad (OFL), files from assets/fonts. Body 500, display 400, emphasis 700/800, semibold 600.
+// Persian (/fa only). Both OFL, files and licences in app/fonts/.
+// The CSS stacks built on these are --font-fa-display and --font-fa-body (globals.css @theme).
+// next/font emits a metric-matched fallback face for each (size-adjust etc.), so the swap doesn't shift layout.
+
+// Lalezar: display only (headlines, big numbers). A single weight: never bold it.
+export const lalezar = localFont({
+  src: "./fonts/lalezar/Lalezar-400.woff2",
+  weight: "400",
+  style: "normal",
+  variable: "--font-lalezar",
+  display: "swap",
+  preload: true,
+});
+
+// Estedad: everything else. Body 700, UI 800, captions 500–600, small emphasis 900.
+// next/font preloads per family, not per weight, so this family is not preloaded (six files);
+// it is requested as soon as the stylesheet is parsed.
 export const estedad = localFont({
   src: [
-    { path: "../assets/fonts/estedad-arabic-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "../assets/fonts/estedad-arabic-500-normal.woff2", weight: "500", style: "normal" },
-    { path: "../assets/fonts/estedad-arabic-600-normal.woff2", weight: "600", style: "normal" },
-    { path: "../assets/fonts/estedad-arabic-700-normal.woff2", weight: "700", style: "normal" },
-    { path: "../assets/fonts/estedad-arabic-800-normal.woff2", weight: "800", style: "normal" },
+    { path: "./fonts/estedad/Estedad-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/estedad/Estedad-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/estedad/Estedad-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/estedad/Estedad-700.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/estedad/Estedad-800.woff2", weight: "800", style: "normal" },
+    { path: "./fonts/estedad/Estedad-900.woff2", weight: "900", style: "normal" },
   ],
   variable: "--font-estedad",
   display: "swap",
+  preload: false,
 });

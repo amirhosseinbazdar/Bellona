@@ -31,11 +31,11 @@ export default function GlobalNotFound() {
             <Link href="/" className="btn btn-primary">
               {en.pages.notFound.cta}
             </Link>
-            <Link href="/fa" lang="fa" dir="rtl" className="btn btn-outline font-fa">
+            <Link href="/fa" lang="fa" dir="rtl" className="btn btn-outline font-fa-body">
               {fa.pages.notFound.cta}
             </Link>
           </div>
-          <p lang="fa" dir="rtl" className="font-fa text-lg text-muted">
+          <p lang="fa" dir="rtl" className="font-fa-body text-lg text-muted">
             {fa.meta.notFound.title}. {fa.pages.notFound.text}
           </p>
         </main>

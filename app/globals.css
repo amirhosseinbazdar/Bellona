@@ -22,13 +22,17 @@
   --color-orange-light: #f97316;
   --color-orange-text: #c2410c;
   --color-orange-on-dark: #ff7a33;
+  /* #ff5500 is 2.9:1 on the grey surface; this is the nearest orange that passes 3:1 for large text. */
+  --color-orange-on-surface: #f25000;
   --color-body: #3f3f3f;
   --color-muted: #525252;
   --color-muted-dark: #a3a3a3;
   --color-soft-dark: #d4d4d4;
 
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-fa: var(--font-estedad), var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  /* Persian (/fa). Jakarta stays in the stack so Latin words inside Persian text render cleanly. */
+  --font-fa-display: var(--font-lalezar), var(--font-estedad), var(--font-jakarta), sans-serif;
+  --font-fa-body: var(--font-estedad), var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
 
   --radius-card: 28px;
@@ -58,8 +62,9 @@
   }
   :lang(fa) body,
   body:lang(fa) {
-    font-family: var(--font-fa);
-    font-weight: 600;
+    font-family: var(--font-fa-body);
+    font-weight: 700;
+    line-height: 1.9;
   }
   ::selection {
     background: var(--color-orange);
@@ -171,65 +176,51 @@
     box-decoration-break: clone;
   }
 
+  /*
+   * Persian sizes. Display classes are set in Lalezar (see "Persian type" at the end of this file),
+   * which reads about 1.2x smaller than Estedad at the same px, so they are scaled up. Never under 28px.
+   */
+  /* Phones/tablets: each sentence of the slogan on one line across the full width (the longest is ~10.2em). */
   :lang(fa) .t-hero {
-    font-size: clamp(36px, min(5.2vw, 8svh), 80px);
-    line-height: 1.3;
-    font-weight: 800;
-    letter-spacing: 0;
+    font-size: clamp(30px, calc(9.4vw - 3px), 56px);
+  }
+  /* Desktop: sized so each sentence of the slogan stays on one line in the text column (the longest
+     is ~10.2em wide), and height-aware so the CTA fits the first screen on ~1366x657 windows. */
+  @media (min-width: 1024px) {
+    :lang(fa) .t-hero {
+      font-size: clamp(40px, min(calc(4.6vw - 3px), 8.6svh), 60px);
+    }
   }
   :lang(fa) .t-h1 {
-    font-size: clamp(34px, 5vw, 72px);
-    line-height: 1.35;
-    font-weight: 800;
-    letter-spacing: 0;
+    font-size: clamp(40px, 6vw, 86px);
   }
-  :lang(fa) .t-h2,
-  :lang(fa) .t-h2-sm {
-    font-size: clamp(30px, 4.2vw, 60px);
-    line-height: 1.35;
-    font-weight: 800;
-    letter-spacing: 0;
+  :lang(fa) .t-h2 {
+    font-size: clamp(36px, 5vw, 72px);
   }
   :lang(fa) .t-h2-sm {
-    font-size: clamp(28px, 3.4vw, 48px);
+    font-size: clamp(34px, 4.1vw, 58px);
   }
+  :lang(fa) .t-h3 {
+    font-size: clamp(28px, 2.3vw, 31px);
+  }
+  /* Statements are sentence-length, so they stay in Estedad. */
   :lang(fa) .t-statement {
     font-size: clamp(24px, 3.2vw, 44px);
     line-height: 1.6;
     font-weight: 800;
-    letter-spacing: 0;
-  }
-  :lang(fa) .t-h3 {
-    line-height: 1.6;
-    font-weight: 800;
-    letter-spacing: 0;
   }
   :lang(fa) .t-lead {
     line-height: 1.9;
     font-weight: 700;
   }
   :lang(fa) .t-eyebrow {
-    font-family: var(--font-fa);
+    font-family: var(--font-fa-body);
     font-size: 15px;
     font-weight: 800;
-    letter-spacing: 0;
     text-transform: none;
   }
-  :lang(fa) .t-num {
-    letter-spacing: 0;
-    font-weight: 700;
-  }
-  :lang(fa) .accent,
-  :lang(fa) .accent-ink {
-    font-weight: 800;
-  }
-  :lang(fa) .prose-fa,
-  :lang(fa) p {
-    line-height: 1.9;
-  }
   :lang(fa) .tagline {
-    letter-spacing: 0;
-    word-spacing: 0.4em;
+    word-spacing: 0.3em;
   }
 
   /* Buttons: pills, min 44px tall */
@@ -291,12 +282,6 @@
   .btn-ink:hover {
     background: var(--color-orange);
     color: var(--color-ink);
-  }
-  :lang(fa) .btn {
-    font-weight: 700;
-  }
-  :lang(fa) .btn-primary {
-    font-weight: 800;
   }
 
   .chip {
@@ -657,7 +642,66 @@ html.lenis {
 /* Persian inside mono labels: JetBrains Mono has no Persian glyphs, so use Estedad.
    Unlayered so it beats the .font-mono utility. */
 :lang(fa) .font-mono {
-  font-family: var(--font-fa);
+  font-family: var(--font-fa-body);
+}
+
+/* ---------------------------------------------------------------------------
+ * Persian type (/fa). Unlayered so it beats the weight / tracking / leading utilities in components.
+ *   Lalezar (display): h1, h2, display classes, big numbers and anything marked .fa-display.
+ *   Estedad: everything else. Body 700 · UI (buttons, nav, tags, eyebrows) 800 · captions & footer 600
+ *   · small emphasis (strong) 900.
+ * ------------------------------------------------------------------------- */
+
+/* Persian is never letter-spaced: tracking breaks the letter joins. */
+:lang(fa),
+:lang(fa) * {
+  letter-spacing: 0;
+}
+
+/* Estedad roles */
+:lang(fa) p:not([class*="t-"]) {
+  line-height: 1.9;
+}
+:lang(fa) :is(.btn, .chip, .chip-check, nav a:not(footer *), .t-eyebrow, .tagline) {
+  font-weight: 800;
+}
+:lang(fa) footer :is(p, li, a, span):not(.fa-display, .fa-display *, .t-eyebrow, .tagline) {
+  font-weight: 600;
+}
+:lang(fa) :is(figcaption, small, form p) {
+  font-weight: 600;
+}
+:lang(fa) :is(strong, b):not(.fa-display *) {
+  font-weight: 900;
+}
+
+/* Display last, so it wins every tie with the role rules above. */
+/* Lalezar has one weight. Always 400, never synthesised; emphasis inside it is colour only. */
+:lang(fa) :is(h1, h2:not(.t-eyebrow), .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .t-num, .fa-display),
+:lang(fa) :is(h1, h2:not(.t-eyebrow), .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .t-num, .fa-display) * {
+  font-family: var(--font-fa-display);
+  font-weight: 400;
+  font-synthesis: none;
+}
+:lang(fa) :is(h1, h2:not(.t-eyebrow), .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .fa-display) {
+  line-height: 1.25;
+  text-wrap: balance;
+}
+/* The emphasised word: orange (it is always 28px+ here, so #FF5500 passes on light and dark). */
+:lang(fa) :is(h1, h2, .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .fa-display) :is(.accent, .accent-ink) {
+  color: var(--color-orange);
+}
+/* On the grey surface, a hair darker so large text keeps 3:1. */
+:lang(fa) .bg-surface :is(h1, h2, .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .fa-display) :is(.accent, .accent-ink) {
+  color: var(--color-orange-on-surface);
+}
+/* Accents in running text (under 24px) on light backgrounds use the darker text orange. */
+:lang(fa) :is(.t-lead, p:not([class*="t-"]), li) .accent:not(.on-dark *) {
+  color: var(--color-orange-text);
+}
+/* …except on orange panels, where it stays ink. */
+:lang(fa) .bg-orange :is(.accent, .accent-ink) {
+  color: var(--color-ink);
 }
 
 /* Logo "exploded view" hover (reference/LogoMotion.dc.html, .hx rules) */

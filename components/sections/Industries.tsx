@@ -34,44 +34,60 @@ function IndustryWork({ d, id }: { d: Dict; id: string }) {
 export function Industries({ d, full = false }: { d: Dict; full?: boolean }) {
   const { industries, locale } = d;
 
+  const shape = (ind: (typeof industries.items)[number]) => (
+    <VoxelArt model={INDUSTRY_MODEL[ind.id] ?? "stack"} className={`w-auto self-start ${full ? "h-40 sm:h-48" : "h-28"}`} gap="stroke-paper" anim="rise" />
+  );
+
+  // Home: each card is one link to its sector page. /industries: the card holds its own links
+  // (sector page, case studies), so it is not a link itself.
   const cards = (
     <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {industries.items.map((ind, i) => (
-        <li
-          key={ind.id}
-          id={full ? ind.id : undefined}
-          data-reveal=""
-          style={{ "--d": i % 3 } as CSSProperties}
-          className={`card lift group flex scroll-mt-6 flex-col ${full ? "gap-5 border border-line p-7" : "gap-3 bg-paper p-5"}`}
-        >
-          <VoxelArt
-            model={INDUSTRY_MODEL[ind.id] ?? "stack"}
-            className={`w-auto self-start ${full ? "h-40 sm:h-48" : "h-28"}`}
-            gap="stroke-paper"
-            anim="rise"
-          />
-          <h3 className={full ? "t-h3" : "text-xl font-bold tracking-[-0.01em] rtl:font-extrabold rtl:tracking-normal"}>{ind.title}</h3>
-          <p className={`flex-grow leading-relaxed text-muted ${full ? "" : "text-[15px]"}`}>{ind.text}</p>
-          {full && (
+      {industries.items.map((ind, i) =>
+        full ? (
+          <li
+            key={ind.id}
+            id={ind.id}
+            data-reveal=""
+            style={{ "--d": i % 3 } as CSSProperties}
+            className="card lift group flex scroll-mt-6 flex-col gap-5 border border-line p-7"
+          >
+            {shape(ind)}
+            <h3 className="t-h3">
+              <LLink locale={locale} href={`/industries/${ind.id}`} className="hover:text-orange-text">
+                {ind.title}
+              </LLink>
+            </h3>
+            <p className="flex-grow leading-relaxed text-muted">{ind.text}</p>
             <div className="flex flex-col gap-3">
               <p className="t-eyebrow text-orange-text">{industries.buildLabel}</p>
               <Chips items={ind.build} />
             </div>
-          )}
-          {full && <IndustryWork d={d} id={ind.id} />}
-          {full && (
-          <LLink
-            locale={locale}
-            href={`/contact?industry=${ind.id}`}
-            className="inline-flex items-center gap-2 self-start font-semibold underline-offset-4 hover:text-orange-text hover:underline"
-            track={`industry_${ind.id}`}
-          >
-            {industries.cardCta}
-            <ArrowIcon size={16} />
-          </LLink>
-          )}
-        </li>
-      ))}
+            <IndustryWork d={d} id={ind.id} />
+            <LLink locale={locale} href={`/industries/${ind.id}`} className="btn btn-sm btn-ink self-start" track={`industry_${ind.id}`}>
+              <RollText>{industries.cardLink}</RollText>
+              <ArrowIcon size={16} />
+            </LLink>
+          </li>
+        ) : (
+          <li key={ind.id} data-reveal="" style={{ "--d": i % 3 } as CSSProperties} className="flex">
+            <LLink
+              locale={locale}
+              href={`/industries/${ind.id}`}
+              className="card lift group flex w-full flex-col gap-3 bg-paper p-5"
+              track={`home_industry_${ind.id}`}
+            >
+              {shape(ind)}
+              <h3 className="flex items-center justify-between gap-3 text-xl font-bold tracking-[-0.01em] rtl:font-extrabold rtl:tracking-normal">
+                {ind.title}
+                <span aria-hidden="true" className="text-muted transition-colors group-hover:text-orange-text">
+                  <ArrowIcon size={16} />
+                </span>
+              </h3>
+              <p className="flex-grow text-[15px] leading-relaxed text-muted">{ind.text}</p>
+            </LLink>
+          </li>
+        ),
+      )}
     </ul>
   );
 

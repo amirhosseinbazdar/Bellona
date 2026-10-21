@@ -23,7 +23,6 @@ export async function submitLead(prev: LeadState, form: FormData): Promise<LeadS
     email: str("email"),
     company: str("company"),
     message: str("message"),
-    budget: str("budget"),
     needs: form.getAll("needs").filter((v): v is string => typeof v === "string"),
   };
 
@@ -99,7 +98,6 @@ async function deliver(lead: Lead) {
           `Email: ${lead.email}`,
           `Company: ${lead.company || "-"}`,
           `Needs: ${lead.needs.join(", ")}`,
-          `Budget: ${lead.budget || "-"}`,
           `Engagement model: ${lead.model || "-"}`,
           `Industry: ${lead.industry || "-"}`,
           `Language: ${lead.locale}`,

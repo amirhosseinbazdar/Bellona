@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import type { CSSProperties } from "react";
+import { type CSSProperties, Fragment, type ReactNode } from "react";
 import type { Locale } from "@/content/types";
-import { gridProjects, pageProjects, projects } from "@/content/work";
-import { stepNum } from "@/lib/format";
+import { gridProjects, pageProjects, projects, projectsForIndustry } from "@/content/work";
+import { digits, stepNum } from "@/lib/format";
 import { getDict } from "@/lib/i18n";
 import { BreadcrumbLd } from "../JsonLd";
 import { Rich } from "../Rich";
@@ -14,11 +14,12 @@ import { Journey } from "../sections/Journey";
 import { Start } from "../sections/Start";
 import { Team } from "../sections/Team";
 import { Compare, Why } from "../sections/Why";
-import { pillarShort, ProjectCard } from "../sections/Work";
+import { ProjectCard } from "../sections/Work";
 import { ArrowIcon, Chips, Eyebrow, LLink, PageHero } from "../ui";
 import { WorkFilter } from "../WorkFilter";
 import { RollText } from "../RollText";
 import { VoxelArt } from "../voxel/Voxel";
+import { INDUSTRY_MODEL } from "../voxel/models";
 
 export function PartnerPage({ locale }: { locale: Locale }) {
   const d = getDict(locale);
@@ -69,6 +70,93 @@ export function IndustriesPage({ locale }: { locale: Locale }) {
   );
 }
 
+/** One sector: a short description, what we'd build, its case studies and the other sectors. */
+export function IndustryPage({ locale, id }: { locale: Locale; id: string }) {
+  const d = getDict(locale);
+  const { industries } = d;
+  const ind = industries.items.find((x) => x.id === id);
+  if (!ind) notFound();
+  const work = projectsForIndustry(id);
+  const others = industries.items.filter((x) => x.id !== id);
+  return (
+    <>
+      <PageHero eyebrow={industries.eyebrow} title={ind.title} sub={ind.text}>
+        <div className="flex flex-wrap gap-3 pt-2">
+          <LLink locale={locale} href={`/contact?industry=${id}`} className="btn btn-primary" track={`industry_page_${id}`}>
+            <RollText>{industries.cardCta}</RollText>
+            <ArrowIcon />
+          </LLink>
+          <LLink locale={locale} href="/industries" className="btn btn-outline">
+            <RollText>{industries.seeAll}</RollText>
+          </LLink>
+        </div>
+      </PageHero>
+
+      <section aria-labelledby="build-title" className="wrap pb-16">
+        <div className="card grid items-center gap-10 bg-surface p-8 sm:p-12 lg:grid-cols-[1fr_auto]">
+          <div className="flex flex-col gap-5">
+            <h2 id="build-title" className="t-eyebrow text-orange-text">
+              {industries.buildLabel}
+            </h2>
+            <ul className="flex flex-col gap-3">
+              {ind.build.map((b, i) => (
+                <li key={b} className="flex items-baseline gap-4 text-xl font-bold rtl:font-extrabold">
+                  <span className="font-mono text-sm text-orange-text">{stepNum(i, locale)}</span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <VoxelArt model={INDUSTRY_MODEL[id] ?? "stack"} className="h-40 w-auto justify-self-center sm:h-52" gap="stroke-surface" anim="rise" />
+        </div>
+      </section>
+
+      <section aria-labelledby="industry-work" className="section bg-surface">
+        <div className="wrap flex flex-col gap-10">
+          <h2 id="industry-work" className="t-h2-sm">
+            {industries.workTitle}
+          </h2>
+          {work.length > 0 ? (
+            <ul className="grid gap-x-5 gap-y-10 lg:grid-cols-2">
+              {work.map((proj, i) => (
+                <li key={proj.slug} data-reveal="clip" style={{ "--d": i % 2 } as CSSProperties}>
+                  <ProjectCard project={proj} d={d} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="t-lead max-w-3xl text-body">{industries.noWork}</p>
+          )}
+        </div>
+      </section>
+
+      <nav aria-labelledby="other-industries" className="wrap flex flex-col gap-6 py-16">
+        <h2 id="other-industries" className="t-eyebrow text-orange-text">
+          {industries.others}
+        </h2>
+        <ul className="flex flex-wrap gap-2">
+          {others.map((o) => (
+            <li key={o.id}>
+              <LLink locale={locale} href={`/industries/${o.id}`} className="btn btn-sm btn-outline">
+                <RollText>{o.title}</RollText>
+              </LLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <Contact d={d} />
+      <BreadcrumbLd
+        d={d}
+        trail={[
+          { name: d.meta.industries.title, path: "/industries" },
+          { name: ind.title, path: `/industries/${id}` },
+        ]}
+      />
+    </>
+  );
+}
+
 export function WorkPage({ locale }: { locale: Locale }) {
   const d = getDict(locale);
   const p = d.pages.work;
@@ -77,6 +165,25 @@ export function WorkPage({ locale }: { locale: Locale }) {
     <>
       <PageHero eyebrow={p.eyebrow} title={p.h1} sub={p.sub} />
       <section aria-label={d.meta.work.title} className="wrap flex flex-col gap-10 pb-24">
+        <nav aria-labelledby="by-industry" className="flex flex-wrap items-center gap-2">
+          <h2 id="by-industry" className="t-eyebrow me-2 text-orange-text">
+            {d.work.byIndustry}
+          </h2>
+          {d.industries.items
+            .map((ind) => ({ ind, n: projectsForIndustry(ind.id).length }))
+            .filter((x) => x.n > 0)
+            .map(({ ind, n }) => (
+              <LLink
+                key={ind.id}
+                locale={locale}
+                href={`/industries/${ind.id}`}
+                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-surface px-5 text-sm font-semibold transition-colors hover:bg-ink hover:text-paper"
+              >
+                {ind.title}
+                <span className="font-mono text-xs opacity-60">{digits(n, locale)}</span>
+              </LLink>
+            ))}
+        </nav>
         <WorkFilter
           label={d.work.filterLabel}
           allLabel={d.work.filterAll}
@@ -105,6 +212,14 @@ export function CaseStudyPage({ locale, slug }: { locale: Locale; slug: string }
   const published = projects.filter((p) => p.status === "published");
   const idx = published.findIndex((p) => p.slug === slug);
   const next = idx >= 0 && published.length > 1 ? published[(idx + 1) % published.length] : null;
+  const industryLinks = (project.industries ?? []).flatMap((id) => {
+    const ind = d.industries.items.find((x) => x.id === id);
+    return ind ? [{ href: `/industries/${id}`, label: ind.title }] : [];
+  });
+  const serviceLinks = project.pillars.flatMap((id) => {
+    const p = d.pillars.items.find((x) => x.id === id);
+    return p ? [{ href: `/services/${p.slug}`, label: p.short }] : [];
+  });
 
   return (
     <>
@@ -115,13 +230,16 @@ export function CaseStudyPage({ locale, slug }: { locale: Locale; slug: string }
       )}
       <PageHero eyebrow={c.sector} title={c.title} sub={c.summary}>
         <dl className="grid grid-cols-2 gap-6 border-t border-line pt-6 sm:grid-cols-4">
-          {[
-            [cs.client, c.client],
-            [cs.sector, c.sector],
-            ...(project.year ? [[cs.year, project.year]] : []),
-            [cs.services, project.pillars.map((id) => pillarShort(d, id)).join(locale === "fa" ? "، " : ", ")],
-            ...(c.partner ? [[cs.partner, c.partner]] : []),
-          ].map(([k, v]) => (
+          {(
+            [
+              [cs.client, c.client],
+              [cs.sector, c.sector],
+              ...(industryLinks.length ? [[d.industries.eyebrow, <Links key="i" items={industryLinks} locale={locale} />]] : []),
+              ...(project.year ? [[cs.year, project.year]] : []),
+              [cs.services, <Links key="s" items={serviceLinks} locale={locale} />],
+              ...(c.partner ? [[cs.partner, c.partner]] : []),
+            ] as [string, ReactNode][]
+          ).map(([k, v]) => (
             <div key={k} className="flex flex-col gap-1">
               <dt className="t-eyebrow text-orange-text">{k}</dt>
               <dd className="font-semibold">{v}</dd>
@@ -250,6 +368,18 @@ export function CaseStudyPage({ locale, slug }: { locale: Locale; slug: string }
       />
     </>
   );
+}
+
+/** Comma-separated inline links (case-study details). */
+function Links({ items, locale }: { items: { href: string; label: string }[]; locale: Locale }) {
+  return items.map((it, i) => (
+    <Fragment key={it.href}>
+      {i > 0 && (locale === "fa" ? "، " : ", ")}
+      <LLink locale={locale} href={it.href} className="underline decoration-line underline-offset-4 hover:text-orange-text hover:decoration-orange">
+        {it.label}
+      </LLink>
+    </Fragment>
+  ));
 }
 
 export function AboutPage({ locale }: { locale: Locale }) {

@@ -102,7 +102,7 @@ export function Header({ locale, common, pillars, servicesLabel, book }: HeaderP
             <span className="flex size-14 items-center justify-center rounded-full bg-ink transition-transform duration-300 group-hover:scale-105 sm:size-[72px]">
               <LogoMark variant="dark" size={38} className="sm:size-[52px]" />
             </span>
-            <span className="text-[22px] font-extrabold tracking-[-0.03em] sm:text-[26px] rtl:tracking-normal">
+            <span className="fa-display text-[22px] font-extrabold tracking-[-0.03em] sm:text-[26px] rtl:text-[28px] sm:rtl:text-[32px]">
               {common.wordmark}
             </span>
           </Link>

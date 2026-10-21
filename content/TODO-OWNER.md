@@ -24,7 +24,7 @@ Everything here is your call or needs your input. Nothing on this list has been 
 ## Update (2026-10-21, after build feedback)
 
 **Done**
-- **Pricing:** the engagement / pricing cards are removed from every page for now. Budget stays as a chip group in the contact form, still with `[RANGE]` placeholders. The `Engage` component and its copy are kept in the code for later.
+- **Pricing:** the engagement / pricing cards are removed from every page for now. The budget question was later removed from the contact form too (owner request, 2026-10-22). The `Engage` component and its copy are kept in the code for later.
 - **Projects:** four real projects, ranked strongest first: Konjed, Nira Perfume, Microshamim, Codechee.
   - Screenshots are in `public/work/`. The home page shows the top three as small cards; `/work` and each case study show the full detail.
   - Copy describes only what is visible on each live site. No results or quotes.
@@ -37,7 +37,7 @@ Everything here is your call or needs your input. Nothing on this list has been 
 - [ ] **Project results and quotes:** add only sourced numbers and approved quotes to `content/work.ts`.
 - [ ] **Project years and stack** (optional fields in `content/work.ts`).
 - [ ] **Team photos and LinkedIn URLs** (`photo`, `linkedin` in `team.members`).
-- [ ] **Budget ranges** for the contact form, and the reply-time promise `[24 h]`.
+- [ ] The reply-time promise `[24 h]` in the contact section.
 - [ ] **Lighthouse performance** on simulated mobile is about 82–87 (desktop 100; accessibility, best practices and SEO 100 everywhere).
   - Plus Jakarta Sans now uses `display: "optional"` (owner decision). That gained only ~1 point, so the font was not the bottleneck.
   - What remains is hydration and rendering work on a long, animated page (hero animation, voxel art, 3D section) under 4× CPU throttling.
@@ -96,7 +96,7 @@ Everything here is your call or needs your input. Nothing on this list has been 
 
 - [ ] **Prices** for the 3 engagement models (or "from" prices, or "on request")
 - [ ] **Pricing model** line for Why Bellona #05
-- [ ] **Budget ranges** for the contact form (4 chips + currency: USD? Toman? both, per language?)
+- [x] ~~Budget ranges for the contact form~~: the budget question is removed (2026-10-22).
 - [ ] **Reply time** promise ("within [24 h]")
 - [ ] **Client logos** (only with permission), or confirm we hide the strip
 - [ ] **Case studies**: for each, client, sector, pillars, challenge, what we built, **sourced** result, images, optional quote

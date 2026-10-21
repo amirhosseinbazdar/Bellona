@@ -191,6 +191,7 @@ export interface Dict {
     all: string;
     filterLabel: string;
     filterAll: string;
+    byIndustry: string;
     placeholderImage: string;
     placeholderNote: string;
     view: string;
@@ -233,6 +234,11 @@ export interface Dict {
     cardCta: string;
     buildLabel: string;
     workLabel: string;
+    /** Industry pages (/industries/[id]). */
+    cardLink: string;
+    workTitle: string;
+    noWork: string;
+    others: string;
     more: string;
     seeAll: string;
   };
@@ -277,8 +283,6 @@ export interface Dict {
       label: string;
       needLegend: string;
       needs: { id: PillarId | "unsure"; label: string }[];
-      budgetLegend: string;
-      budgets: { id: string; label: string }[];
       name: string;
       namePh: string;
       email: string;
