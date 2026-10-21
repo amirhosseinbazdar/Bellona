@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cube B mark family</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: {{px}}; height: {{px}}; background: {{fill}}; display: flex; align-items: center; justify-content: center">
+
+<sc-if value="{{is1}}" hint-placeholder-val="{{ true }}">
+<svg viewBox="8 8 184 184" width="100%" height="100%" role="img" aria-label="Bellona cube B, C1 cube stack">
+<polygon points="60.2,111 100,88 139.8,111 100,134" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,111 100,134 100,180 60.2,157" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="100,134 139.8,111 139.8,157 100,180" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,43 100,20 139.8,43 100,66" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,43 100,66 100,112 60.2,89" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="100,66 139.8,43 139.8,89 100,112" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,89 79.2,100 60.2,111" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+</svg>
+</sc-if>
+
+<sc-if value="{{is2}}" hint-placeholder-val="{{ false }}">
+<svg viewBox="8 8 184 184" width="100%" height="100%" role="img" aria-label="Bellona cube B, C2 open box">
+<polygon points="60.2,111 100,88 139.8,111 100,134" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,111 100,134 100,180 60.2,157" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="100,134 139.8,111 139.8,157 100,180" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,43 100,20 139.8,43 100,66" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,43 100,66 100,112 60.2,89" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="100,66 139.8,43 139.8,89 100,112" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,89 79.2,100 60.2,111" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="75.3,43 100,28.7 124.7,43 100,57.3" style="fill: {{c.bg}}"></polygon>
+<polygon points="75.3,43 100,28.7 100,37.7 83.1,47.5" style="fill: {{c.right}}"></polygon>
+<polygon points="100,28.7 124.7,43 116.9,47.5 100,37.7" style="fill: {{c.left}}"></polygon>
+</svg>
+</sc-if>
+
+<sc-if value="{{is3}}" hint-placeholder-val="{{ false }}">
+<svg viewBox="4 4 192 192" width="100%" height="100%" role="img" aria-label="Bellona cube B, C3 modular tiles">
+<polygon points="60.2,111 100,88 139.8,111 100,134" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 8; stroke-linejoin: miter"></polygon>
+<polygon points="60.2,111 100,134 100,180 60.2,157" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 8; stroke-linejoin: miter"></polygon>
+<polygon points="100,134 139.8,111 139.8,157 100,180" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 8; stroke-linejoin: miter"></polygon>
+<polygon points="60.2,43 100,20 139.8,43 100,66" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 8; stroke-linejoin: miter"></polygon>
+<polygon points="60.2,43 100,66 100,112 60.2,89" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 8; stroke-linejoin: miter"></polygon>
+<polygon points="100,66 139.8,43 139.8,89 100,112" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 8; stroke-linejoin: miter"></polygon>
+<polygon points="60.2,89 79.2,100 60.2,111" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 8; stroke-linejoin: miter"></polygon>
+</svg>
+</sc-if>
+
+<sc-if value="{{is4}}" hint-placeholder-val="{{ false }}">
+<svg viewBox="-12 12 184 184" width="100%" height="100%" role="img" aria-label="Bellona cube B, C4 cube stack with seed cube">
+<polygon points="60.2,111 100,88 139.8,111 100,134" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,111 100,134 100,180 60.2,157" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="100,134 139.8,111 139.8,157 100,180" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,43 100,20 139.8,43 100,66" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,43 100,66 100,112 60.2,89" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="100,66 139.8,43 139.8,89 100,112" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,89 79.2,100 60.2,111" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="35.5,154.7 49.8,163 35.5,171.3 21.1,163" style="fill: {{c.a1}}; stroke: {{c.bg}}; stroke-width: 2.5; stroke-linejoin: round"></polygon>
+<polygon points="21.1,179.5 35.5,187.8 35.5,171.3 21.1,163" style="fill: {{c.a2}}; stroke: {{c.bg}}; stroke-width: 2.5; stroke-linejoin: round"></polygon>
+<polygon points="49.8,179.5 35.5,187.8 35.5,171.3 49.8,163" style="fill: {{c.a3}}; stroke: {{c.bg}}; stroke-width: 2.5; stroke-linejoin: round"></polygon>
+</svg>
+</sc-if>
+
+<sc-if value="{{is5}}" hint-placeholder-val="{{ false }}">
+<svg viewBox="-71.2 -134 184 184" width="100%" height="100%" role="img" aria-label="Bellona cube B, C5 voxel B">
+<polygon points="0,-24 20.8,-12 0,0 -20.8,-12" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="-20.8,12 0,24 0,0 -20.8,-12" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="20.8,12 0,24 0,0 20.8,-12" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="20.8,-12 41.6,0 20.8,12 0,0" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="0,24 20.8,36 20.8,12 0,0" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="41.6,24 20.8,36 20.8,12 41.6,0" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="0,-48 20.8,-36 0,-24 -20.8,-36" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="-20.8,-12 0,0 0,-24 -20.8,-36" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="20.8,-12 0,0 0,-24 20.8,-36" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="0,-72 20.8,-60 0,-48 -20.8,-60" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="-20.8,-36 0,-24 0,-48 -20.8,-60" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="20.8,-36 0,-24 0,-48 20.8,-60" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="41.6,-24 62.4,-12 41.6,0 20.8,-12" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="20.8,12 41.6,24 41.6,0 20.8,-12" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="62.4,12 41.6,24 41.6,0 62.4,-12" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="20.8,-60 41.6,-48 20.8,-36 0,-48" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="0,-24 20.8,-12 20.8,-36 0,-48" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="41.6,-24 20.8,-12 20.8,-36 41.6,-48" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="0,-96 20.8,-84 0,-72 -20.8,-84" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="-20.8,-60 0,-48 0,-72 -20.8,-84" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="20.8,-60 0,-48 0,-72 20.8,-84" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="0,-120 20.8,-108 0,-96 -20.8,-108" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="-20.8,-84 0,-72 0,-96 -20.8,-108" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="20.8,-84 0,-72 0,-96 20.8,-108" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="41.6,-72 62.4,-60 41.6,-48 20.8,-60" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="20.8,-36 41.6,-24 41.6,-48 20.8,-60" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="62.4,-36 41.6,-24 41.6,-48 62.4,-60" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="20.8,-108 41.6,-96 20.8,-84 0,-96" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="0,-72 20.8,-60 20.8,-84 0,-96" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+<polygon points="41.6,-72 20.8,-60 20.8,-84 41.6,-96" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 2; stroke-linejoin: round"></polygon>
+</svg>
+</sc-if>
+
+<sc-if value="{{is6}}" hint-placeholder-val="{{ false }}">
+<svg viewBox="-69 -129.3 184 184" width="100%" height="100%" role="img" aria-label="Bellona cube B, C6 extruded monolith B">
+<polygon points="-6.6,7 -6.6,-20.2 19.4,-35.2 19.4,-8" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<polygon points="22.5,23.8 -6.6,7 19.4,-8 48.5,8.8" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<polygon points="28.1,20.6 22.5,23.8 48.5,8.8 54,5.6" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<polygon points="46.1,37.4 29.4,47 55.4,32 72.1,22.4" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<polygon points="-6.6,-55.4 -6.6,-76.2 19.4,-91.2 19.4,-70.4" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<polygon points="46.1,11.8 46.1,37.4 72.1,22.4 72.1,-3.2" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<polygon points="17,-41.8 -6.6,-55.4 19.4,-70.4 43,-56.8" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<polygon points="29.4,-17 46.1,11.8 72.1,-3.2 55.4,-32" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<polygon points="22.5,-45 17,-41.8 43,-56.8 48.5,-60" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<polygon points="40.5,-23.4 29.4,-17 55.4,-32 66.5,-38.4" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<polygon points="-26,-106.6 23.9,-77.8 49.9,-92.8 0,-121.6" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<polygon points="40.5,-49 40.5,-23.4 66.5,-38.4 66.5,-64" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<polygon points="23.9,-77.8 40.5,-49 66.5,-64 49.9,-92.8" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></polygon>
+<path d="M-26,-106.6 L23.9,-77.8 L40.5,-49 L40.5,-23.4 L29.4,-17 L46.1,11.8 L46.1,37.4 L29.4,47 L-26,15Z M-6.6,-76.2 L17,-62.6 L22.5,-53 L22.5,-45 L17,-41.8 L-6.6,-55.4Z M-6.6,-20.2 L22.5,-3.4 L28.1,6.2 L28.1,20.6 L22.5,23.8 L-6.6,7Z" style="fill: {{c.left}}; fill-rule: evenodd; stroke: {{c.bg}}; stroke-width: 1.5; stroke-linejoin: round"></path>
+</svg>
+</sc-if>
+
+<sc-if value="{{is7}}" hint-placeholder-val="{{ false }}">
+<svg viewBox="0 0 200 200" width="100%" height="100%" role="img" aria-label="Bellona cube B, C7 cube stack in a hexagon frame">
+<polygon points="20.3,54 100,8 179.7,54 179.7,146 100,192 20.3,146" style="fill: none; stroke: {{c.top}}; stroke-width: 7; stroke-linejoin: miter"></polygon>
+<g transform="translate(100 100) scale(0.64) translate(-100 -100)">
+<polygon points="60.2,111 100,88 139.8,111 100,134" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 4; stroke-linejoin: round"></polygon>
+<polygon points="60.2,111 100,134 100,180 60.2,157" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 4; stroke-linejoin: round"></polygon>
+<polygon points="100,134 139.8,111 139.8,157 100,180" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 4; stroke-linejoin: round"></polygon>
+<polygon points="60.2,43 100,20 139.8,43 100,66" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 4; stroke-linejoin: round"></polygon>
+<polygon points="60.2,43 100,66 100,112 60.2,89" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 4; stroke-linejoin: round"></polygon>
+<polygon points="100,66 139.8,43 139.8,89 100,112" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 4; stroke-linejoin: round"></polygon>
+<polygon points="60.2,89 79.2,100 60.2,111" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 4; stroke-linejoin: round"></polygon>
+</g>
+</svg>
+</sc-if>
+
+<sc-if value="{{is8}}" hint-placeholder-val="{{ false }}">
+<svg viewBox="0 16 200 200" width="100%" height="100%" role="img" aria-label="Bellona cube B, C8 cube stack on a circuit plinth">
+<polygon points="100,113.3 175.7,157 100,200.7 24.3,157" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="24.3,168 100,211.7 100,200.7 24.3,157" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="175.7,168 100,211.7 100,200.7 175.7,157" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polyline points="38.3,155.8 72.1,175.4 74.9,183" style="fill: none; stroke: {{c.bg}}; stroke-width: 1.8"></polyline>
+<polyline points="161.7,155.8 125.9,176.6 123.1,184.1" style="fill: none; stroke: {{c.bg}}; stroke-width: 1.8"></polyline>
+<circle cx="76.5" cy="186.7" r="2.6" style="fill: none; stroke: {{c.bg}}; stroke-width: 1.6"></circle>
+<circle cx="121.5" cy="187.8" r="2.6" style="fill: none; stroke: {{c.bg}}; stroke-width: 1.6"></circle>
+<polygon points="60.2,111 100,88 139.8,111 100,134" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,111 100,134 100,180 60.2,157" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="100,134 139.8,111 139.8,157 100,180" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,43 100,20 139.8,43 100,66" style="fill: {{c.top}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,43 100,66 100,112 60.2,89" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="100,66 139.8,43 139.8,89 100,112" style="fill: {{c.right}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+<polygon points="60.2,89 79.2,100 60.2,111" style="fill: {{c.left}}; stroke: {{c.bg}}; stroke-width: 3; stroke-linejoin: round"></polygon>
+</svg>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"variant":{"editor":"enum","options":["c1","c2","c3","c4","c5","c6","c7","c8"],"default":"c1"},"pal":{"editor":"enum","options":["p2","site","bell","p1"],"default":"p2"},"bg":{"editor":"enum","options":["dark","light"],"default":"dark"},"size":{"editor":"int","default":320,"min":16,"max":1200},"clear":{"editor":"boolean","default":false},"$preview":{"width":320,"height":320}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const P = {
+      p2: {
+        dark: { bg: '#0D0D0D', top: '#FFFFFF', left: '#F97316', right: '#FF5500' },
+        light: { bg: '#FFFFFF', top: '#F97316', left: '#FF5500', right: '#0D0D0D' }
+      },
+      site: {
+        dark: { bg: '#060A12', top: '#22D3FF', left: '#4A8DFF', right: '#8B5CFF' },
+        light: { bg: '#FFFFFF', top: '#0891B2', left: '#2F6FED', right: '#7C3AED' }
+      },
+      p1: {
+        dark: { bg: '#0A0A0F', top: '#A78BFA', left: '#8B5CF6', right: '#6D28D9' },
+        light: { bg: '#FFFFFF', top: '#8B5CF6', left: '#6D28D9', right: '#1E3A8A' }
+      },
+      bell: {
+        dark: { bg: '#070B14', top: '#EAF2FF', left: '#3D7BFF', right: '#1E2F7A', a1: '#FFD08A', a2: '#FFB547', a3: '#D9831A' },
+        light: { bg: '#FFFFFF', top: '#8DB8FF', left: '#2F66F0', right: '#0B1530', a1: '#FFC266', a2: '#F59E0B', a3: '#B45309' }
+      }
+    };
+    const pal = P[this.props.pal] ? this.props.pal : 'p2';
+    Object.keys(P).forEach((k) => ['dark', 'light'].forEach((b) => {
+      const t = P[k][b];
+      if (!t.a1) { t.a1 = t.top; t.a2 = t.left; t.a3 = t.right; }
+    }));
+    const bg = this.props.bg === 'light' ? 'light' : 'dark';
+    const v = this.props.variant || 'c1';
+    const size = Number(this.props.size ?? 320) || 320;
+    return {
+      c: P[pal][bg],
+      px: size + 'px',
+      fill: (this.props.clear === true || this.props.clear === 'true') ? 'transparent' : P[pal][bg].bg,
+      is1: v === 'c1', is2: v === 'c2', is3: v === 'c3', is4: v === 'c4',
+      is5: v === 'c5', is6: v === 'c6', is7: v === 'c7', is8: v === 'c8'
+    };
+  }
+}
+</script>
+</body>
+</html>

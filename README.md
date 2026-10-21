@@ -1,0 +1,159 @@
+# Bellona website (v2)
+
+Bilingual marketing site for **Bellona**: English at `/`, Persian (RTL) at `/fa`.
+Next.js 16 (App Router) + TypeScript + Tailwind CSS 4. Fonts and brand assets are self-hosted.
+
+```
+app/                 routes: (en)/… and (fa)/fa/… are two root layouts (different <html lang/dir>)
+  actions/contact.ts contact form server action (zod + honeypot → webhook → Resend fallback)
+  api/og/route.tsx   Open Graph images
+  sitemap.ts robots.ts global-not-found.tsx
+components/
+  sections/          home + shared page sections
+  pages/             page compositions used by both languages
+  hero/              HeroMark (animated logo, motion.css verbatim) + IsoGrid floor
+  factory/           AgenticFactory3D (three.js Lead → Revenue machine) + lazy FactoryEmbed
+  voxel/             VoxelArt renderer + cube models (house, bank, robot …)
+content/
+  en.ts fa.ts        ALL site copy (typed by content/types.ts)
+  work.ts            case studies (ranked; featured ones show on the home page)
+  proof.ts           client logos + testimonials (empty → those sections stay hidden)
+  factory.ts         Persian copy for the 3D machine
+  AUDIT.md COPY.md SITEMAP.md INSPIRATION.md TODO-OWNER.md   planning docs
+public/work/<slug>/  project screenshots (cover.jpg, shot-N.jpg, mobile.jpg)
+assets/              brand source files (logo SVGs, fonts, motion spec)
+```
+
+## Run it
+
+Requires Node 20.9+ (tested on Node 24).
+
+```bash
+npm install
+```
+
+```bash
+cp .env.example .env.local
+```
+
+```bash
+npm run dev
+```
+
+Open http://localhost:3000 (English) and http://localhost:3000/fa (Persian).
+
+Before shipping:
+
+```bash
+npm run lint && npm run build
+```
+
+## Edit content
+
+- **All text** lives in `content/en.ts` and `content/fa.ts`. Both implement the same `Dict` type, so TypeScript tells you if a key is missing in one language.
+- **Mini-markup in strings:** `**accent**` (orange), `==highlight==` (black pill), `\n` (line break).
+- **Placeholders** are wrapped in `[LIKE THIS]`. Search for `[` to find what is still open; the owner checklist is `content/TODO-OWNER.md`.
+- **Persian:** use Persian digits (۱۰۰+، ۲۴/۷) and never letter-space Persian text.
+- **Team** (`team.members`): name → role → skills → education. Add `photo: "/team/name.jpg"` (square, at least 400px) to replace the initials, and `linkedin` for a profile link.
+- **Client logos / testimonials:** add real entries to `content/proof.ts`. The sections appear automatically once there is at least one entry. Never add invented clients or quotes.
+- **Social links:** `common.footer.social` in both language files (shown in the footer and the menu, and listed as schema.org `sameAs`).
+
+## Add a case study
+
+1. Put images in `public/work/<slug>/`:
+   - `cover.jpg`: 1440×900 desktop screenshot (16:10)
+   - `shot-1.jpg …`: extra 1440×900 screens
+   - `mobile.jpg`: 390×844 at 2× (780×1688)
+2. Add an entry to `projects` in `content/work.ts` (copy an existing one). Set:
+   - `status: "published"`, a unique `slug`, `pillars`, `url`, `cover`, `gallery`.
+   - `featured: true` to show it on the home page (the home shows featured projects in list order).
+   - Copy in **both** `en` and `fa`: title, client, sector, summary, challenge, built.
+   - `results` only with sourced numbers. Leave it empty otherwise.
+3. The list is ranked: put stronger projects first. `/work`, the sitemap and the case-study page (`/work/<slug>` and `/fa/work/<slug>`) update automatically.
+
+`/work/example` is a noindex template preview (`status: "preview"`).
+
+## Contact form and booking
+
+- The form posts to a server action (`app/actions/contact.ts`). It validates with zod, drops bots (honeypot field + minimum fill time), then:
+  1. POSTs JSON to `LEAD_WEBHOOK_URL` (your n8n / Make flow), with the optional `x-bellona-secret` header.
+  2. Falls back to an email via Resend (`RESEND_API_KEY`, `LEAD_FROM_EMAIL`, `LEAD_TO_EMAIL`) if the webhook is missing or fails.
+  3. In development without either, it logs the lead to the server console instead.
+- **Webhook payload:**
+  ```json
+  {
+    "name": "", "email": "", "company": "", "message": "",
+    "needs": ["web", "ai"], "budget": "", "model": "project",
+    "industry": "finance", "locale": "en", "page": "/contact",
+    "source": "bellonaagency.com", "receivedAt": "ISO date"
+  }
+  ```
+- **Prefilling:** `/contact?need=ai`, `?industry=finance` (used by the pillar and industry CTAs).
+- **Booking:** set `BOOKING_URL` (Cal.com / Calendly). Every "Book a 30-min free call" button links there; without it they go to `/contact`.
+
+## Analytics
+
+Optional. Set `NEXT_PUBLIC_ANALYTICS_ID` to a GA4 measurement ID. It loads lazily and tracks:
+- `cta_click` (any element with `data-track="cta"` and `data-track-label`)
+- `form_submit`, `form_success`, `form_invalid`, `form_error`
+
+Leave it empty to load nothing.
+
+## SEO
+
+- Per-page metadata with canonical + `hreflang` (en, fa, x-default) in `lib/metadata.ts`.
+- `sitemap.xml` and `robots.txt` are generated (`app/sitemap.ts`, `app/robots.ts`).
+- JSON-LD: `ProfessionalService` on every page, plus `FAQPage` and `BreadcrumbList` where relevant.
+- OG images come from `/api/og?locale=en&title=…`. The OG renderer can't shape Persian reliably, so Persian cards show the Latin lockup; the Persian title still goes in `og:title`.
+- The old site's `/industries/<name>` URLs 301-redirect to `/industries#<anchor>` (`next.config.ts`).
+
+## Motion
+
+- **Hero logo:** `components/hero/HeroMark.tsx` + `motion.css` (verbatim from `assets/motion`), per `assets/motion/MOTION.md`:
+  - intro, then a random shuffle
+  - smaller move pool under 768px
+  - pauses off-screen and in hidden tabs
+  - static with reduced motion
+- **Site-wide** (`components/Motion.tsx`): smooth wheel scrolling (Lenis, mouse/trackpad only), scroll reveal for `[data-reveal]`, voxel drop-in, counting stats.
+  - The hero floor's ambient loops start once the page is idle.
+  - Everything is visible without JS and switches off with `prefers-reduced-motion`.
+- **Cursor accent** (`components/Cursor.tsx`): a 64px circle over headlines and big statements only.
+  - Brand orange (multiply) behind black text; a dark tint over orange text; screen blend on dark sections.
+  - Add `data-cursor` to opt other elements in.
+
+## Deploy to Railway
+
+`railway.json` sets the build (`npm run build`), the start command (`npm run start`; `next start` reads Railway's `PORT`) and a health check on `/`. Node ≥ 20.9 is pinned in `package.json`.
+
+1. Log in (opens the browser):
+   ```bash
+   npx @railway/cli login
+   ```
+2. From this folder, create the project once:
+   ```bash
+   npx @railway/cli init
+   ```
+3. Deploy (uploads this folder; `.gitignore` keeps `node_modules` and `.next` out):
+   ```bash
+   npx @railway/cli up
+   ```
+4. Give it a public URL:
+   ```bash
+   npx @railway/cli domain
+   ```
+5. In the Railway dashboard → Variables, add the keys from `.env.example`. Then point `bellonaagency.com` at the service under Settings → Networking → Custom Domain.
+
+## Deploy to Vercel
+
+1. Push this folder to a Git repository (it is the project root).
+2. In Vercel: **Add New → Project → Import** the repository. Framework preset: Next.js (auto-detected). No build overrides needed.
+3. Under **Settings → Environment Variables**, add the keys from `.env.example` (at least `NEXT_PUBLIC_SITE_URL`; add `LEAD_WEBHOOK_URL` and/or the Resend keys before going live).
+4. Deploy, then under **Settings → Domains** add `bellonaagency.com` and follow the DNS instructions.
+5. After the switch, re-submit `https://bellonaagency.com/sitemap.xml` in Google Search Console.
+
+## Quality checklist
+
+- `npm run lint && npm run build` must be clean.
+- Check `/`, `/fa`, a pillar page, `/work`, a case study and `/contact` at 360 / 768 / 1280 / 1440 px.
+- Keyboard: Tab from the top. You should reach the skip link, then the menu button. The menu traps focus and Escape closes it.
+- Lighthouse (mobile) on the production build: `npm run build`, then `npx next start`.
