@@ -100,15 +100,23 @@ function walk(n: number, m: number, moves: [number, number, number][]) {
   return `M ${pts.join(" L ")}`;
 }
 
-// Traces from the edges toward the mark (dash animated in CSS).
+// Traces from the edges toward the mark (dash animated in CSS); x = where each one starts.
 const traces = [
-  walk(9, 7, [[1, -1, 4], [1, 1, 2], [1, -1, 3]]),
-  walk(33, -5, [[-1, 1, 4], [-1, -1, 2], [-1, 1, 4]]),
-  walk(33, 7, [[-1, -1, 3], [-1, 1, 1], [-1, -1, 4]]),
-  walk(9, -7, [[1, 1, 5], [1, -1, 2], [1, 1, 4]]),
+  { x: X0 + HW * 9, d: walk(9, 7, [[1, -1, 4], [1, 1, 2], [1, -1, 3]]) },
+  { x: X0 + HW * 33, d: walk(33, -5, [[-1, 1, 4], [-1, -1, 2], [-1, 1, 4]]) },
+  { x: X0 + HW * 33, d: walk(33, 7, [[-1, -1, 3], [-1, 1, 1], [-1, -1, 4]]) },
+  { x: X0 + HW * 9, d: walk(9, -7, [[1, 1, 5], [1, -1, 2], [1, 1, 4]]) },
 ];
 
-export function IsoGrid({ className }: { className?: string }) {
+/** Which half may carry orange decoration (cubes, orange tiles, traces, nodes). */
+export type DecorSide = "all" | "left" | "right";
+const onSide = (x: number, side: DecorSide) => side === "all" || (side === "right" ? x > 760 : x < 680);
+
+/**
+ * `decor` keeps the orange pieces away from the headline: on the full-width desktop floor only the
+ * logo's half is decorated, the text half shows plain grey tiles that fade out.
+ */
+export function IsoGrid({ className, decor = "all" }: { className?: string; decor?: DecorSide }) {
   return (
     <svg viewBox="0 0 1440 560" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden="true" focusable="false">
       <g>
@@ -116,26 +124,33 @@ export function IsoGrid({ className }: { className?: string }) {
           <polygon
             key={`${t.cx}-${t.cy}`}
             points={diamond(t.cx, t.cy, 4)}
-            className={t.tone === "orange" ? "fill-orange/15" : t.tone === "line" ? "fill-line/70" : "fill-surface"}
+            className={
+              t.tone === "orange" && onSide(t.cx, decor) ? "fill-orange/15" : t.tone === "line" ? "fill-line/70" : "fill-surface"
+            }
           />
         ))}
       </g>
       <path d={lines} className="fill-none stroke-grid" strokeWidth={1.2} />
       <g className="fill-none stroke-orange" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-        {traces.map((d, i) => (
-          <path key={d} d={d} className="iso-flow" style={{ "--i": i } as CSSProperties} />
-        ))}
+        {traces
+          .filter((t) => onSide(t.x, decor))
+          .map((t, i) => (
+            <path key={t.d} d={t.d} className="iso-flow" style={{ "--i": i } as CSSProperties} />
+          ))}
       </g>
       <g className="stroke-paper" strokeWidth={1.5} strokeLinejoin="round">
         {cubes.map(([n, m, h], i) => {
           const [cx, cy] = center(n, m);
+          if (!onSide(cx, decor)) return null;
           return Array.from({ length: h }, (_, level) => <Cube key={`${n}-${m}-${level}`} cx={cx} cy={cy + HH * 0.35} level={level} i={i} />);
         })}
       </g>
       <g className="fill-orange">
-        {nodes.map(([cx, cy], i) => (
+        {nodes
+          .filter(([cx]) => onSide(cx, decor))
+          .map(([cx, cy], i) => (
           <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={4} className="iso-pulse" style={{ "--i": i } as CSSProperties} />
-        ))}
+          ))}
       </g>
     </svg>
   );
