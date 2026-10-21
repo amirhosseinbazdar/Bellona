@@ -62,12 +62,13 @@ export function ProjectCard({
       ) : (
         <>
           <VoxelArt
-            model="cluster"
-            className="h-24 w-auto sm:h-32"
+            model={project.model ?? "cluster"}
+            className={`w-auto ${project.model ? (compact ? "h-36 sm:h-44" : "h-40 sm:h-52") : "h-24 sm:h-32"}`}
             gap={gapCls[project.tone]}
             swap={project.tone === "orange" ? { o: "w" } : project.tone === "paper" ? {} : { k: "w" }}
+            anim={project.model ? "rise" : undefined}
           />
-          <span className={`absolute bottom-5 start-6 font-mono text-[13px] ${tone.label}`}>{d.work.placeholderImage}</span>
+          {!project.model && <span className={`absolute bottom-5 start-6 font-mono text-[13px] ${tone.label}`}>{d.work.placeholderImage}</span>}
         </>
       )}
     </div>

@@ -443,6 +443,7 @@ export const en: Dict = {
       previewNotice: "Template preview: this page is not indexed and shows the layout for a future case study.",
       visit: "Visit the live site",
       gallery: "Screens",
+      partner: "In collaboration with",
     },
   },
 
@@ -480,6 +481,7 @@ export const en: Dict = {
     sub: "Websites, software and automation shaped around how your industry actually works.",
     cardCta: "Talk about your project",
     buildLabel: "What we'd build",
+    workLabel: "Our work here",
     more: "Don't see your sector? We probably still fit. Ask us.",
     seeAll: "All industries",
     items: [
@@ -737,6 +739,8 @@ export const en: Dict = {
       otherPillars: "The other pillars",
       ctaTitle: "Let's build **yours.**",
       ctaSub: "Tell us where it hurts. We'll come back with a plan.",
+      work: "Projects in this service",
+      workAll: "All projects",
     },
     ai: {
       problem: {

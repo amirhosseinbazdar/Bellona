@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
-import type { Dict, Locale, Pillar } from "@/content/types";
+import type { Dict, Locale, Pillar, PillarId } from "@/content/types";
+import { projectsForPillar } from "@/content/work";
 import { stepNum } from "@/lib/format";
 import { getDict } from "@/lib/i18n";
 import { BreadcrumbLd } from "../JsonLd";
@@ -11,6 +12,7 @@ import { FaqLd } from "../JsonLd";
 import { Flow } from "../sections/Flow";
 import { Monday } from "../sections/Monday";
 import { PillarCard, Stats } from "../sections/Pillars";
+import { ProjectCard } from "../sections/Work";
 import { ArrowIcon, Chips, Eyebrow, LLink, PageHero } from "../ui";
 import { RollText } from "../RollText";
 
@@ -112,6 +114,8 @@ export function PillarPage({ locale, slug }: { locale: Locale; slug: string }) {
         </div>
       </section>
 
+      <PillarWork d={d} id={p.id} />
+
       {isAi && <Monday d={d} />}
 
       <section aria-labelledby="deliver-title" className="on-dark section rounded-t-[40px] bg-ink text-paper">
@@ -197,6 +201,35 @@ export function PillarPage({ locale, slug }: { locale: Locale; slug: string }) {
         ]}
       />
     </>
+  );
+}
+
+/** This service's projects (strongest first, at most six) with a link to the filtered /work list. */
+function PillarWork({ d, id }: { d: Dict; id: PillarId }) {
+  const items = projectsForPillar(id).slice(0, 6);
+  if (items.length === 0) return null;
+  const labels = d.pages.pillar;
+  return (
+    <section aria-labelledby="pillar-work" className="section pt-8">
+      <div className="wrap flex flex-col gap-10">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <h2 id="pillar-work" className="t-h2-sm">
+            {labels.work}
+          </h2>
+          <LLink locale={d.locale} href={`/work?service=${id}`} className="btn btn-sm btn-outline" track={`pillar_${id}_work`}>
+            <RollText>{labels.workAll}</RollText>
+            <ArrowIcon />
+          </LLink>
+        </div>
+        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((proj, i) => (
+            <li key={proj.slug} data-reveal="clip" style={{ "--d": i % 3 } as CSSProperties}>
+              <ProjectCard project={proj} d={d} variant="compact" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }
 

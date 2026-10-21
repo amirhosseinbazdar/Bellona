@@ -356,10 +356,10 @@
   transform: scale(0.94);
   transition-timing-function: var(--ease-spring);
 }
+/* Starts part-open and transparent: IntersectionObserver ignores fully clipped targets, so a 100% inset would never reveal. */
 .reveal-ready [data-reveal="clip"] {
-  opacity: 1;
   transform: none;
-  clip-path: inset(100% 0 0 0 round 28px);
+  clip-path: inset(40% -24px -24px -24px round 28px);
 }
 .reveal-ready [data-reveal="fade"] {
   transform: none;
@@ -368,8 +368,9 @@
   opacity: 1;
   transform: none;
 }
+/* Ends outside the box so nothing (rounded corners, hover lift) is cut once revealed. */
 .reveal-ready [data-reveal="clip"].is-in {
-  clip-path: inset(0 0 0 0 round 28px);
+  clip-path: inset(-24px round 28px);
 }
 
 /* Hero intro (CSS only, runs before hydration). The h1 only moves, so it still counts for LCP at once. */

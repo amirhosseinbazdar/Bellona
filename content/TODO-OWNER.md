@@ -43,6 +43,24 @@ Everything here is your call or needs your input. Nothing on this list has been 
   - What remains is hydration and rendering work on a long, animated page (hero animation, voxel art, 3D section) under 4× CPU throttling.
   - Reaching 95 on mobile would mean trimming home-page sections or animations. Your call.
 
+## Update (2026-10-21, team portfolio PDF)
+
+**Done**
+- **Portfolio:** all 12 projects from `Bellona_AI_Team_Bilingual_Portfolio.pdf` are added to `content/work.ts`, next to the four earlier ones (16 in total).
+  - Copy, stack and numbers come only from the PDF. The 278 migrated posts, 12 n8n workflows and 7 CRM tables are shown as results because the PDF states them.
+  - "In collaboration with Shamim startup" is shown on the case studies the PDF marks that way.
+- **Links to services and industries:**
+  - Each service page lists its projects, strongest first, with up to six cards. Its "All projects" link opens `/work` filtered to that service.
+  - Each industry card on `/industries` links to its case studies.
+- **Home page:** shows the three strongest projects (see `featured` in `content/work.ts`).
+
+**Still open**
+- [ ] **AI Real Estate OS (kharazie.at):** the PDF calls it a private delivery, so its card shows a cube house, not a screenshot of the client's site. Send approved screenshots of the system (workflows, CRM) if you want them shown.
+- [ ] **Prowem:** prowem.com shows only "Coming soon", so the card uses a cube illustration. Send app screenshots (iOS/Android) to replace it.
+- [ ] **Bellona AI Agency (old site):** listed last, linking to bellonaagency.com. Once this new site goes live on that domain, remove `url` from the `bellona-v1` entry (or the whole entry).
+- [ ] **School-Builders and Elm-Kala:** both Railway addresses in the PDF (`jkh-production…` and `app-production-7816…`) return 404 "Not Found". Their cards use cube illustrations and have no "visit" link. Send their live addresses (or screenshots) and add `url` / `cover` / `gallery` back.
+- [ ] **Mojasame Saidi:** mojasamesaidi.ir timed out from our network, so there are no screenshots yet (a cube illustration for now). The link is kept. Send screenshots, or let Claude retry once it loads.
+
 ## A. Decisions (these block the build)
 
 | # | Question | Options / default |

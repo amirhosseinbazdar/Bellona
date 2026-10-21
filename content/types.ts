@@ -209,6 +209,7 @@ export interface Dict {
       previewNotice: string;
       visit: string;
       gallery: string;
+      partner: string;
     };
   };
   flow: {
@@ -231,6 +232,7 @@ export interface Dict {
     items: Industry[];
     cardCta: string;
     buildLabel: string;
+    workLabel: string;
     more: string;
     seeAll: string;
   };
@@ -297,7 +299,7 @@ export interface Dict {
   };
   pages: {
     services: { eyebrow: string; h1: string; sub: string; includedLabel: string };
-    pillar: { included: string; deliver: string; connects: string; faq: string; otherPillars: string; ctaTitle: string; ctaSub: string };
+    pillar: { included: string; deliver: string; connects: string; faq: string; otherPillars: string; ctaTitle: string; ctaSub: string; work: string; workAll: string };
     ai: {
       problem: {
         title: string;

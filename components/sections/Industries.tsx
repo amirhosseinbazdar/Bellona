@@ -1,10 +1,31 @@
 import type { CSSProperties } from "react";
 import type { Dict } from "@/content/types";
+import { projectsForIndustry } from "@/content/work";
 import { Rich } from "../Rich";
 import { VoxelArt } from "../voxel/Voxel";
 import { INDUSTRY_MODEL } from "../voxel/models";
 import { ArrowIcon, Chips, Eyebrow, LLink, StickySplit } from "../ui";
 import { RollText } from "../RollText";
+
+/** Links to the case studies filed under one industry. */
+function IndustryWork({ d, id }: { d: Dict; id: string }) {
+  const items = projectsForIndustry(id);
+  if (items.length === 0) return null;
+  return (
+    <div className="flex flex-col gap-3">
+      <p className="t-eyebrow text-orange-text">{d.industries.workLabel}</p>
+      <ul className="flex flex-wrap gap-1.5">
+        {items.map((p) => (
+          <li key={p.slug}>
+            <LLink locale={d.locale} href={`/work/${p.slug}`} className="chip bg-ink text-paper transition-colors hover:bg-orange hover:text-ink">
+              {p[d.locale].title}
+            </LLink>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 /**
  * Home: heading held in place beside compact cards (shape, name, one line).
@@ -37,6 +58,7 @@ export function Industries({ d, full = false }: { d: Dict; full?: boolean }) {
               <Chips items={ind.build} />
             </div>
           )}
+          {full && <IndustryWork d={d} id={ind.id} />}
           {full && (
           <LLink
             locale={locale}

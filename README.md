@@ -69,7 +69,12 @@ npm run lint && npm run build
    - `featured: true` to show it on the home page (the home shows featured projects in list order).
    - Copy in **both** `en` and `fa`: title, client, sector, summary, challenge, built.
    - `results` only with sourced numbers. Leave it empty otherwise.
-3. The list is ranked: put stronger projects first. `/work`, the sitemap and the case-study page (`/work/<slug>` and `/fa/work/<slug>`) update automatically.
+   - Optional:
+     - `industries`: industry ids such as `"education"`. The project is then linked from that card on `/industries`.
+     - `model`: a voxel shape (`components/voxel/models.ts`) shown in place of screenshots, for private work or sites that are down.
+     - `partner` (per language): shown as "In collaboration with".
+3. The list is ranked: put stronger projects first.
+   - These update automatically: `/work` (with `?service=<pillar>` filtering), the sitemap, the case-study pages (`/work/<slug>`, `/fa/work/<slug>`) and the "Projects in this service" block on each service page (top six).
 
 `/work/example` is a noindex template preview (`status: "preview"`).
 

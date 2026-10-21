@@ -1,6 +1,9 @@
 "use client";
 
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState, useSyncExternalStore } from "react";
+
+const noSubscribe = () => () => {};
+const readService = () => new URLSearchParams(window.location.search).get("service");
 
 /**
  * Pillar filter for /work. Children are <li data-pillars="web ai"> items; without JS every
@@ -17,7 +20,10 @@ export function WorkFilter({
   options: { id: string; label: string }[];
   children: ReactNode;
 }) {
-  const [active, setActive] = useState("all");
+  // Service pages link here with ?service=<pillar id>; a click on a chip takes over from it.
+  const fromUrl = useSyncExternalStore(noSubscribe, readService, () => null);
+  const [picked, setActive] = useState<string | null>(null);
+  const active = picked ?? (options.some((o) => o.id === fromUrl) ? fromUrl! : "all");
   const listRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {

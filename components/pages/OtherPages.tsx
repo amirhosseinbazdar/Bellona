@@ -18,6 +18,7 @@ import { pillarShort, ProjectCard } from "../sections/Work";
 import { ArrowIcon, Chips, Eyebrow, LLink, PageHero } from "../ui";
 import { WorkFilter } from "../WorkFilter";
 import { RollText } from "../RollText";
+import { VoxelArt } from "../voxel/Voxel";
 
 export function PartnerPage({ locale }: { locale: Locale }) {
   const d = getDict(locale);
@@ -119,6 +120,7 @@ export function CaseStudyPage({ locale, slug }: { locale: Locale; slug: string }
             [cs.sector, c.sector],
             ...(project.year ? [[cs.year, project.year]] : []),
             [cs.services, project.pillars.map((id) => pillarShort(d, id)).join(locale === "fa" ? "، " : ", ")],
+            ...(c.partner ? [[cs.partner, c.partner]] : []),
           ].map(([k, v]) => (
             <div key={k} className="flex flex-col gap-1">
               <dt className="t-eyebrow text-orange-text">{k}</dt>
@@ -145,6 +147,8 @@ export function CaseStudyPage({ locale, slug }: { locale: Locale; slug: string }
         <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-[28px] bg-ink sm:rounded-[40px]">
           {project.cover ? (
             <Image src={project.cover} alt={c.title} fill priority sizes="(min-width: 1280px) 1232px, 100vw" className="object-cover object-top" />
+          ) : project.model ? (
+            <VoxelArt model={project.model} className="h-1/2 w-auto" gap="stroke-ink" swap={{ k: "w" }} anim="rise" label={c.title} />
           ) : (
             <span className="font-mono text-[13px] text-muted-dark">{d.work.placeholderImage}</span>
           )}
