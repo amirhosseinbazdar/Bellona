@@ -1,4 +1,13 @@
+import { facts, fmt } from "./facts";
 import type { Dict } from "./types";
+import { projects } from "./work";
+
+// Figures come from content/facts.ts (project count from content/work.ts): docs/seo G-06.
+const n = (v: number) => fmt.n(v, "fa");
+const sprint = fmt.span(facts.timelines.automationSprintWeeks, "fa");
+const complexAgents = fmt.span(facts.timelines.complexAgentWeeks, "fa");
+const shipped = n(projects.filter((p) => p.status === "published").length);
+const workflows = n(facts.projects.realEstate.n8nWorkflows);
 
 /**
  * Persian copy (RTL). Persian digits throughout; never letter-space Persian.
@@ -27,7 +36,7 @@ export const fa: Dict = {
     offers: {
       title: "پیشنهادها و پکیج‌ها",
       description:
-        "چهار مسیر روشن برای شروع: بررسی رایگان رشد، سایت فروش‌محور، اسپرینت ۲ تا ۴ هفته‌ای اتوماسیون هوش مصنوعی، یا سیستم کامل رشد بلونا. قیمت قطعی قبل از پرداخت.",
+        `چهار مسیر روشن برای شروع: بررسی رایگان رشد، سایت فروش‌محور، اسپرینت ${sprint} هفته‌ای اتوماسیون هوش مصنوعی، یا سیستم کامل رشد بلونا. قیمت قطعی قبل از پرداخت.`,
     },
     industries: {
       title: "صنایع",
@@ -152,7 +161,7 @@ export const fa: Dict = {
         stage: "اتوماسیون",
         title: "هر مشتری، جواب‌گرفته و پیگیری‌شده",
         text: "ایجنت‌های هوش مصنوعی و گردش‌کارهای n8n در چند ثانیه جواب می‌دهند، مشتری را می‌سنجند، در CRM ثبتش می‌کنند و تا گرفتن جواب پیگیری می‌کنند؛ شب و روز.",
-        proof: "۱۲ گردش‌کار که فروش یک کسب‌وکار املاک را می‌چرخاند",
+        proof: `${workflows} گردش‌کار که فروش یک کسب‌وکار املاک را می‌چرخاند`,
       },
       {
         pillar: "growth",
@@ -220,7 +229,7 @@ export const fa: Dict = {
           "ایمیل، چت سایت یا پیام‌رسان",
           "هشدار خطا، مستندات و آموزش تیم",
         ],
-        timeline: "۲ تا ۴ هفته",
+        timeline: `${sprint} هفته`,
         price: "قیمت قطعی",
         cta: "خودکارسازی یک فرایند",
       },
@@ -426,7 +435,7 @@ export const fa: Dict = {
           faq: [
             {
               q: "چقدر طول می‌کشد تا سیستم آماده شود؟",
-              a: "بیشتر سیستم‌ها بین ۲ تا ۴ هفته راه می‌افتند. کارهای ساده‌تر چند روزه و سیستم‌های چندایجنتی پیچیده ۴ تا ۶ هفته زمان می‌برند.",
+              a: `بیشتر سیستم‌ها بین ${sprint} هفته راه می‌افتند. کارهای ساده‌تر چند روزه و سیستم‌های چندایجنتی پیچیده ${complexAgents} هفته زمان می‌برند.`,
             },
             {
               q: "تیم ما باید فنی باشد؟",
@@ -522,10 +531,10 @@ export const fa: Dict = {
 
   // Every figure here is sourced from content/work.ts.
   stats: [
-    { value: "۱۵", label: "پروژه‌ی تحویل‌شده" },
-    { value: "۱۲", label: "گردش‌کار n8n در یک سیستم فروش" },
-    { value: "۲۷۸", label: "مطلب منتقل‌شده، بدون یک لینک شکسته" },
-    { value: "۲", label: "زبان، با راست‌چین اصولی" },
+    { value: `${shipped}`, label: "پروژه‌ی تحویل‌شده" },
+    { value: `${workflows}`, label: "گردش‌کار n8n در یک سیستم فروش" },
+    { value: `${n(facts.projects.dane.migratedPosts)}`, label: "مطلب منتقل‌شده، بدون یک لینک شکسته" },
+    { value: `${n(facts.counts.languages)}`, label: "زبان، با راست‌چین اصولی" },
   ],
 
   journey: {
@@ -696,7 +705,7 @@ export const fa: Dict = {
         { topic: "زمان فعالیت", traditional: "محدود به ساعات اداری", bellona: "۲۴ ساعته برای عملیات خودکار" },
         { topic: "مقیاس", traditional: "نیاز به نیروی جدید", bellona: "گسترش سیستم، نه استخدام" },
         { topic: "هزینه", traditional: "حقوق ماهانه + سربار", bellona: "یک‌بار ساخت، بازگشت بلندمدت" },
-        { topic: "سرعت", traditional: "هفته‌ها تا آمادگی نیرو", bellona: "بیشتر سیستم‌ها در ۲ تا ۴ هفته" },
+        { topic: "سرعت", traditional: "هفته‌ها تا آمادگی نیرو", bellona: `بیشتر سیستم‌ها در ${sprint} هفته` },
         { topic: "ثبات", traditional: "وابسته به تمرکز انسان", bellona: "اجرای یکسان فرایند، هر بار" },
         { topic: "هماهنگی", traditional: "پنج پیمانکار، پنج برنامه", bellona: "یک تیم، یک برنامه" },
       ],
@@ -797,7 +806,7 @@ export const fa: Dict = {
       },
       {
         q: "چقدر طول می‌کشد؟",
-        a: "اسپرینت اتوماسیون ۲ تا ۴ هفته و اتوماسیون‌های ساده چند روز. زمان سایت و پلتفرم به دامنه بستگی دارد؛ تاریخ دقیق در پیش‌فاکتور می‌آید.",
+        a: `اسپرینت اتوماسیون ${sprint} هفته و اتوماسیون‌های ساده چند روز. زمان سایت و پلتفرم به دامنه بستگی دارد؛ تاریخ دقیق در پیش‌فاکتور می‌آید.`,
       },
       {
         q: "سایت داریم. روی همان کار می‌کنید؟",

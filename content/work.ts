@@ -1,5 +1,12 @@
 import type { ModelName } from "@/components/voxel/models";
+import { facts, fmt } from "./facts";
 import type { PillarId } from "./types";
+
+// Project figures live in content/facts.ts (docs/seo G-06).
+const re = facts.projects.realEstate;
+const dane = facts.projects.dane;
+const en = (v: number) => fmt.n(v, "en");
+const fa = (v: number) => fmt.n(v, "fa");
 
 /**
  * Case studies. See README › "Add a case study".
@@ -86,14 +93,14 @@ export const projects: Project[] = [
       challenge:
         "Selling real-estate projects to investors meant finding them, qualifying them, writing to them, following up and preparing documents, every single day. The system had to run that whole chain and be ready to hand over.",
       built: [
-        "12 n8n workflows, from centralised error handling to a daily digest",
-        "A 7-table Baserow CRM for projects, contacts, campaigns, interactions, tasks and documents",
+        `${en(re.n8nWorkflows)} n8n workflows, from centralised error handling to a daily digest`,
+        `A ${en(re.crmTables)}-table Baserow CRM for projects, contacts, campaigns, interactions, tasks and documents`,
         "Claude-assisted content with SMTP/IMAP outreach and reply handling",
         "Google Drive documents, plus backup and security documentation for handover",
       ],
       results: [
-        { value: "12", label: "n8n workflows running the sales operation" },
-        { value: "7", label: "CRM tables in one Baserow base" },
+        { value: `${en(re.n8nWorkflows)}`, label: "n8n workflows running the sales operation" },
+        { value: `${en(re.crmTables)}`, label: "CRM tables in one Baserow base" },
       ],
     },
     fa: {
@@ -104,14 +111,14 @@ export const projects: Project[] = [
       challenge:
         "فروش پروژه‌های ملکی به سرمایه‌گذارها یعنی هر روز پیدا کردن‌شان، سنجیدن‌شان، نوشتن برای‌شان، پیگیری و آماده کردن سند. سیستم باید کل این زنجیره را خودش جلو می‌برد و آماده‌ی تحویل می‌بود.",
       built: [
-        "۱۲ گردش‌کار n8n؛ از مدیریت متمرکز خطا تا گزارش روزانه",
-        "CRM هفت‌جدولی در Baserow برای پروژه‌ها، مخاطبان، کمپین‌ها، تعامل‌ها، وظایف و اسناد",
+        `${fa(re.n8nWorkflows)} گردش‌کار n8n؛ از مدیریت متمرکز خطا تا گزارش روزانه`,
+        `CRM با ${fa(re.crmTables)} جدول در Baserow برای پروژه‌ها، مخاطبان، کمپین‌ها، تعامل‌ها، وظایف و اسناد`,
         "تولید محتوا با Claude و ارسال و دریافت ایمیل با SMTP/IMAP",
         "ساخت سند در Google Drive و مستندات کامل پشتیبان‌گیری و امنیت برای تحویل",
       ],
       results: [
-        { value: "۱۲", label: "گردش‌کار n8n که عملیات فروش را می‌چرخاند" },
-        { value: "۷", label: "جدول CRM در یک پایگاه Baserow" },
+        { value: `${fa(re.n8nWorkflows)}`, label: "گردش‌کار n8n که عملیات فروش را می‌چرخاند" },
+        { value: `${fa(re.crmTables)}`, label: "جدول CRM در یک پایگاه Baserow" },
       ],
     },
   },
@@ -332,14 +339,14 @@ export const projects: Project[] = [
       challenge:
         "Dane ran on WordPress. Moving to a platform of its own meant carrying every post, tag and author across, tidying a sprawling taxonomy and keeping every old link working.",
       built: [
-        "Migrated 278 posts, 15 categories, 1,057 tags and 6 authors",
-        "Consolidated the taxonomy into 8 categories and 105 topics",
-        "278 permanent redirects so no old link breaks",
+        `Migrated ${en(dane.migratedPosts)} posts, ${en(dane.categoriesBefore)} categories, ${en(dane.tags)} tags and ${en(dane.authors)} authors`,
+        `Consolidated the taxonomy into ${en(dane.categoriesAfter)} categories and ${en(dane.topics)} topics`,
+        `${en(dane.redirects)} permanent redirects so no old link breaks`,
         "Editorial validation for sources, leads, captions, credits and long-form structure",
       ],
       results: [
-        { value: "278", label: "posts migrated, each with a permanent redirect" },
-        { value: "105", label: "topics in 8 categories after the taxonomy clean-up" },
+        { value: `${en(dane.migratedPosts)}`, label: "posts migrated, each with a permanent redirect" },
+        { value: `${en(dane.topics)}`, label: `topics in ${en(dane.categoriesAfter)} categories after the taxonomy clean-up` },
       ],
       partner: SHAMIM.en,
     },
@@ -350,14 +357,14 @@ export const projects: Project[] = [
       summary: "پلتفرم اختصاصی انتشار علمی که وردپرس را با معماری Next.js و Payload CMS و قواعد حرفه‌ای تحریریه جایگزین کرد.",
       challenge: "دانه روی وردپرس بود. رفتن به پلتفرم اختصاصی یعنی منتقل کردن همه‌ی مطالب، برچسب‌ها و نویسنده‌ها، مرتب کردن یک طبقه‌بندی شلوغ و سالم ماندن همه‌ی لینک‌های قدیمی.",
       built: [
-        "مهاجرت ۲۷۸ مطلب، ۱۵ دسته، ۱٬۰۵۷ برچسب و ۶ نویسنده",
-        "بازطراحی طبقه‌بندی به ۸ دسته و ۱۰۵ موضوع",
-        "۲۷۸ ریدایرکت دائمی تا هیچ لینک قدیمی نشکند",
+        `مهاجرت ${fa(dane.migratedPosts)} مطلب، ${fa(dane.categoriesBefore)} دسته، ${fa(dane.tags)} برچسب و ${fa(dane.authors)} نویسنده`,
+        `بازطراحی طبقه‌بندی به ${fa(dane.categoriesAfter)} دسته و ${fa(dane.topics)} موضوع`,
+        `${fa(dane.redirects)} ریدایرکت دائمی تا هیچ لینک قدیمی نشکند`,
         "اعتبارسنجی تحریریه برای منبع، لید، کپشن، اعتبار تصویر و ساختار مطالب بلند",
       ],
       results: [
-        { value: "۲۷۸", label: "مطلب منتقل‌شده، هر کدام با ریدایرکت دائمی" },
-        { value: "۱۰۵", label: "موضوع در ۸ دسته، بعد از بازطراحی طبقه‌بندی" },
+        { value: `${fa(dane.migratedPosts)}`, label: "مطلب منتقل‌شده، هر کدام با ریدایرکت دائمی" },
+        { value: `${fa(dane.topics)}`, label: `موضوع در ${fa(dane.categoriesAfter)} دسته، بعد از بازطراحی طبقه‌بندی` },
       ],
       partner: SHAMIM.fa,
     },

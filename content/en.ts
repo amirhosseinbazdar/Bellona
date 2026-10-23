@@ -1,4 +1,13 @@
+import { facts, fmt } from "./facts";
 import type { Dict } from "./types";
+import { projects } from "./work";
+
+// Figures come from content/facts.ts (project count from content/work.ts): docs/seo G-06.
+const n = (v: number) => fmt.n(v, "en");
+const sprint = fmt.span(facts.timelines.automationSprintWeeks, "en");
+const complexAgents = fmt.span(facts.timelines.complexAgentWeeks, "en");
+const shipped = n(projects.filter((p) => p.status === "published").length);
+const workflows = n(facts.projects.realEstate.n8nWorkflows);
 
 /**
  * English copy. Placeholders are wrapped as [LIKE THIS]; search for "[" to find every one.
@@ -27,7 +36,7 @@ export const en: Dict = {
     offers: {
       title: "Offers",
       description:
-        "Four clear ways to start: a free growth audit, a sales website, a 2–4 week AI automation sprint, or the full Bellona Growth System. Fixed quote before you pay.",
+        `Four clear ways to start: a free growth audit, a sales website, a ${sprint} week AI automation sprint, or the full Bellona Growth System. Fixed quote before you pay.`,
     },
     industries: {
       title: "Industries",
@@ -157,7 +166,7 @@ export const en: Dict = {
         stage: "AUTOMATE",
         title: "Every lead answered and followed up",
         text: "AI agents and n8n workflows reply in seconds, qualify the lead, log it in your CRM and follow up until there is an answer. Day and night.",
-        proof: "12 workflows run a real-estate sales operation",
+        proof: `${workflows} workflows run a real-estate sales operation`,
       },
       {
         pillar: "growth",
@@ -225,7 +234,7 @@ export const en: Dict = {
           "Email, website chat or messenger channels",
           "Error alerts, docs and team training",
         ],
-        timeline: "2–4 weeks",
+        timeline: `${sprint} weeks`,
         price: "Fixed quote",
         cta: "Automate a process",
       },
@@ -435,7 +444,7 @@ export const en: Dict = {
           faq: [
             {
               q: "How long does deployment take?",
-              a: "Most systems go live within 2–4 weeks. Simple automations deploy in days; complex multi-agent systems take 4–6 weeks.",
+              a: `Most systems go live within ${sprint} weeks. Simple automations deploy in days; complex multi-agent systems take ${complexAgents} weeks.`,
             },
             {
               q: "Do I need technical knowledge?",
@@ -534,10 +543,10 @@ export const en: Dict = {
 
   // Every figure here is sourced from content/work.ts.
   stats: [
-    { value: "15", label: "Projects shipped" },
-    { value: "12", label: "n8n workflows in one sales system" },
-    { value: "278", label: "Posts migrated, zero broken links" },
-    { value: "2", label: "Languages, RTL-native" },
+    { value: `${shipped}`, label: "Projects shipped" },
+    { value: `${workflows}`, label: "n8n workflows in one sales system" },
+    { value: `${n(facts.projects.dane.migratedPosts)}`, label: "Posts migrated, zero broken links" },
+    { value: `${n(facts.counts.languages)}`, label: "Languages, RTL-native" },
   ],
 
   journey: {
@@ -712,7 +721,7 @@ export const en: Dict = {
         { topic: "Availability", traditional: "Business hours only", bellona: "24/7 for automated operations" },
         { topic: "Scale", traditional: "Hire more people", bellona: "Scale systems, not headcount" },
         { topic: "Cost", traditional: "Salaries + overhead", bellona: "Build once, keep the return" },
-        { topic: "Speed", traditional: "Weeks to onboard", bellona: "Most systems live in 2–4 weeks" },
+        { topic: "Speed", traditional: "Weeks to onboard", bellona: `Most systems live in ${sprint} weeks` },
         { topic: "Consistency", traditional: "Depends on who's in today", bellona: "Same process, every time" },
         { topic: "Coordination", traditional: "Five vendors, five plans", bellona: "One team, one plan" },
       ],
@@ -813,7 +822,7 @@ export const en: Dict = {
       },
       {
         q: "How long does it take?",
-        a: "An automation sprint goes live in 2–4 weeks, simple automations in days. Website and platform timelines depend on scope; you get a firm date in your quote.",
+        a: `An automation sprint goes live in ${sprint} weeks, simple automations in days. Website and platform timelines depend on scope; you get a firm date in your quote.`,
       },
       {
         q: "We already have a website. Can you work with it?",
