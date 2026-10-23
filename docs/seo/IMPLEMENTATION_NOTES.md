@@ -151,3 +151,33 @@ Commands run for the batch: `npm run build` ✓ · `npm run lint` ✓ · `npx ts
 - Alt text (64 warnings): Phase E, P2-06.
 - Entity statement, areaServed, contact details, founders' LinkedIn: questions 23–28.
 - Content depth, answer-first sections, the facts module and new pages: Phase D (most items need facts).
+
+---
+
+## 8. Phase D log (2026-10-24)
+
+| Commit | Task | What changed | Validation |
+|---|---|---|---|
+| `13c2dd5` | G-06 | `content/facts.ts`: every stated figure in one module, with its evidence. Timelines are the automation sprint (2–4 weeks) and complex agent systems (4–6 weeks). Counts are team and languages. Project figures are the real-estate system (12 workflows, 7 CRM tables) and Dane (278 posts, 105 topics…). Prices, reply time, website timelines and support period are `null`. The copy and case studies read these through locale formatters; the "projects shipped" stat is computed from `work.ts`. | The rendered text on the affected pages was compared and matches the previous build |
+| `36c3ecf` | G-04 | `components/sections/Answers.tsx`: a question H2, a direct answer (`data-answer`), then steps (`<ol>`, Persian numbering in RTL), a table or links. Unconfirmed answers are hidden on published pages and shown as a "needs answer to question N" note in drafts. | Draft build screenshots |
+| `7df6547` | P1-09…11, P1-13, G-05 | `content/spokes.ts` holds answer-first drafts (EN+FA) for the AI-agents, n8n and Next.js spokes, the guides hub and the two cost guides. `lib/drafts.ts`: routes exist only in `SHOW_DRAFTS=1` builds (noindex + banner). Guides get a byline, a visible "last updated" date and `Article` JSON-LD once `author` and `updated` are set. | Production: all 12 draft URLs **404**, none in the sitemap. Draft build: 12 pages 200, noindex, one H1, answers 35–58 words, 0 placeholders |
+| `b7498ff` | P1-07 | Published spokes go into the sitemap and are linked from their pillar ("Go deeper"); the guides hub joins once a guide is published. | Nothing changes today (all drafts) |
+| `0dcc1af` | tooling | seo:check warns when a direct answer is outside ~25–90 words. | Production seo:check: **0 errors** |
+
+Commands: `npm run build` (production and `SHOW_DRAFTS=1`) ✓ · `npm run lint` ✓ · `npx tsc --noEmit` ✓ · `npm run seo:check` ✓.
+
+### How to publish a draft page
+
+1. Answer the questions listed in its banner (`needs` and each `a: null` in `content/spokes.ts`). Put numbers in `content/facts.ts` and the wording in the answer, in both languages.
+2. Guides only: set `updated` (ISO date) and `author` (a team member's name).
+3. Change `status` to `"published"`. It then gets a route in production, joins the sitemap and is linked from its pillar page (guides: from `/guides`).
+4. Run `npm run build && npm run seo:check`.
+
+To preview drafts, build with `SHOW_DRAFTS=1` (for example in a separate Render preview service). Never set it on production.
+
+### Still open after Phase D
+
+- Every `a: null` answer: questions 3, 4, 19, 20, 30, 31, 32, 33.
+- Expanding the existing service pages (P1-03…05) and case-study outcomes (P1-06): they need the same facts.
+- The education page (P1-12) exists; answer-first sections can be added once outcomes are supplied.
+- Phase E (alt text, HTML weight, fonts) and Phase F (form field) are not started.
