@@ -121,3 +121,33 @@ The read-only scripts (in the agent's scratchpad, not the repo) did the followin
 - Image alt text: 64 warnings, all from `alt=""` on project images (Phase E, P2-06).
 - Every answer in `QUESTIONS_FOR_TEAM.md` (removed content returns once answered).
 - Ops: P0-02 cutover, P0-05 GSC/Bing, and turning on `CANONICAL_HOST_MODE` at cutover.
+
+---
+
+## 7. Phase C log (2026-10-23)
+
+| Commit | Task | What changed | Validation |
+|---|---|---|---|
+| `d2a0bf2` | P1-01, P1-02 | **Titles:** a per-locale `seo` map in `content/{en,fa}.ts`, keyed by path, overrides `<title>`/description in `pageMetadata()`, so the short `meta.*` labels (breadcrumbs, nav, aria) stay as they are. Service-page `metaTitle`s rewritten. Industry pages get titles and descriptions built from their real work. Case studies use "Project: sector" (above ~50 characters only the specific sector part). Home title rewritten. About and contact avoid repeating the brand. **H1s:** service pages get keyword H1s, and the former slogan stays as a non-heading `tagline` under it (`PageHero`). Industry pages get keyword H1s, with the sector name in the eyebrow. Home keeps its brand H1 and names «آژانس بلونا» / "Bellona Agency" in the first paragraph. | Every title is 31–65 characters, all unique · 1 H1 per page · screenshots EN/FA at 1280 and 360 |
+| `73b3156` | P1-07 | Footer "Services" row linking all 5 service pages (both locales). | Every page links every service page (seo:check) |
+| `ce26e8a` | G-02 | robots.txt: explicit `Allow: /` group for OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User, PerplexityBot, Perplexity-User. Training bots not named, so they stay allowed under `*`. | robots.txt output checked |
+| `c79e35d` | P1-08, G-03 | `ProfessionalService` entity (with `OfferCatalog`) on the home pages only; `alternateName` [بلونا, آژانس بلونا, Bellona Agency]; founders/employees as `Person`, with `affiliation` Sharif University only where the visible bio says so. `WebSite` node on every page (`publisher` → entity `@id`). `Service` node on each service page only (`provider` → `@id`). | JSON-LD parses on all pages · placement rules in seo:check |
+| `b1c4a0b` | TA-13 | Sitemap `lastmod` = last git commit touching the page's sources; omitted if git is unavailable. | Stable across fetches · no future dates |
+| `d470cf4` | tooling | seo:check enforces all of the above, plus a warning for titles outside ~30–65 characters. | Old build: flagged (no WebSite, entity on 62 pages, missing links, etc.) · Phase C build: **0 errors**, 64 alt warnings |
+
+Commands run for the batch: `npm run build` ✓ · `npm run lint` ✓ · `npx tsc --noEmit` ✓ · `npm run seo:check` ✓ (0 errors).
+
+### Decisions (Phase C)
+
+- **Website-design H1:** the architecture proposes «طراحی سایت اختصاصی که بازدیدکننده را مشتری می‌کند». With the slogan kept as the sub-line («سایت‌هایی که بازدیدکننده را به مشتری تبدیل می‌کنند»), that would say the same thing twice. So the H1 is the keyword phrase «طراحی سایت اختصاصی و دوزبانه», which keeps the primary keyword. The other service H1s follow the architecture table.
+- **Hub pages** (services, offers, partner, industries hub, work, about, contact) keep their slogan H1s; only their titles became keyword-bearing. P1-02 covers service and industry pages, and changing hub H1s is a copy decision for the team.
+- **Home:** brand H1 kept (architecture recommendation). The «آژانس بلونا» mention in the first paragraph is reversible if the answer to question 16 says otherwise.
+- **OfferCatalog** stays on the home entity, as the organisation's own service list, and is gone everywhere else (legal pages included). The `WebSite` node is how every page references the entity.
+- **Entity description** is still the existing home meta description until the team approves an entity statement (question 23). Founder affiliation follows the visible team bios (question 28).
+- **lastmod granularity:** every page depends on its language's copy file, so any copy edit moves the date of every page in that language. Render's build clone depth is unknown: if it is shallow, all dates equal the deployed commit's date. That is still honest; if git is unavailable, lastmod is omitted.
+
+### Still open after Phase C
+
+- Alt text (64 warnings): Phase E, P2-06.
+- Entity statement, areaServed, contact details, founders' LinkedIn: questions 23–28.
+- Content depth, answer-first sections, the facts module and new pages: Phase D (most items need facts).
