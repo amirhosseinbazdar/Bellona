@@ -96,3 +96,28 @@ The read-only scripts (in the agent's scratchpad, not the repo) did the followin
   - drop the about origin-story paragraph;
   - drop the six unanswered FAQs;
   - legal pages: keep `noindex`, but they still need real text. Until then, remove the footer links and do not ship the bracketed body.
+
+---
+
+## 6. Phase B log (2026-10-23)
+
+| Commit | Task | What changed | Validation |
+|---|---|---|---|
+| `5de5bac` | P0-01 / G-01 tooling | `scripts/seo-check.mjs` + `npm run seo:check`. It starts `next start` on the production build, or uses `SEO_CHECK_BASE`. Errors: status, one H1, unique title and description, self-canonical, reciprocal hreflang, lang/dir, noindex in the sitemap, JSON-LD parses, placeholders in text/meta/JSON-LD (sitemap, every linked page and the legal pages), internal 404s, old URLs single-hop 301/308, robots sanity. Warnings: empty content-image alt, links to redirects. | Baseline on the pre-change build: **81 errors** (80 placeholders, Host line) and 64 warnings (alt) |
+| `78c6c1d` | P0-01 | Placeholders removed in EN+FA: the reply time (contact block, form success, `/contact` meta), the about origin story, unanswered FAQs (website CMS; full-stack ×3; marketing ×2; biz-dev markets), the `[TYPICAL RANGE]` token. Pillar pages with no FAQs left hide the FAQ block (and its JSON-LD). Legal pages get interim text without placeholders; their footer and form links are hidden behind `legalPagesPublished` in `lib/site.ts`. | Build ✓ · lint ✓ · tsc ✓ · seo:check 1 error (Host) · the legal pages' visible text checked directly: no tokens |
+| `288a9b3` | P0-04 | `proxy.ts`, off unless `CANONICAL_HOST_MODE=redirect\|noindex`. The robots `Host:` line is removed. `.env.example` documented. | Off, `redirect` and `noindex` each tested against Render, canonical, `www` and localhost hosts, plus `X-Forwarded-Host` · seo:check **0 errors** |
+| — | P0-03 | No change needed: finance/healthcare/consulting → 308 → `/industries`; `realEstate` → 308 → `/industries/real-estate`; `ecommerce`/`education` are live pages (200), both locales. | seo:check checks all 12 old URLs on every run |
+| — | P0-06 | No change. Remaining "24/7" / "around the clock" / «۲۴ ساعته» wording (`en.ts` 351, 356, 358, 363, 662, 971 and the FA twins) describes automations running continuously, not a performance statistic. Unsupported numbers were already removed by the redesign. | Waiting for the team's answer to question 12 |
+
+### Decisions
+
+- **Legal pages:** kept reachable and `noindex`, with an honest interim note and the contact email. They are **unlinked** until the real texts exist. To publish: put the texts in `content/{en,fa}.ts` `pages.legal`, then set `legalPagesPublished = true` in `lib/site.ts`.
+- **Form success copy:** "Got it. Thanks, we'll be in touch." / «دریافت شد. ممنون؛ با شما تماس می‌گیریم.» This promises no specific time until question 1 is answered.
+- **Render health check at cutover:** Render health-checks `/`. In `redirect` mode the Render host returns a 301. Render treats 2xx–3xx as healthy, **but confirm this in the dashboard when you enable the flag**; if the check fails, use `noindex` mode instead.
+- **Not in scope yet:** `Engage` price placeholders (`[PRICE]`…) are data only, not rendered (pricing removed). `placeholderImage` only renders for a project without a cover or model (none today). seo:check would catch either if it appeared.
+
+### Still open after Phase B
+
+- Image alt text: 64 warnings, all from `alt=""` on project images (Phase E, P2-06).
+- Every answer in `QUESTIONS_FOR_TEAM.md` (removed content returns once answered).
+- Ops: P0-02 cutover, P0-05 GSC/Bing, and turning on `CANONICAL_HOST_MODE` at cutover.
