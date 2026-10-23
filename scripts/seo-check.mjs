@@ -34,6 +34,9 @@ const OLD_URLS = ["realEstate", "finance", "healthcare", "ecommerce", "consultin
   `/fa/industries/${s}`,
 ]);
 
+// Reachable pages kept out of the sitemap (noindex). Always checked for placeholders, linked or not.
+const EXTRA_PAGES = ["/privacy", "/terms", "/fa/privacy", "/fa/terms"];
+
 const errors = [];
 const warnings = [];
 const err = (where, msg) => errors.push(`${where}: ${msg}`);
@@ -189,6 +192,13 @@ async function main() {
       if (res.status === 404) err(from, `links to 404: ${href}`);
       else if (res.status >= 300 && res.status < 400) warn(from, `links to a redirect: ${href} → ${res.headers.get("location")}`);
       else if (res.status === 200 && !pages.includes(href.split("?")[0])) placeholderChecks(href, await res.text());
+    }
+
+    for (const p of EXTRA_PAGES) {
+      if (links.has(p)) continue; // already checked above
+      const res = await fetch(base + p, { redirect: "manual" });
+      if (res.status === 200) placeholderChecks(p, await res.text());
+      else err(p, `HTTP ${res.status}`);
     }
 
     for (const u of OLD_URLS) {

@@ -43,7 +43,7 @@ export const en: Dict = {
     },
     contact: {
       title: "Contact",
-      description: "Tell us what you need. Book a 30-minute free call or send a request; we reply within [24 h].",
+      description: "Tell us what you need. Book a 30-minute free call or send a request.",
     },
     privacy: { title: "Privacy policy", description: "How Bellona handles your data." },
     terms: { title: "Terms of use", description: "Terms for using bellonaagency.com." },
@@ -300,10 +300,9 @@ export const en: Dict = {
               q: "Can you redesign our current site?",
               a: "Yes. We start with an audit of what works and what doesn't, then keep what earns its place.",
             },
-            { q: "Which CMS do you use?", a: "[CMS CHOICE, e.g. Webflow, WordPress or a headless CMS]" },
             {
               q: "How long does a website take?",
-              a: "It depends on scope. You get a firm timeline after the free growth audit. [TYPICAL RANGE]",
+              a: "It depends on scope. You get a firm timeline after the free growth audit.",
             },
           ],
         },
@@ -338,11 +337,7 @@ export const en: Dict = {
           connectsTitle: "Connects with",
           connects:
             "Your product is where AI agents do their work and where the data for growth lives.",
-          faq: [
-            { q: "What's your stack?", a: "[STACK]" },
-            { q: "Who owns the code?", a: "[CODE OWNERSHIP TERMS]" },
-            { q: "Can you take over an app you didn't build?", a: "[YES / NO / CONDITIONS]" },
-          ],
+          faq: [],
         },
       },
       {
@@ -448,13 +443,7 @@ export const en: Dict = {
           connectsTitle: "Connects with",
           connects:
             "Leads land on a website built to convert and get followed up by AI agents automatically, so nothing goes cold.",
-          faq: [
-            { q: "Which channels do you run?", a: "[CHANNELS, e.g. Google Ads, Meta, LinkedIn, Instagram]" },
-            {
-              q: "Do you write the content too?",
-              a: "[YES / NO / IN WHICH LANGUAGES]",
-            },
-          ],
+          faq: [],
         },
       },
       {
@@ -491,7 +480,6 @@ export const en: Dict = {
               q: "Is this consulting or hands-on work?",
               a: "Both. We write the plan, then set up the CRM, sales process and systems that carry it out.",
             },
-            { q: "Which markets do you know best?", a: "[MARKETS / REGIONS]" },
           ],
         },
       },
@@ -803,7 +791,7 @@ export const en: Dict = {
   contact: {
     eyebrow: "LET'S TALK",
     title: "Ready when\n**you are.**",
-    sub: "Tell us where it hurts. You get a free 30-minute growth audit and, if it fits, a fixed quote. We reply within [24 h].",
+    sub: "Tell us where it hurts. You get a free 30-minute growth audit and, if it fits, a fixed quote.",
     bookAlt: "Prefer to pick a time?",
     emailAlt: "Or email",
     form: {
@@ -827,7 +815,7 @@ export const en: Dict = {
       messagePh: "Where does it hurt? What would “done” look like?",
       submit: "Send request",
       sending: "Sending…",
-      success: "Got it. We'll reply within [24 h].",
+      success: "Got it. Thanks, we'll be in touch.",
       stored: "Got it. Your message is saved on our server, but our notification link is down right now, so our reply may take a little longer than usual.",
       error: "Something went wrong on our side. Please email us at bellona.ai.team@gmail.com.",
       errors: {
@@ -982,7 +970,6 @@ export const en: Dict = {
       story: [
         "Bellona started as an AI and automation studio: agents, workflows and integrations that take repetitive work off a team's plate and run around the clock.",
         "Building those systems kept leading to the same place. The automation needed a better website feeding it, a product to live in, and a growth plan to point it at. So we grew into a complete digital partner: one team from idea to growth.",
-        "[FOUNDING YEAR, LOCATION AND ORIGIN STORY]",
       ],
       howTitle: "How we work",
     },
@@ -994,7 +981,7 @@ export const en: Dict = {
     },
     legal: {
       eyebrow: "LEGAL",
-      body: "[OWNER TO SUPPLY: full text of this policy]",
+      body: "We're preparing this page. Until it's published, send any question about how we handle your information to the email below.",
     },
     notFound: {
       title: "This page **wandered off.**",

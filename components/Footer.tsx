@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Dict } from "@/content/types";
 import { localePath } from "@/lib/i18n";
+import { legalPagesPublished } from "@/lib/site";
 import { LogoMark } from "./LogoMark";
 
 function InstagramIcon() {
@@ -60,16 +61,20 @@ export function Footer({ d }: { d: Dict }) {
                 </a>
               </li>
             ))}
-            <li>
-              <Link href={localePath(locale, "/privacy")} className="hover:text-paper">
-                {common.footer.legal.privacy}
-              </Link>
-            </li>
-            <li>
-              <Link href={localePath(locale, "/terms")} className="hover:text-paper">
-                {common.footer.legal.terms}
-              </Link>
-            </li>
+            {legalPagesPublished && (
+              <>
+                <li>
+                  <Link href={localePath(locale, "/privacy")} className="hover:text-paper">
+                    {common.footer.legal.privacy}
+                  </Link>
+                </li>
+                <li>
+                  <Link href={localePath(locale, "/terms")} className="hover:text-paper">
+                    {common.footer.legal.terms}
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
         {/* Decorative giant wordmark, drawn as SVG so it isn't treated as body text. */}

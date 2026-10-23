@@ -164,6 +164,8 @@ export function PillarPage({ locale, slug }: { locale: Locale; slug: string }) {
 
       {isAi && <Flow d={d} />}
 
+      {/* Only questions with real answers are listed; a pillar with none shows no FAQ block. */}
+      {p.page.faq.length > 0 && (
       <section aria-labelledby="pillar-faq" className="section">
         <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.6fr]">
           <div className="flex flex-col gap-4">
@@ -176,6 +178,7 @@ export function PillarPage({ locale, slug }: { locale: Locale; slug: string }) {
         </div>
         <FaqLd items={p.page.faq} />
       </section>
+      )}
 
       <section aria-labelledby="other-pillars" className="section bg-surface">
         <div className="wrap flex flex-col gap-10">

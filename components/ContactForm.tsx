@@ -6,6 +6,7 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import { submitLead } from "@/app/actions/contact";
 import type { Dict, Locale } from "@/content/types";
 import { localePath } from "@/lib/i18n";
+import { legalPagesPublished } from "@/lib/site";
 import { initialLeadState, MODEL_IDS, NEED_IDS } from "@/lib/lead";
 import { track } from "./Analytics";
 import { RollText } from "./RollText";
@@ -196,10 +197,15 @@ export function ContactForm({ locale, copy, defaultNeed }: { locale: Locale; cop
         <RollText>{pending ? copy.sending : copy.submit}</RollText>
       </button>
       <p className="text-sm text-muted-dark">
-        {copy.privacy}{" "}
-        <Link href={localePath(locale, "/privacy")} className="underline underline-offset-4 hover:text-paper">
-          {copy.privacyLink}
-        </Link>
+        {copy.privacy}
+        {legalPagesPublished && (
+          <>
+            {" "}
+            <Link href={localePath(locale, "/privacy")} className="underline underline-offset-4 hover:text-paper">
+              {copy.privacyLink}
+            </Link>
+          </>
+        )}
       </p>
     </form>
   );
