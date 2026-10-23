@@ -20,7 +20,7 @@
  *  - every page links to every service page (footer, P1-07)
  *  - sitemap lastmod is stable between two fetches and never in the future (TA-13)
  * Warnings: content images with empty alt that aren't marked decorative; internal links to redirects;
- * titles outside ~30–65 characters.
+ * titles outside ~30–65 characters; direct answers (data-answer, G-04) outside ~25–90 words.
  *
  * Usage: npm run seo:check
  */
@@ -189,6 +189,11 @@ async function checkPage(base, p, seen) {
   for (const sp of seen.servicePaths) {
     const want = fa ? `/fa${sp}` : sp;
     if (!links.includes(want)) err(p, `no link to ${want}`);
+  }
+
+  for (const m of body.matchAll(/<p[^>]*\sdata-answer=""[^>]*>([\s\S]*?)<\/p>/g)) {
+    const words = visibleText(m[1]).split(" ").filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
+    if (words < 25 || words > 90) warn(p, `direct answer is ${words} words`);
   }
 
   for (const img of body.match(/<img\s[^>]*>/g) || []) {
