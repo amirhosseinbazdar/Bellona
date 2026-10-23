@@ -32,13 +32,11 @@ export const jetbrains = localFont({
 // The CSS stacks built on these are --font-fa-display and --font-fa-body (globals.css @theme).
 // next/font emits a metric-matched fallback face for each (size-adjust etc.), so the swap doesn't shift layout.
 
-// Rooyin Free: display only (headlines, big numbers). A pixel face that echoes the cube mark;
-// Regular 400 and Bold 700, never synthesised. (Lalezar stays in app/fonts/lalezar for an easy switch back.)
+// Rooyin Free: display only (headlines, big numbers). A pixel face that echoes the cube mark.
+// Regular only: its Bold reads ~30% wider, "stretched" (the file is kept in app/fonts/rooyin).
+// Never synthesised. Lalezar stays in app/fonts/lalezar for an easy switch back.
 export const rooyin = localFont({
-  src: [
-    { path: "./fonts/rooyin/RooyinFree-Regular.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/rooyin/RooyinFree-Bold.woff2", weight: "700", style: "normal" },
-  ],
+  src: [{ path: "./fonts/rooyin/RooyinFree-Regular.woff2", weight: "400", style: "normal" }],
   variable: "--font-rooyin",
   display: "swap",
   preload: true,

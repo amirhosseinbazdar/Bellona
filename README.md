@@ -3,7 +3,7 @@
 Bilingual marketing site for **Bellona**: English at `/`, Persian (RTL) at `/fa`.
 Next.js 16 (App Router) + TypeScript + Tailwind CSS 4. Fonts and brand assets are self-hosted.
 
-**Type:** English uses Plus Jakarta Sans. Persian (/fa only, `app/fonts/`, OFL) uses Rooyin Free for display (h1/h2, display classes, big numbers, `.fa-display`; Bold, never synthesised, emphasis by colour only; Lalezar is kept in `app/fonts/lalezar` to switch back) and Estedad for everything else (body 700, UI 800, captions 600). The rules live at the end of `app/globals.css` ("Persian type").
+**Type:** English uses Plus Jakarta Sans. Persian (/fa only, `app/fonts/`, OFL) uses Rooyin Free Regular for display (h1/h2, display classes, big numbers, `.fa-display`; its Bold reads stretched, never synthesised, emphasis by colour only; Lalezar is kept in `app/fonts/lalezar` to switch back) and Estedad for everything else (body 700, UI 800, captions 600). The rules live at the end of `app/globals.css` ("Persian type").
 
 ```
 app/                 routes: (en)/… and (fa)/fa/… are two root layouts (different <html lang/dir>)
