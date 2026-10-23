@@ -154,8 +154,23 @@ export function StickySplit({ head, children, wide = false }: { head: ReactNode;
   );
 }
 
-/** Small page hero for inner pages. */
-export function PageHero({ eyebrow, title, sub, children }: { eyebrow: string; title: string; sub?: string; children?: ReactNode }) {
+/**
+ * Small page hero for inner pages. `title` is the H1 (keyword-bearing on service and industry pages);
+ * `tagline` keeps the brand slogan as a large line under it, without being a heading.
+ */
+export function PageHero({
+  eyebrow,
+  title,
+  tagline,
+  sub,
+  children,
+}: {
+  eyebrow: string;
+  title: string;
+  tagline?: string;
+  sub?: string;
+  children?: ReactNode;
+}) {
   return (
     <section className="wrap pb-16 pt-16 sm:pt-24" aria-labelledby="page-title">
       <div className="hero-in flex max-w-5xl flex-col gap-6">
@@ -163,6 +178,11 @@ export function PageHero({ eyebrow, title, sub, children }: { eyebrow: string; t
         <h1 id="page-title" className="t-h1">
           <Rich text={title} />
         </h1>
+        {tagline && (
+          <p className="t-h3 max-w-4xl text-body">
+            <Rich text={tagline} />
+          </p>
+        )}
         {sub && <p className="t-lead max-w-3xl text-body">{sub}</p>}
         {children}
       </div>

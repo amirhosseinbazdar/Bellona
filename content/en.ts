@@ -10,7 +10,7 @@ export const en: Dict = {
   meta: {
     siteName: "Bellona",
     home: {
-      title: "Bellona: Websites that sell, AI that follows up",
+      title: "Bellona: website design, AI agents and automation",
       description:
         "Bellona designs and codes custom websites and web platforms, connects them to AI automation that answers and follows up every lead, and grows the traffic behind them. English and Persian. Book a free growth audit.",
     },
@@ -84,10 +84,51 @@ export const en: Dict = {
     email: "bellona.ai.team@gmail.com",
   },
 
+  /** SEO <title>/description per locale-less path (docs/seo/SEO_SITE_ARCHITECTURE.md). Labels in `meta` stay short. */
+  seo: {
+    "/services": {
+      title: "Web design, product and AI automation services",
+    },
+    "/offers": {
+      title: "Website and automation packages with fixed quotes",
+    },
+    "/partner": {
+      title: "Your digital partner from idea to growth",
+    },
+    "/industries": {
+      title: "Websites and AI automation by industry",
+    },
+    "/industries/education": {
+      title: "Education websites and gamified learning platforms",
+      description: "Learning platforms, gamified courses and enrollment sites, designed and built by Bellona. Work includes Konjed, Codechee, Yasin and Microshamim.",
+    },
+    "/industries/real-estate": {
+      title: "Websites and AI sales automation for real estate",
+      description: "Listing websites, automatic buyer follow-up and CRM automation for real-estate businesses, like the AI sales system we built for kharazie.at.",
+    },
+    "/industries/ecommerce": {
+      title: "Online store design and sales automation",
+      description: "Custom online stores with payments, admin panels and AI support. Work includes Sabzino, Nira Perfume, Mojasame Saidi and Elm-Kala.",
+    },
+    "/industries/media": {
+      title: "Media websites and publishing platforms",
+      description: "Publishing platforms with a headless CMS, editorial rules and content migration that keeps every old link working, like Dane Scientific News.",
+    },
+    "/work": {
+      title: "Website, product and automation case studies",
+    },
+    "/about": {
+      title: "About us: an engineering team from Sharif University",
+      description: "Meet Bellona: a four-person engineering team from Sharif University of Technology that builds websites and products and automates repetitive work with AI.",
+    },
+    "/contact": {
+      title: "Contact us and book a free growth audit",
+    },
+  },
   hero: {
     tagline: "BUILD · AUTOMATE · GROW",
     title: "Websites that sell. **AI that follows up.**",
-    sub: "We design and hand-code your website or platform, connect it to AI automation that answers and follows up every lead in seconds, then grow the traffic that feeds it. One engineering team, from first sketch to first sale.",
+    sub: "At Bellona Agency we design and hand-code your website or platform, connect it to AI automation that answers and follows up every lead in seconds, then grow the traffic that feeds it. One engineering team, from first sketch to first sale.",
     primary: "Get a free growth audit",
     secondary: "See our work",
     projectsLabel: "projects shipped",
@@ -276,10 +317,11 @@ export const en: Dict = {
         line: "Sites that look sharp, load fast and turn visitors into leads.",
         chips: ["UI/UX", "Landing pages", "CMS", "Conversion design"],
         page: {
-          metaTitle: "Website design",
+          metaTitle: "Custom, fast, bilingual website design",
           metaDescription:
             "Fast, on-brand websites and landing pages designed to turn visitors into leads: UI/UX, CMS sites and conversion-focused design, in English and Persian.",
-          h1: "Websites that **turn visitors into leads.**",
+          h1: "Custom, **bilingual** website design",
+          tagline: "Websites that **turn visitors into leads.**",
           sub: "Fast, clear, on-brand sites designed around one job: getting the right people to take the next step.",
           includedTitle: "What's included",
           included: [
@@ -318,10 +360,11 @@ export const en: Dict = {
         line: "Web apps, dashboards and internal tools, from database to interface, taken from MVP to launch.",
         chips: ["Web apps", "MVP & launch", "Dashboards", "APIs & integrations", "Maintenance"],
         page: {
-          metaTitle: "Full-stack & product development",
+          metaTitle: "Web app, MVP and custom dashboard development",
           metaDescription:
             "Web apps, digital products, dashboards, internal tools, APIs and integrations, built, launched and maintained by one team.",
-          h1: "Software built **around how you actually work.**",
+          h1: "Web app and **digital product** development",
+          tagline: "Software built **around how you actually work.**",
           sub: "Web apps, digital products, dashboards and internal tools, from database to interface, plus the APIs and integrations that connect them to everything else. We take products from first version to launch, and keep them running.",
           includedTitle: "What's included",
           included: [
@@ -351,10 +394,11 @@ export const en: Dict = {
         line: "Agents, workflows and integrations that qualify leads, sync your CRM and run operations 24/7.",
         chips: ["AI agents", "Workflow automation", "Integrations", "CRM automation"],
         page: {
-          metaTitle: "AI agents & workflow automation",
+          metaTitle: "AI agents and business process automation",
           metaDescription:
             "AI agents, workflow automation, lead generation systems, AI customer support, CRM automation and custom integrations that run 24/7.",
-          h1: "AI systems that work **while you sleep.**",
+          h1: "Business automation **with AI agents**",
+          tagline: "AI systems that work **while you sleep.**",
           sub: "Agents and workflows that qualify leads, sync your CRM, answer customers and run operations around the clock.",
           includedTitle: "Six capabilities, **one system.**",
           included: [
@@ -423,10 +467,11 @@ export const en: Dict = {
         line: "Campaigns, SEO and content, and lead-generation systems that bring the right clients in.",
         chips: ["Campaigns", "SEO & content", "Lead generation"],
         page: {
-          metaTitle: "Marketing & growth",
+          metaTitle: "Lead generation systems and growth marketing",
           metaDescription:
             "Campaigns, SEO and content, and automated lead-generation systems that fill your pipeline and hand leads straight to sales.",
-          h1: "A pipeline that **doesn't depend on luck.**",
+          h1: "Lead generation **and growth** systems",
+          tagline: "A pipeline that **doesn't depend on luck.**",
           sub: "Campaigns, SEO and content, and lead-generation systems that bring the right clients in, and hand them straight to your sales process.",
           includedTitle: "What's included",
           included: [
@@ -457,10 +502,11 @@ export const en: Dict = {
         line: "Research, go-to-market and sales systems that turn “we should grow” into a plan.",
         chips: ["Market research", "Go-to-market", "Sales & CRM", "Partnerships"],
         page: {
-          metaTitle: "Business development",
+          metaTitle: "Business development, CRM setup and market entry",
           metaDescription:
             "Market and competitor research, go-to-market planning, sales process and CRM setup, partnerships and growth strategy.",
-          h1: "Growth, **with a plan behind it.**",
+          h1: "Business development, **from plan to CRM**",
+          tagline: "Growth, **with a plan behind it.**",
           sub: "Market and competitor research, go-to-market planning, sales process and CRM setup, partnerships, and the strategy that ties them together.",
           includedTitle: "What's included",
           included: [
@@ -612,6 +658,7 @@ export const en: Dict = {
         id: "real-estate",
         icon: "home",
         title: "Real Estate",
+        h1: "Websites and **sales automation** for real estate",
         text: "Lead nurturing, property matching, and client follow-ups on autopilot.",
         build: ["Listing website", "Lead nurturing", "CRM automation"],
       },
@@ -619,6 +666,7 @@ export const en: Dict = {
         id: "education",
         icon: "book",
         title: "Education",
+        h1: "Websites and **learning platforms** for education",
         text: "Learning platforms, gamified courses and enrollment sites that students actually enjoy using.",
         build: ["Learning platform", "Enrollment funnel", "Student support agent"],
       },
@@ -626,6 +674,7 @@ export const en: Dict = {
         id: "ecommerce",
         icon: "cart",
         title: "E-Commerce",
+        h1: "Online store design and **sales automation**",
         text: "Online stores with payments, admin panels and the automation that keeps orders moving.",
         build: ["Custom store", "Payments & admin", "AI support"],
       },
@@ -633,6 +682,7 @@ export const en: Dict = {
         id: "media",
         icon: "chat",
         title: "Media & Publishing",
+        h1: "Websites and **publishing platforms** for media",
         text: "Publishing platforms with editorial rules built in, migrated without breaking a single old link.",
         build: ["Headless CMS", "Content migration", "SEO redirects"],
       },

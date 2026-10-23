@@ -56,6 +56,8 @@ export interface Pillar {
     metaTitle: string;
     metaDescription: string;
     h1: string;
+    /** The former slogan headline, shown under the keyword H1. */
+    tagline?: string;
     sub: string;
     includedTitle: string;
     included: { title: string; text: string }[];
@@ -71,6 +73,8 @@ export interface Industry {
   id: string;
   icon: IconName;
   title: string;
+  /** Keyword H1 on the industry page (the title becomes the eyebrow). */
+  h1?: string;
   text: string;
   build: string[];
 }
@@ -125,6 +129,8 @@ export interface PageMeta {
 export interface Dict {
   locale: Locale;
   dir: "ltr" | "rtl";
+  /** <title>/description overrides by locale-less path, e.g. "/services". */
+  seo: Record<string, { title?: string; description?: string }>;
   meta: {
     siteName: string;
     home: PageMeta;

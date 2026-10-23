@@ -81,7 +81,7 @@ export function PillarPage({ locale, slug }: { locale: Locale; slug: string }) {
 
   return (
     <>
-      <PageHero eyebrow={`${p.num} · ${p.stage} · ${p.title}`} title={p.page.h1} sub={p.page.sub}>
+      <PageHero eyebrow={`${p.num} · ${p.stage} · ${p.title}`} title={p.page.h1} tagline={p.page.tagline} sub={p.page.sub}>
         <div className="flex flex-wrap gap-3 pt-2">
           <LLink locale={locale} href={`/contact?need=${p.id}`} className="btn btn-primary" track={`pillar_${p.id}_start`}>
             <RollText>{d.common.startProject}</RollText>

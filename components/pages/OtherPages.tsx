@@ -97,7 +97,7 @@ export function IndustryPage({ locale, id }: { locale: Locale; id: string }) {
   const others = industries.items.filter((x) => x.id !== id);
   return (
     <>
-      <PageHero eyebrow={industries.eyebrow} title={ind.title} sub={ind.text}>
+      <PageHero eyebrow={`${industries.eyebrow} · ${ind.title}`} title={ind.h1 ?? ind.title} sub={ind.text}>
         <div className="flex flex-wrap gap-3 pt-2">
           <LLink locale={locale} href={`/contact?industry=${id}`} className="btn btn-primary" track={`industry_page_${id}`}>
             <RollText>{industries.cardCta}</RollText>
