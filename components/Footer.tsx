@@ -43,6 +43,21 @@ export function Footer({ d }: { d: Dict }) {
             </ul>
           </nav>
         </div>
+        {/* Sitewide crawl path to every service page, with descriptive anchors (docs/seo P1-07). */}
+        <nav aria-labelledby="footer-services" className="flex flex-wrap items-baseline gap-x-7 gap-y-3 border-t border-line-dark pt-8">
+          <p id="footer-services" className="t-eyebrow text-orange-on-dark">
+            {d.meta.services.title}
+          </p>
+          <ul className="flex flex-wrap gap-x-7 gap-y-3 text-[15px]">
+            {d.pillars.items.map((p) => (
+              <li key={p.id}>
+                <Link href={localePath(locale, `/services/${p.slug}`)} className="text-soft-dark hover:text-orange">
+                  {p.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <div className="flex flex-wrap items-center justify-between gap-4 text-sm text-muted-dark">
           <p>{common.footer.rights}</p>
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
