@@ -93,7 +93,7 @@ export function ProjectCard({
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex flex-col gap-1">
-          <Heading className="fa-display text-2xl font-bold tracking-[-0.02em] sm:text-3xl rtl:text-[30px] sm:rtl:text-[36px]">{copy.title}</Heading>
+          <Heading className="fa-display text-2xl font-bold tracking-[-0.02em] sm:text-3xl">{copy.title}</Heading>
           <p className="text-sm font-semibold text-orange-text">{isLink ? copy.sector : d.work.placeholderNote}</p>
         </div>
         {chips}

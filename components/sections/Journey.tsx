@@ -43,7 +43,7 @@ export function Journey({ d, full = false, headless = false }: { d: Dict; full?:
                 {stepNum(i, locale)}
               </span>
               <div className="flex flex-col gap-2 pt-2 lg:pt-0">
-                <h3 className="fa-display text-2xl font-bold tracking-[-0.02em] rtl:text-[30px]">{step.title}</h3>
+                <h3 className="fa-display text-2xl font-bold tracking-[-0.02em]">{step.title}</h3>
                 <p className="leading-relaxed text-muted">{step.line}</p>
                 {full && (
                   <div className="mt-3 flex flex-col gap-2">

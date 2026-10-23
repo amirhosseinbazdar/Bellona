@@ -22,7 +22,7 @@ export function Footer({ d }: { d: Dict }) {
           <Link href={localePath(locale, "/")} className="hx flex items-center gap-4 rounded-2xl">
             <LogoMark variant="dark" size={72} />
             <span className="flex flex-col gap-2">
-              <span className="fa-display text-[30px] font-extrabold leading-none tracking-[-0.035em] rtl:text-[34px]">
+              <span className="fa-display text-[30px] font-extrabold leading-none tracking-[-0.035em]">
                 {common.wordmark} <span className="font-normal text-orange">{common.agency}</span>
               </span>
               <span className="tagline text-[11px] font-semibold tracking-[0.36em] text-muted-dark rtl:text-sm">

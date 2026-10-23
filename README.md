@@ -3,7 +3,7 @@
 Bilingual marketing site for **Bellona**: English at `/`, Persian (RTL) at `/fa`.
 Next.js 16 (App Router) + TypeScript + Tailwind CSS 4. Fonts and brand assets are self-hosted.
 
-**Type:** English uses Plus Jakarta Sans. Persian (/fa only, `app/fonts/`, OFL) uses Lalezar for display (h1/h2, display classes, big numbers, `.fa-display`; always weight 400, emphasis by colour only) and Estedad for everything else (body 700, UI 800, captions 600). The rules live at the end of `app/globals.css` ("Persian type").
+**Type:** English uses Plus Jakarta Sans. Persian (/fa only, `app/fonts/`, OFL) uses Rooyin Free for display (h1/h2, display classes, big numbers, `.fa-display`; Bold, never synthesised, emphasis by colour only; Lalezar is kept in `app/fonts/lalezar` to switch back) and Estedad for everything else (body 700, UI 800, captions 600). The rules live at the end of `app/globals.css` ("Persian type").
 
 ```
 app/                 routes: (en)/… and (fa)/fa/… are two root layouts (different <html lang/dir>)
@@ -102,7 +102,7 @@ npm run lint && npm run build
 
 ## International cut-off (offline readiness)
 
-If international connectivity from Iran is lost but this server and the local network stay up, the site keeps working: every page, image, font (Plus Jakarta Sans, JetBrains Mono, Lalezar, Estedad), script, animation and the 3D section is served from this server. Nothing loads from a CDN at runtime, and `next build` needs no font downloads (all fonts are files in `app/fonts/`).
+If international connectivity from Iran is lost but this server and the local network stay up, the site keeps working: every page, image, font (Plus Jakarta Sans, JetBrains Mono, Rooyin, Estedad), script, animation and the 3D section is served from this server. Nothing loads from a CDN at runtime, and `next build` needs no font downloads (all fonts are files in `app/fonts/`).
 
 What still depends on international access:
 
