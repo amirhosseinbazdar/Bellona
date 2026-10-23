@@ -1,5 +1,6 @@
 import type { Locale } from "@/content/types";
 import { getDict } from "@/lib/i18n";
+import { ProfessionalServiceLd } from "../JsonLd";
 import { Contact } from "../sections/Contact";
 import { Faq } from "../sections/Faq";
 import { Hero } from "../sections/Hero";
@@ -36,6 +37,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       {/* Objection handling: price, timeline, existing site, ownership, international. */}
       <Faq d={d} items={d.faq.items.slice(0, 5)} />
       <Contact d={d} />
+      <ProfessionalServiceLd d={d} />
     </>
   );
 }

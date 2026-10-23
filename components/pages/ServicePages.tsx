@@ -8,7 +8,7 @@ import { BreadcrumbLd } from "../JsonLd";
 import { Rich } from "../Rich";
 import { Contact } from "../sections/Contact";
 import { FaqList } from "../sections/Faq";
-import { FaqLd } from "../JsonLd";
+import { FaqLd, ServiceLd } from "../JsonLd";
 import { Flow } from "../sections/Flow";
 import { Monday } from "../sections/Monday";
 import { PillarCard, Stats } from "../sections/Pillars";
@@ -196,6 +196,7 @@ export function PillarPage({ locale, slug }: { locale: Locale; slug: string }) {
       </section>
 
       <Contact d={d} defaultNeed={p.id} title={labels.ctaTitle} sub={labels.ctaSub} />
+      <ServiceLd d={d} p={p} />
       <BreadcrumbLd
         d={d}
         trail={[

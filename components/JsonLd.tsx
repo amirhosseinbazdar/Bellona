@@ -1,4 +1,4 @@
-import type { Dict, Faq } from "@/content/types";
+import type { Dict, Faq, Pillar, TeamMember } from "@/content/types";
 import { localePath } from "@/lib/i18n";
 import { siteUrl } from "@/lib/site";
 
@@ -12,15 +12,33 @@ function Script({ data }: { data: object }) {
   );
 }
 
+/** One id for the business, shared by both locales; every other node points to it. */
+export const ORG_ID = `${siteUrl}/#organization`;
+const ALTERNATE_NAMES = ["بلونا", "آژانس بلونا", "Bellona Agency"];
+const SHARIF = { "@type": "CollegeOrUniversity", name: "Sharif University of Technology" };
+
+/** Only what the team section shows: name, role, skills and (if stated) Sharif University. */
+const person = (m: TeamMember) => ({
+  "@type": "Person",
+  name: m.name,
+  jobTitle: m.role,
+  knowsAbout: m.skills,
+  ...(/Sharif|شریف/.test(m.education) ? { affiliation: SHARIF } : {}),
+});
+
+/**
+ * The full business entity. Rendered on the home page only (docs/seo P1-08 / TA-15).
+ * areaServed / address / telephone are left out until the team confirms them (QUESTIONS_FOR_TEAM #24).
+ */
 export function ProfessionalServiceLd({ d }: { d: Dict }) {
   return (
     <Script
       data={{
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
-        "@id": `${siteUrl}/#organization`,
+        "@id": ORG_ID,
         name: "Bellona",
-        alternateName: "بلونا",
+        alternateName: ALTERNATE_NAMES,
         url: `${siteUrl}${localePath(d.locale, "/")}`,
         logo: `${siteUrl}/brand/bellona-app-icon.svg`,
         image: `${siteUrl}/api/og?locale=${d.locale}`,
@@ -43,12 +61,46 @@ export function ProfessionalServiceLd({ d }: { d: Dict }) {
           })),
         },
         sameAs: d.common.footer.social.map((s) => s.href),
-        founder: d.team.members
-          .filter((m) => m.founder)
-          .map((m) => ({ "@type": "Person", name: m.name, jobTitle: m.role, knowsAbout: m.skills })),
-        employee: d.team.members
-          .filter((m) => !m.founder)
-          .map((m) => ({ "@type": "Person", name: m.name, jobTitle: m.role, knowsAbout: m.skills })),
+        founder: d.team.members.filter((m) => m.founder).map(person),
+        employee: d.team.members.filter((m) => !m.founder).map(person),
+      }}
+    />
+  );
+}
+
+/** Small sitewide node: the site in this language, published by the entity above (by @id). */
+export function WebSiteLd({ d }: { d: Dict }) {
+  const url = `${siteUrl}${localePath(d.locale, "/")}`;
+  return (
+    <Script
+      data={{
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": `${url}#website`,
+        url,
+        name: d.meta.siteName,
+        alternateName: ALTERNATE_NAMES,
+        inLanguage: d.locale,
+        publisher: { "@id": ORG_ID },
+      }}
+    />
+  );
+}
+
+/** One service, on its own service page only. */
+export function ServiceLd({ d, p }: { d: Dict; p: Pillar }) {
+  const url = `${siteUrl}${localePath(d.locale, `/services/${p.slug}`)}`;
+  return (
+    <Script
+      data={{
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": `${url}#service`,
+        name: p.title,
+        serviceType: p.title,
+        description: p.page.metaDescription,
+        url,
+        provider: { "@id": ORG_ID },
       }}
     />
   );
