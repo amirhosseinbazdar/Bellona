@@ -11,6 +11,7 @@ import { Contact } from "../sections/Contact";
 import { Faq } from "../sections/Faq";
 import { Industries } from "../sections/Industries";
 import { Journey } from "../sections/Journey";
+import { Offers, Promises } from "../sections/Offers";
 import { Start } from "../sections/Start";
 import { Team } from "../sections/Team";
 import { Compare, Why } from "../sections/Why";
@@ -53,6 +54,22 @@ export function PartnerPage({ locale }: { locale: Locale }) {
       <Faq d={d} />
       <Contact d={d} />
       <BreadcrumbLd d={d} trail={[{ name: d.meta.partner.title, path: "/partner" }]} />
+    </>
+  );
+}
+
+export function OffersPage({ locale }: { locale: Locale }) {
+  const d = getDict(locale);
+  const p = d.pages.offers;
+  return (
+    <>
+      <PageHero eyebrow={p.eyebrow} title={p.h1} sub={p.sub} />
+      <Offers d={d} headless />
+      <Promises d={d} />
+      <Start d={d} />
+      <Faq d={d} />
+      <Contact d={d} />
+      <BreadcrumbLd d={d} trail={[{ name: d.meta.offers.title, path: "/offers" }]} />
     </>
   );
 }

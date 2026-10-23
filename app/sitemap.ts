@@ -8,6 +8,7 @@ import { siteUrl } from "@/lib/site";
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     "/",
+    "/offers",
     "/services",
     ...en.pillars.items.map((p) => `/services/${p.slug}`),
     "/partner",

@@ -1,9 +1,12 @@
 import type { NextConfig } from "next";
 
-// Old industry URLs from the previous site. Most now match the new /industries/<id> pages exactly;
-// only the camel-case one needs a redirect.
+// Old industry URLs from the previous site. Most match the /industries/<id> pages exactly; the camel-case one
+// moved, and sectors we have no published work in yet now point to the industries overview.
 const industrySlugs: Record<string, string> = {
-  realEstate: "real-estate",
+  realEstate: "/industries/real-estate",
+  finance: "/industries",
+  healthcare: "/industries",
+  consulting: "/industries",
 };
 
 const nextConfig: NextConfig = {
@@ -14,8 +17,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   async redirects() {
     return Object.entries(industrySlugs).flatMap(([oldSlug, id]) => [
-      { source: `/industries/${oldSlug}`, destination: `/industries/${id}`, permanent: true },
-      { source: `/fa/industries/${oldSlug}`, destination: `/fa/industries/${id}`, permanent: true },
+      { source: `/industries/${oldSlug}`, destination: id, permanent: true },
+      { source: `/fa/industries/${oldSlug}`, destination: `/fa${id}`, permanent: true },
     ]);
   },
   async headers() {

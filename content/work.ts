@@ -318,6 +318,7 @@ export const projects: Project[] = [
     slug: "dane-news",
     status: "published",
     pillars: ["web", "product"],
+    industries: ["media"],
     tone: "paper",
     url: "https://danenews.ir",
     cover: "/work/dane-news/cover.jpg",

@@ -101,6 +101,22 @@ export interface EngagementModel {
   cta: string;
 }
 
+/** A productized offer (home + /offers). `need` pre-fills the contact form. */
+export interface OfferPackage {
+  id: "audit" | "launch" | "automate" | "system";
+  need: PillarId | "unsure" | "system";
+  name: string;
+  /** Short label on the card, e.g. "Free" or "Core offer". */
+  badge?: string;
+  /** Who it is for, one line. */
+  fit: string;
+  outcome: string;
+  includes: string[];
+  timeline: string;
+  price: string;
+  cta: string;
+}
+
 export interface PageMeta {
   title: string;
   description: string;
@@ -114,6 +130,7 @@ export interface Dict {
     home: PageMeta;
     services: PageMeta;
     partner: PageMeta;
+    offers: PageMeta;
     industries: PageMeta;
     work: PageMeta;
     about: PageMeta;
@@ -132,7 +149,7 @@ export interface Dict {
     menuClose: string;
     menuTitle: string;
     primaryNav: string;
-    nav: { key: "work" | "services" | "partner" | "industries" | "about" | "contact"; label: string; href: string }[];
+    nav: { key: "work" | "offers" | "services" | "partner" | "industries" | "about" | "contact"; label: string; href: string }[];
     langSwitch: { label: string; hrefLang: Locale; ariaLabel: string };
     bookCall: string;
     bookInitial: string;
@@ -156,9 +173,32 @@ export interface Dict {
     sub: string;
     primary: string;
     secondary: string;
+    /** First stat; its value is the live count of published projects (content/work.ts). */
+    projectsLabel: string;
     stats: { value: string; label: string }[];
   };
+  /** Marquee of the clients we shipped for (names come from content/work.ts). */
   proofStrip: { label: string };
+  /** The core offer: one system in three layers. */
+  system: {
+    eyebrow: string;
+    title: string;
+    sub: string;
+    layers: { pillar: PillarId; stage: string; title: string; text: string; proof: string }[];
+    standalone: string;
+  };
+  /** Productized offers + risk reversal. */
+  offers: {
+    eyebrow: string;
+    title: string;
+    sub: string;
+    timelineLabel: string;
+    priceLabel: string;
+    includesLabel: string;
+    packages: OfferPackage[];
+    custom: { title: string; text: string; cta: string };
+    promises: { eyebrow: string; title: string; items: { icon: IconName; title: string; text: string }[] };
+  };
   who: { eyebrow: string; text: string; cta: string };
   /** Home "sound familiar?" section: the live site's three pain points plus one per new pillar. */
   problems: {
@@ -282,7 +322,7 @@ export interface Dict {
     form: {
       label: string;
       needLegend: string;
-      needs: { id: PillarId | "unsure"; label: string }[];
+      needs: { id: PillarId | "unsure" | "system"; label: string }[];
       name: string;
       namePh: string;
       email: string;
@@ -305,6 +345,7 @@ export interface Dict {
   };
   pages: {
     services: { eyebrow: string; h1: string; sub: string; includedLabel: string };
+    offers: { eyebrow: string; h1: string; sub: string };
     pillar: { included: string; deliver: string; connects: string; faq: string; otherPillars: string; ctaTitle: string; ctaSub: string; work: string; workAll: string };
     ai: {
       problem: {

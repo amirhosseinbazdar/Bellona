@@ -166,4 +166,5 @@ export const INDUSTRY_MODEL: Record<string, ModelName> = {
   ecommerce: "shop",
   consulting: "briefcase",
   education: "cap",
+  media: "monitor",
 };

@@ -1,5 +1,7 @@
 import type { CSSProperties } from "react";
 import type { Dict } from "@/content/types";
+import { projects } from "@/content/work";
+import { digits } from "@/lib/format";
 import { HeroMark } from "../hero/HeroMark";
 import { IsoGrid } from "../hero/IsoGrid";
 import { Rich } from "../Rich";
@@ -27,6 +29,7 @@ const SATELLITES: { x: string; y: string; size: string; v: Vox[] }[] = [
  */
 export function Hero({ d }: { d: Dict }) {
   const { hero, locale } = d;
+  const shipped = projects.filter((p) => p.status === "published").length;
   return (
     <section aria-labelledby="hero-title" className="relative overflow-hidden">
       {/* Desktop: one floor behind the whole hero, fading out under the text (globals.css, .hero-floor). */}
@@ -42,7 +45,7 @@ export function Hero({ d }: { d: Dict }) {
           </h1>
           <p className="t-lead max-w-[600px] text-body">{hero.sub}</p>
           <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
-            <LLink locale={locale} href="/contact" className="btn btn-primary" track="hero_start">
+            <LLink locale={locale} href="/contact?need=unsure" className="btn btn-primary" track="hero_start">
               <RollText>{hero.primary}</RollText>
               <ArrowIcon />
             </LLink>
@@ -51,7 +54,7 @@ export function Hero({ d }: { d: Dict }) {
             </LLink>
           </div>
           <ul className="inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-1 rounded-[28px] bg-surface px-5 py-3 text-[15px] text-body sm:rounded-full">
-            {hero.stats.map((s, i) => (
+            {[{ value: digits(shipped, locale), label: hero.projectsLabel }, ...hero.stats].map((s, i) => (
               <li key={s.label} className="flex items-center gap-4">
                 {i > 0 && <span aria-hidden="true" className="hidden size-1 rounded-full bg-muted-dark sm:block" />}
                 <span>

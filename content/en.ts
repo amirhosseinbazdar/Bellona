@@ -10,9 +10,9 @@ export const en: Dict = {
   meta: {
     siteName: "Bellona",
     home: {
-      title: "Bellona: Websites, Products, AI Automation & Growth",
+      title: "Bellona: Websites that sell, AI that follows up",
       description:
-        "One technology partner to design your website, build and launch your product, automate operations with AI agents and integrations, and grow your pipeline. Book a free strategy audit.",
+        "Bellona designs and codes custom websites and web platforms, connects them to AI automation that answers and follows up every lead, and grows the traffic behind them. English and Persian. Book a free growth audit.",
     },
     services: {
       title: "Services",
@@ -24,10 +24,14 @@ export const en: Dict = {
       description:
         "One team from idea to growth: strategy, design, build, automation, growth and support, with project, monthly and dedicated-team engagement models.",
     },
+    offers: {
+      title: "Offers",
+      description:
+        "Four clear ways to start: a free growth audit, a sales website, a 2–4 week AI automation sprint, or the full Bellona Growth System. Fixed quote before you pay.",
+    },
     industries: {
       title: "Industries",
-      description:
-        "Websites, software and AI automation for real estate, finance, healthcare, e-commerce, consulting and education.",
+      description: "Websites, platforms and AI automation we have shipped for education, e-commerce, real estate and media.",
     },
     work: {
       title: "Work",
@@ -58,14 +62,13 @@ export const en: Dict = {
     primaryNav: "Primary",
     nav: [
       { key: "work", label: "Work", href: "/work" },
+      { key: "offers", label: "Offers", href: "/offers" },
       { key: "services", label: "Services", href: "/services" },
-      { key: "partner", label: "Partner", href: "/partner" },
-      { key: "industries", label: "Industries", href: "/industries" },
       { key: "about", label: "About", href: "/about" },
       { key: "contact", label: "Contact", href: "/contact" },
     ],
     langSwitch: { label: "فارسی", hrefLang: "fa", ariaLabel: "نسخه‌ی فارسی" },
-    bookCall: "Book a 30-min free call",
+    bookCall: "Book a free growth audit",
     bookInitial: "B",
     startProject: "Start a project",
     learnMore: "Learn more",
@@ -83,18 +86,144 @@ export const en: Dict = {
 
   hero: {
     tagline: "BUILD · AUTOMATE · GROW",
-    title: "Built, automated, and **growing while you sleep.**",
-    sub: "One team for websites, full-stack products, AI automation, marketing and business development. We build it, automate it, and help it grow.",
-    primary: "Start a project",
+    title: "Websites that sell. **AI that follows up.**",
+    sub: "We design and hand-code your website or platform, connect it to AI automation that answers and follows up every lead in seconds, then grow the traffic that feeds it. One engineering team, from first sketch to first sale.",
+    primary: "Get a free growth audit",
     secondary: "See our work",
+    projectsLabel: "projects shipped",
     stats: [
-      { value: "100+", label: "automations built" },
-      { value: "24/7", label: "AI operations" },
-      { value: "", label: "Free strategy audit" },
+      { value: "", label: "Engineers from Sharif University" },
+      { value: "", label: "English & Persian" },
     ],
   },
 
-  proofStrip: { label: "Trusted by teams in [YOUR SECTORS]" },
+  proofStrip: { label: "Shipped for" },
+
+  system: {
+    eyebrow: "OUR CORE OFFER",
+    title: "One system. **Three layers.**",
+    sub: "Most businesses buy a website from one shop, automation from another and ads from a third, and nobody owns the result. We build all three as one system, so every visitor has a path to becoming a customer.",
+    layers: [
+      {
+        pillar: "web",
+        stage: "BUILD",
+        title: "A website that sells",
+        text: "Custom-designed and hand-coded, not a template. Fast on any phone, clear about what you offer, and built around one action: getting in touch.",
+        proof: "Codechee, Yasin, Nira, Sabzino",
+      },
+      {
+        pillar: "ai",
+        stage: "AUTOMATE",
+        title: "Every lead answered and followed up",
+        text: "AI agents and n8n workflows reply in seconds, qualify the lead, log it in your CRM and follow up until there is an answer. Day and night.",
+        proof: "12 workflows run a real-estate sales operation",
+      },
+      {
+        pillar: "growth",
+        stage: "GROW",
+        title: "Traffic that keeps coming",
+        text: "SEO, content and campaigns that bring the right people in, with one simple report that shows which channel actually sells.",
+        proof: "SEO-ready from the first line of code",
+      },
+    ],
+    standalone: "Need just one layer? Each one also works on its own:",
+  },
+
+  offers: {
+    eyebrow: "OFFERS",
+    title: "Start where **it hurts most.**",
+    sub: "Four clear ways in. Every one starts with a free audit and a fixed quote in writing, before you pay anything.",
+    timelineLabel: "Timeline",
+    priceLabel: "Price",
+    includesLabel: "What you get",
+    packages: [
+      {
+        id: "audit",
+        need: "unsure",
+        name: "Free Growth Audit",
+        badge: "Free",
+        fit: "For: you know something leaks, but not where.",
+        outcome: "Find where you lose customers, and what to fix first.",
+        includes: [
+          "30-min call with an engineer, not a salesperson",
+          "Review of your site, funnel and lead handling",
+          "The 3 fixes that would earn you the most",
+          "A fixed quote, only if you want us to build it",
+        ],
+        timeline: "30 minutes",
+        price: "Free",
+        cta: "Book my free audit",
+      },
+      {
+        id: "launch",
+        need: "web",
+        name: "Launch: Sales Website",
+        fit: "For: a business that needs a site that brings in customers.",
+        outcome: "A custom site built around one clear offer, ready to rank and convert.",
+        includes: [
+          "Offer, page structure and copy direction",
+          "Custom UI/UX design, hand-coded (no templates)",
+          "Fast on mobile, SEO-ready, analytics installed",
+          "English, Persian or both, with proper RTL",
+          "Lead forms wired to your inbox, Telegram or CRM",
+        ],
+        timeline: "Fixed in your quote",
+        price: "Fixed quote",
+        cta: "Plan my website",
+      },
+      {
+        id: "automate",
+        need: "ai",
+        name: "Automate: AI Sprint",
+        fit: "For: a team buried in repetitive work or slow follow-ups.",
+        outcome: "One costly process, fully automated and handed over.",
+        includes: [
+          "Process map and a time-saved estimate",
+          "AI agents + n8n workflows, self-hosted if you prefer",
+          "CRM set up or cleaned up (Baserow, HubSpot or yours)",
+          "Email, website chat or messenger channels",
+          "Error alerts, docs and team training",
+        ],
+        timeline: "2–4 weeks",
+        price: "Fixed quote",
+        cta: "Automate a process",
+      },
+      {
+        id: "system",
+        need: "system",
+        name: "The Growth System",
+        badge: "Core offer",
+        fit: "For: owners who want one team to own growth end to end.",
+        outcome: "Website, automation and monthly growth, run as one system.",
+        includes: [
+          "Everything in Launch",
+          "An AI automation sprint for your leads",
+          "Monthly SEO, content and campaign work",
+          "A monthly report: traffic, leads, sales",
+          "Ongoing fixes and improvements",
+        ],
+        timeline: "Launch, then monthly",
+        price: "Monthly partnership",
+        cta: "Start my system",
+      },
+    ],
+    custom: {
+      title: "Building a product?",
+      text: "Web apps, platforms, online stores, MVPs and mobile apps, scoped as a project. Codechee, Konjed and Prowem started this way.",
+      cta: "Full-stack & product",
+    },
+    promises: {
+      eyebrow: "OUR PROMISES",
+      title: "Less risk, **in writing.**",
+      items: [
+        { icon: "shield", title: "Fixed quote first", text: "Scope, price and timeline agreed in writing before any work starts. No hourly surprises." },
+        { icon: "layers", title: "Progress every week", text: "A live preview link and a short demo every week, so you never wonder where things are." },
+        { icon: "link", title: "You own everything", text: "Code, domain, hosting accounts and data are yours from day one." },
+        { icon: "users", title: "Talk to the builders", text: "No account managers in between. You work directly with the engineers on your project." },
+        { icon: "cycle", title: "We stay after launch", text: "Monitoring, fixes and improvements are part of every engagement." },
+      ],
+    },
+  },
 
   who: {
     eyebrow: "WHO WE ARE",
@@ -104,30 +233,30 @@ export const en: Dict = {
 
   problems: {
     eyebrow: "SOUND FAMILIAR?",
-    title: "You have ideas. You have tools.\n**You don't have a system.**",
+    title: "Visitors come.\n**Customers don't.**",
     cards: [
       {
         pillar: "web",
-        title: "A Website That Doesn't Sell",
+        title: "The site doesn't sell",
         quote: "Your site looks fine, but it doesn't bring in leads. Visitors arrive, look around and leave without a trace.",
-        bullets: ["Slow pages and unclear offers", "Forms nobody fills in", "Every change needs a developer"],
+        bullets: ["A template that looks like everyone else's", "No clear offer, so no reason to call", "Slow on phones, invisible on Google"],
       },
       {
         pillar: "ai",
-        title: "Manual Operations",
+        title: "Leads go cold",
         quote:
-          "You know what needs automating. But between client work and daily fires, your workflows stay half-built and your team stays overwhelmed.",
-        bullets: ["Tasks repeated every single day", "Bottlenecks killing your growth", "No time to build what you planned"],
+          "Leads come in. Follow-ups slip. Your CRM is a graveyard of missed opportunities because nobody has time to nurture properly.",
+        bullets: ["Messages answered hours later, or never", "Follow-ups live in someone's head", "No CRM, or one nobody updates"],
       },
       {
         pillar: "growth",
-        title: "Lead & Sales Chaos",
+        title: "Five vendors, no owner",
         quote:
-          "Leads come in. Follow-ups slip. Your CRM is a graveyard of missed opportunities because nobody has time to nurture properly.",
-        bullets: ["Leads going cold within hours", "Follow-ups always ‘tomorrow’", "Pipeline data you can't trust"],
+          "The designer blames the developer, the developer waits on marketing, and you end up managing vendors instead of your business.",
+        bullets: ["Designer, developer, ads guy: nobody owns the result", "Every small change takes a week", "No numbers you can trust"],
       },
     ],
-    close: "The strategy isn't the problem. **You've never had enough systems.**",
+    close: "Three problems, **one fix:** a site, automation and growth built as one system, by one team.",
   },
 
   pillars: {
@@ -174,7 +303,7 @@ export const en: Dict = {
             { q: "Which CMS do you use?", a: "[CMS CHOICE, e.g. Webflow, WordPress or a headless CMS]" },
             {
               q: "How long does a website take?",
-              a: "It depends on scope. You get a firm timeline after the free strategy audit. [TYPICAL RANGE]",
+              a: "It depends on scope. You get a firm timeline after the free growth audit. [TYPICAL RANGE]",
             },
           ],
         },
@@ -275,7 +404,7 @@ export const en: Dict = {
             },
             {
               q: "What platforms do you integrate with?",
-              a: "200+ platforms, including Salesforce, HubSpot, Slack, n8n, Make, Zapier, and any tool with an API or webhook.",
+              a: "n8n, Make, Zapier, HubSpot, Baserow, Google Workspace, email, website chat and messengers, plus any tool with an API or webhook.",
             },
             {
               q: "How is this different from hiring?",
@@ -283,7 +412,7 @@ export const en: Dict = {
             },
             {
               q: "What return can I expect?",
-              a: "Many projects see lower operating costs and better key metrics within 90 days. We project the return for your case during the free audit.",
+              a: "It depends on the process. In the free audit we estimate the hours and cost the automation would save for your case, before you commit to anything.",
             },
           ],
         },
@@ -369,11 +498,12 @@ export const en: Dict = {
     ],
   },
 
+  // Every figure here is sourced from content/work.ts.
   stats: [
-    { value: "100+", label: "Automations built" },
-    { value: "24/7", label: "AI operations" },
-    { value: "80%", label: "Time saved" },
-    { value: "3X", label: "Operational efficiency" },
+    { value: "15", label: "Projects shipped" },
+    { value: "12", label: "n8n workflows in one sales system" },
+    { value: "278", label: "Posts migrated, zero broken links" },
+    { value: "2", label: "Languages, RTL-native" },
   ],
 
   journey: {
@@ -384,7 +514,7 @@ export const en: Dict = {
       {
         title: "Strategy",
         line: "Where you are, where you're going, and what to build first.",
-        deliverables: ["Free strategy audit", "Roadmap", "Priorities"],
+        deliverables: ["Free growth audit", "Roadmap", "Priorities"],
       },
       {
         title: "Design",
@@ -465,14 +595,14 @@ export const en: Dict = {
 
   start: {
     eyebrow: "HOW TO START",
-    title: "Simple **by design.**",
+    title: "From first call **to first sale.**",
     steps: [
-      { title: "Book a free call", text: "Bring the problem, not the plan. We'll map it with you in 30 minutes." },
+      { title: "Free growth audit", text: "Bring the problem, not the plan. In 30 minutes we map where you lose customers and what to fix first." },
       {
-        title: "Get a clear plan",
-        text: "Your free strategy audit: what to build, automate and grow first, with scope and timeline.",
+        title: "Fixed plan & quote",
+        text: "Scope, price and timeline in writing. You decide with everything on the table.",
       },
-      { title: "We build. You grow.", text: "We ship in short sprints, then monitor, improve and scale." },
+      { title: "Build, launch, grow", text: "Weekly demos while we build. Then we launch, measure and keep improving." },
     ],
   },
 
@@ -498,39 +628,25 @@ export const en: Dict = {
         build: ["Listing website", "Lead nurturing", "CRM automation"],
       },
       {
-        id: "finance",
-        icon: "bank",
-        title: "Finance",
-        text: "Compliance workflows, reporting, and client onboarding at scale.",
-        build: ["Client portal", "Onboarding flows", "Reporting dashboards"],
-      },
-      {
-        id: "healthcare",
-        icon: "heart",
-        title: "Healthcare",
-        text: "Appointment scheduling, patient intake, and admin automation.",
-        build: ["Booking website", "Patient intake", "Admin automation"],
+        id: "education",
+        icon: "book",
+        title: "Education",
+        text: "Learning platforms, gamified courses and enrollment sites that students actually enjoy using.",
+        build: ["Learning platform", "Enrollment funnel", "Student support agent"],
       },
       {
         id: "ecommerce",
         icon: "cart",
         title: "E-Commerce",
-        text: "Inventory sync, order processing, and support automation.",
-        build: ["Store & landing pages", "Inventory sync", "AI support"],
+        text: "Online stores with payments, admin panels and the automation that keeps orders moving.",
+        build: ["Custom store", "Payments & admin", "AI support"],
       },
       {
-        id: "consulting",
-        icon: "briefcase",
-        title: "Consulting",
-        text: "Proposal generation, client reporting, and project workflows.",
-        build: ["Proposal automation", "Client reporting", "Lead generation"],
-      },
-      {
-        id: "education",
-        icon: "book",
-        title: "Education",
-        text: "Enrollment, student support, and content delivery systems.",
-        build: ["Enrollment funnel", "Student support agent", "Course platform"],
+        id: "media",
+        icon: "chat",
+        title: "Media & Publishing",
+        text: "Publishing platforms with editorial rules built in, migrated without breaking a single old link.",
+        build: ["Headless CMS", "Content migration", "SEO redirects"],
       },
     ],
   },
@@ -568,7 +684,7 @@ export const en: Dict = {
   engage: {
     eyebrow: "WAYS TO WORK WITH US",
     title: "Pick the shape **that fits.**",
-    sub: "Every engagement starts with a free strategy audit, and every one includes monitoring and support after launch.",
+    sub: "Every engagement starts with a free growth audit, and every one includes monitoring and support after launch.",
     includesLabel: "Includes",
     items: [
       {
@@ -578,7 +694,7 @@ export const en: Dict = {
         text: "Best for a website, a product launch, an automation system or a campaign.",
         price: "[PRICE]",
         priceNote: "[FROM / FIXED SCOPE]",
-        includes: ["Free strategy audit", "Agreed scope & timeline", "Handover and team training", "[SUPPORT PERIOD]"],
+        includes: ["Free growth audit", "Agreed scope & timeline", "Handover and team training", "[SUPPORT PERIOD]"],
         cta: "Start a project",
       },
       {
@@ -607,9 +723,9 @@ export const en: Dict = {
   },
 
   team: {
-    eyebrow: "THE TEAM",
-    title: "The people **behind Bellona.**",
-    sub: "Engineering, AI, design and marketing, in one team.",
+    eyebrow: "WHO BUILDS IT",
+    title: "Engineers, **not account managers.**",
+    sub: "Bellona is a small team of engineers from Sharif University of Technology, and small on purpose: you talk directly to the people who design, code and automate your system, so decisions take hours, not weeks.",
     skillsLabel: "Skills",
     educationLabel: "Education",
     members: [
@@ -651,31 +767,35 @@ export const en: Dict = {
   faq: {
     eyebrow: "FAQ",
     title: "Questions? **Good.**",
-    side: "Still unsure? Book a 30-min free call, or email us.",
+    side: "Still unsure? Book a free growth audit, or email us.",
     items: [
       {
-        q: "Do you only do AI?",
-        a: "No. We also design websites, build products and run marketing and business development, with automation across all of it.",
+        q: "How much does it cost?",
+        a: "It depends on scope, so we don't publish a price list that would be wrong for you. After the free audit you get a fixed quote in writing, and you only pay for the agreed scope.",
       },
       {
-        q: "How long does a project take?",
-        a: "Most automations go live in 2–4 weeks, simple ones in days. Website and product timelines depend on scope; you get a firm plan after the free audit.",
+        q: "How long does it take?",
+        a: "An automation sprint goes live in 2–4 weeks, simple automations in days. Website and platform timelines depend on scope; you get a firm date in your quote.",
+      },
+      {
+        q: "We already have a website. Can you work with it?",
+        a: "Yes. We can connect automation to your current site first, or rebuild it step by step while it keeps running.",
+      },
+      {
+        q: "Who owns the code and accounts?",
+        a: "You do. Code, domain, hosting accounts and data belong to you from day one.",
+      },
+      {
+        q: "Do you work with clients outside Iran?",
+        a: "Yes. We build in English and Persian and work remotely. The AI real-estate system we built for kharazie.at is one example.",
+      },
+      {
+        q: "Do you stay on after launch?",
+        a: "Yes. Monitoring, fixes and improvements are part of every engagement.",
       },
       {
         q: "Do I need technical knowledge?",
         a: "No. We build simple dashboards and train your team.",
-      },
-      {
-        q: "What platforms do you integrate with?",
-        a: "200+ platforms, including Salesforce, HubSpot, Slack, n8n, Make, Zapier, and any tool with an API or webhook.",
-      },
-      {
-        q: "What return can I expect?",
-        a: "Many projects see lower operating costs and better key metrics within 90 days. We project the return for your case during the free strategy audit.",
-      },
-      {
-        q: "Do you stay on after launch?",
-        a: "Yes. Monitoring, optimization and scaling support are part of every engagement.",
       },
     ],
   },
@@ -683,19 +803,19 @@ export const en: Dict = {
   contact: {
     eyebrow: "LET'S TALK",
     title: "Ready when\n**you are.**",
-    sub: "A 30-minute call to see if we fit. No pressure. We reply within [24 h].",
+    sub: "Tell us where it hurts. You get a free 30-minute growth audit and, if it fits, a fixed quote. We reply within [24 h].",
     bookAlt: "Prefer to pick a time?",
     emailAlt: "Or email",
     form: {
       label: "Project request",
       needLegend: "What do you need?",
       needs: [
-        { id: "web", label: "Website design" },
-        { id: "product", label: "Full-stack & product" },
-        { id: "ai", label: "AI & automation" },
-        { id: "growth", label: "Marketing & growth" },
-        { id: "bizdev", label: "Business development" },
-        { id: "unsure", label: "Not sure yet" },
+        { id: "system", label: "The Growth System" },
+        { id: "web", label: "Sales website" },
+        { id: "ai", label: "AI automation" },
+        { id: "growth", label: "SEO & marketing" },
+        { id: "product", label: "Custom platform or app" },
+        { id: "unsure", label: "Not sure yet (free audit)" },
       ],
       name: "Name",
       namePh: "Your name",
@@ -725,9 +845,14 @@ export const en: Dict = {
   pages: {
     services: {
       eyebrow: "SERVICES",
-      h1: "Everything you need, **from one team.**",
-      sub: "Five pillars that plug into each other: the site people find you on, the product they use, the agents running in the background, and the marketing and strategy that keep the pipeline full.",
+      h1: "The pieces of **one growth system.**",
+      sub: "Each service works on its own, and they are built to plug into each other: the site people find you on, the product they use, the automation working in the background, and the marketing that keeps the pipeline full.",
       includedLabel: "Includes",
+    },
+    offers: {
+      eyebrow: "OFFERS",
+      h1: "Clear offers. **Fixed quotes.**",
+      sub: "Pick the problem you want solved first. Every offer starts with a free growth audit, and you get scope, price and timeline in writing before you pay anything.",
     },
     pillar: {
       included: "What's included",

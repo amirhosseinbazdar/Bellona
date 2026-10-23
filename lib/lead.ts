@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const NEED_IDS = ["web", "product", "ai", "growth", "bizdev", "unsure"] as const;
+export const NEED_IDS = ["system", "web", "product", "ai", "growth", "bizdev", "unsure"] as const;
 export const MODEL_IDS = ["project", "partnership", "team"] as const;
 
 export const leadSchema = z.object({

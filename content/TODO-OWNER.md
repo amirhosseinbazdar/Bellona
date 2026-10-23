@@ -2,6 +2,26 @@
 
 Everything here is your call or needs your input. Nothing on this list has been guessed in the copy. Each item shows up as `[PLACEHOLDER]` or **[CONFIRM]** in COPY.md.
 
+## Update (2026-10-23): positioning and offers redesign
+
+See `content/STRATEGY.md` for the full reasoning.
+
+**Done**
+- **New positioning:** "Websites that sell. AI that follows up." Core offer: the Growth System (Build → Automate → Grow).
+- **Offers:**
+  - New `/offers` page (EN + FA) and a home section with 4 offers: Free Growth Audit, Launch, AI Sprint, Growth System.
+  - Each offer button pre-fills the contact form (new need id `system`).
+- **Home page:** cut from 14 sections to 11. The client marquee is built from `work.ts`, and the core-offer section shows only sourced stats.
+- **Unbacked claims removed:** 100+ automations, 24/7 ops, 80%, 3X, 200+ platforms, 90-day ROI.
+- **Industries:** cut to real ones (education, e-commerce, real estate, media). Finance, healthcare and consulting now 301 to `/industries`.
+- **Nav:** Work · Offers · Services · About · Contact. The Partner and Industries pages still exist and are listed in the sitemap, but they are no longer in the nav.
+
+**Confirm before launch**
+- [ ] The five promises in `offers.promises`: fixed quote, weekly demo, you own everything, direct access to engineers, support after launch.
+- [ ] FAQ answers that depend on them: "Who owns the code" and "Do you work with clients outside Iran" (this one names kharazie.at).
+- [ ] Offer details: website lead forms to Telegram; AI Sprint channels (email, chat, messengers).
+- [ ] Whether to show "from" prices on the offer cards (currently "Fixed quote" / "Monthly partnership").
+
 ## Decisions applied (2026-10-21)
 
 **Owner decisions**
