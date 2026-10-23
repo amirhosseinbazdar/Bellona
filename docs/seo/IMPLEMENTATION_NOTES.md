@@ -113,7 +113,7 @@ The read-only scripts (in the agent's scratchpad, not the repo) did the followin
 
 - **Legal pages:** kept reachable and `noindex`, with an honest interim note and the contact email. They are **unlinked** until the real texts exist. To publish: put the texts in `content/{en,fa}.ts` `pages.legal`, then set `legalPagesPublished = true` in `lib/site.ts`.
 - **Form success copy:** "Got it. Thanks, we'll be in touch." / «دریافت شد. ممنون؛ با شما تماس می‌گیریم.» This promises no specific time until question 1 is answered.
-- **Render health check at cutover:** Render health-checks `/`. In `redirect` mode the Render host returns a 301. Render treats 2xx–3xx as healthy, **but confirm this in the dashboard when you enable the flag**; if the check fails, use `noindex` mode instead.
+- **Render health check at cutover:** Render health-checks `/`. In `redirect` mode the Render host returns a 301. Whether Render counts a 3xx as healthy was **not verified here**; check the service dashboard right after you enable the flag; if the check fails, use `noindex` mode instead.
 - **Not in scope yet:** `Engage` price placeholders (`[PRICE]`…) are data only, not rendered (pricing removed). `placeholderImage` only renders for a project without a cover or model (none today). seo:check would catch either if it appeared.
 
 ### Still open after Phase B
