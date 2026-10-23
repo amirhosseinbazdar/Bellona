@@ -13,8 +13,14 @@
  *    every sitemap URL and every other internal page they link to (e.g. footer-linked legal pages)
  *  - no internal link that returns 404
  *  - old production URLs redirect permanently (301/308) in a single hop to a 200
- *  - robots.txt: "User-agent: *" + "Allow: /", no root Disallow, no Host line, Sitemap line
- * Warnings: content images with empty alt that aren't marked decorative; internal links to redirects.
+ *  - robots.txt: "User-agent: *" + "Allow: /", no root Disallow, no Host line, Sitemap line, explicit AI-search
+ *    crawler group (G-02)
+ *  - schema (P1-08): the full ProfessionalService entity only on the home pages; a Service node on each service
+ *    page and nowhere else; a WebSite node on every page
+ *  - every page links to every service page (footer, P1-07)
+ *  - sitemap lastmod is stable between two fetches and never in the future (TA-13)
+ * Warnings: content images with empty alt that aren't marked decorative; internal links to redirects;
+ * titles outside ~30–65 characters.
  *
  * Usage: npm run seo:check
  */
@@ -26,6 +32,7 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ORIGIN = (process.env.SEO_CANONICAL_ORIGIN || "https://bellonaagency.com").replace(/\/$/, "");
 const PLACEHOLDER = /\[[^\]\n]{2,}\]/g;
+const AI_SEARCH_CRAWLERS = ["OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User"];
 
 // Old bellonaagency.com URLs (docs/seo/SEO_SITE_ARCHITECTURE.md, redirect map). Each must be a
 // permanent single-hop redirect, or (where a real page now exists at the same path) a 200.
@@ -142,6 +149,7 @@ async function checkPage(base, p, seen) {
   const title = decode(head.match(/<title>([^<]*)<\/title>/)?.[1] || "").trim();
   const desc = (metaContent(head, "description") || "").trim();
   if (!title) err(p, "empty <title>");
+  else if (title.length < 30 || title.length > 65) warn(p, `title is ${title.length} characters`);
   if (!desc) err(p, "empty meta description");
   (seen.titles[title] ||= []).push(p);
   (seen.descs[desc] ||= []).push(p);
@@ -164,12 +172,31 @@ async function checkPage(base, p, seen) {
 
   placeholderChecks(p, html);
 
+  const types = jsonLdBlocks(html).flatMap((b) => {
+    try {
+      return [JSON.parse(b)["@type"]];
+    } catch {
+      return [];
+    }
+  });
+  const isHome = p === "/" || p === "/fa";
+  const isService = /^(\/fa)?\/services\/[^/]+$/.test(p);
+  if (isHome !== types.includes("ProfessionalService")) err(p, isHome ? "home page lacks the ProfessionalService entity" : "full ProfessionalService entity outside the home page");
+  if (isService !== types.includes("Service")) err(p, isService ? "service page lacks its Service node" : "Service node outside a service page");
+  if (!types.includes("WebSite")) err(p, "no WebSite node");
+
+  const links = internalLinks(body);
+  for (const sp of seen.servicePaths) {
+    const want = fa ? `/fa${sp}` : sp;
+    if (!links.includes(want)) err(p, `no link to ${want}`);
+  }
+
   for (const img of body.match(/<img\s[^>]*>/g) || []) {
     const alt = attr(img, "alt");
     if (alt === undefined) err(p, `<img> without alt: ${attr(img, "src")?.slice(0, 60)}`);
     else if (alt.trim() === "" && !/aria-hidden="true"|role="presentation"/.test(img)) warn(p, `empty alt on content image ${attr(img, "src")?.slice(0, 70)}`);
   }
-  return internalLinks(body);
+  return links;
 }
 
 async function main() {
@@ -180,7 +207,7 @@ async function main() {
     if (!pages.length) err("/sitemap.xml", "no URLs");
     for (const p of pages) if (!pages.includes(pairOf(p))) err(p, `language twin ${pairOf(p)} missing from sitemap`);
 
-    const seen = { titles: {}, descs: {} };
+    const seen = { titles: {}, descs: {}, servicePaths: pages.filter((p) => /^\/services\/[^/]+$/.test(p)) };
     const links = new Map();
     for (const p of pages) for (const l of (await checkPage(base, p, seen)) || []) if (!links.has(l)) links.set(l, p);
     for (const [t, ps] of Object.entries(seen.titles)) if (t && ps.length > 1) err(ps.join(", "), `duplicate <title> "${t}"`);
@@ -213,7 +240,15 @@ async function main() {
       if (next.status !== 200) err(u, `redirects to ${loc.pathname} which returns ${next.status} (not a single hop to 200)`);
     }
 
+    await new Promise((r) => setTimeout(r, 1500));
+    const xml2 = await (await fetch(base + "/sitemap.xml")).text();
+    const mods = (x) => [...x.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((m) => m[1]);
+    if (mods(xml).join() !== mods(xml2).join()) err("/sitemap.xml", "lastmod changes between fetches (request time, not content time)");
+    for (const m of mods(xml)) if (new Date(m) > new Date(Date.now() + 60_000)) err("/sitemap.xml", `lastmod in the future: ${m}`);
+
     const robots = await (await fetch(base + "/robots.txt")).text();
+    for (const ua of AI_SEARCH_CRAWLERS)
+      if (!new RegExp(`^user-agent:\\s*${ua}\\s*$`, "im").test(robots)) err("/robots.txt", `no explicit group for ${ua}`);
     if (!/^user-agent:\s*\*\s*$/im.test(robots)) err("/robots.txt", "no 'User-agent: *' group");
     if (!/^allow:\s*\/\s*$/im.test(robots)) err("/robots.txt", "no 'Allow: /'");
     if (/^disallow:\s*\/\s*$/im.test(robots)) err("/robots.txt", "root 'Disallow: /'");
