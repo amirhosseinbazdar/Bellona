@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { en } from "@/content/en";
 import type { Locale } from "@/content/types";
 import { projects } from "@/content/work";
+import { publishedSpokes, spokePath } from "@/lib/drafts";
 import { localePath } from "@/lib/i18n";
 import { siteUrl } from "@/lib/site";
 
@@ -13,6 +14,7 @@ import { siteUrl } from "@/lib/site";
 function sources(path: string, locale: Locale): string[] {
   const copy = `content/${locale}.ts`;
   if (path === "/") return [copy, "components/pages/HomePage.tsx"];
+  if (path.startsWith("/guides") || path.split("/").length > 3) return ["content/spokes.ts", "content/facts.ts", "components/pages/SpokePages.tsx"];
   if (path.startsWith("/services")) return [copy, "components/pages/ServicePages.tsx"];
   if (path.startsWith("/work/")) return [copy, "content/work.ts", "components/pages/OtherPages.tsx", `public/work/${path.slice(6)}`];
   if (path.startsWith("/work") || path.startsWith("/industries")) return [copy, "content/work.ts", "components/pages/OtherPages.tsx"];
@@ -36,11 +38,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/offers",
     "/services",
     ...en.pillars.items.map((p) => `/services/${p.slug}`),
+    // Spokes and guides only once published (drafts never reach the sitemap).
+    ...publishedSpokes("service").map(spokePath),
     "/partner",
     "/industries",
     ...en.industries.items.map((i) => `/industries/${i.id}`),
     "/work",
     ...projects.filter((p) => p.status === "published").map((p) => `/work/${p.slug}`),
+    ...(publishedSpokes("guide").length ? ["/guides", ...publishedSpokes("guide").map(spokePath)] : []),
     "/about",
     "/contact",
   ];

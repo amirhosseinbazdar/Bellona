@@ -13,6 +13,8 @@ import { Flow } from "../sections/Flow";
 import { Monday } from "../sections/Monday";
 import { PillarCard, Stats } from "../sections/Pillars";
 import { ProjectCard } from "../sections/Work";
+import { pillarSpokes } from "./SpokePages";
+import { guidesHub } from "@/content/spokes";
 import { ArrowIcon, Chips, Eyebrow, LLink, PageHero } from "../ui";
 import { RollText } from "../RollText";
 
@@ -115,6 +117,25 @@ export function PillarPage({ locale, slug }: { locale: Locale; slug: string }) {
       </section>
 
       <PillarWork d={d} id={p.id} />
+
+      {/* Spoke pages under this service, once published (docs/seo hub → spoke links). */}
+      {pillarSpokes(p.slug).length > 0 && (
+        <nav aria-labelledby="pillar-deeper" className="wrap flex flex-col gap-6 pb-16">
+          <h2 id="pillar-deeper" className="t-h2-sm">
+            {guidesHub[locale].deeper}
+          </h2>
+          <ul className="grid gap-4 md:grid-cols-2">
+            {pillarSpokes(p.slug).map((s) => (
+              <li key={s.slug}>
+                <LLink locale={locale} href={`/services/${p.slug}/${s.slug}`} className="card lift group flex h-full flex-col gap-2 border border-line p-6">
+                  <span className="text-xl font-bold rtl:font-extrabold">{s[locale].h1.replace(/\*\*/g, "")}</span>
+                  <span className="leading-relaxed text-muted">{s[locale].metaDescription}</span>
+                </LLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
 
       {isAi && <Monday d={d} />}
 
