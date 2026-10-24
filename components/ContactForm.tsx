@@ -7,31 +7,37 @@ import { submitLead } from "@/app/actions/contact";
 import type { Dict, Locale } from "@/content/types";
 import { localePath } from "@/lib/i18n";
 import { legalPagesPublished } from "@/lib/site";
-import { initialLeadState, MODEL_IDS, NEED_IDS } from "@/lib/lead";
+import { initialLeadState, MODEL_IDS, NEED_IDS, OFFER_IDS } from "@/lib/lead";
 import { track } from "./Analytics";
 import { RollText } from "./RollText";
 
 type FormCopy = Dict["contact"]["form"];
+type OfferOption = { id: string; name: string; need: string };
 
 const inputCls =
   "min-h-12 w-full rounded-2xl border border-line-input bg-ink px-4 text-[15px] text-paper placeholder:text-muted-dark focus:border-orange focus:outline-none aria-[invalid=true]:border-orange";
 
-/** Reads ?need=, ?model= and ?industry= so CTAs elsewhere can prefill the form. */
-function usePrefill() {
-  const [prefill, setPrefill] = useState<{ needs: string[]; model?: string; industry?: string }>({ needs: [] });
+/** Reads ?need=, ?model=, ?industry= and ?offer= so CTAs elsewhere can prefill the form. */
+function usePrefill(offers: OfferOption[]) {
+  const [prefill, setPrefill] = useState<{ needs: string[]; model?: string; industry?: string; offer?: string }>({ needs: [] });
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     const need = q.get("need");
     const model = q.get("model");
     const industry = q.get("industry");
+    const offerId = q.get("offer");
+    const offer = offerId && (OFFER_IDS as readonly string[]).includes(offerId) ? offers.find((o) => o.id === offerId) : undefined;
+    // An offer implies its need when the link didn't set one.
+    const needId = need ?? offer?.need ?? null;
     // Reading the URL once after mount; it can't be known during server render of a static page.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setPrefill({
-      needs: need && (NEED_IDS as readonly string[]).includes(need) ? [need] : [],
+      needs: needId && (NEED_IDS as readonly string[]).includes(needId) ? [needId] : [],
       model: model && (MODEL_IDS as readonly string[]).includes(model) ? model : undefined,
       industry: industry && /^[a-z-]{2,30}$/.test(industry) ? industry : undefined,
+      offer: offer?.id,
     });
-  }, []);
+  }, [offers]);
   return prefill;
 }
 
@@ -39,9 +45,20 @@ function stampNow(el: HTMLInputElement | null) {
   if (el && !el.value) el.value = String(Date.now());
 }
 
-export function ContactForm({ locale, copy, defaultNeed }: { locale: Locale; copy: FormCopy; defaultNeed?: string }) {
+export function ContactForm({
+  locale,
+  copy,
+  defaultNeed,
+  offers = [],
+}: {
+  locale: Locale;
+  copy: FormCopy;
+  defaultNeed?: string;
+  offers?: OfferOption[];
+}) {
   const [state, action, pending] = useActionState(submitLead, initialLeadState);
-  const prefill = usePrefill();
+  const prefill = usePrefill(offers);
+  const selectedOffer = offers.find((o) => o.id === prefill.offer);
   const pathname = usePathname();
   const statusRef = useRef<HTMLParagraphElement>(null);
 
@@ -73,7 +90,7 @@ export function ContactForm({ locale, copy, defaultNeed }: { locale: Locale; cop
   return (
     <form
       // Re-mount after each server response so defaultValue/defaultChecked pick up returned values.
-      key={`${state.attempt}-${prefill.needs.join()}`}
+      key={`${state.attempt}-${prefill.needs.join()}-${prefill.offer ?? ""}`}
       action={action}
       onSubmit={() => track("form_submit", { locale })}
       aria-label={copy.label}
@@ -86,6 +103,15 @@ export function ContactForm({ locale, copy, defaultNeed }: { locale: Locale; cop
       <input type="hidden" name="page" value={pathname ?? ""} />
       {prefill.model && <input type="hidden" name="model" value={prefill.model} />}
       {prefill.industry && <input type="hidden" name="industry" value={prefill.industry} />}
+      {selectedOffer && (
+        <>
+          <input type="hidden" name="offer" value={selectedOffer.id} />
+          <p className="flex flex-wrap items-center gap-2 rounded-2xl bg-orange px-4 py-3 font-bold text-ink">
+            <span className="text-sm">{copy.offerLabel}:</span>
+            {selectedOffer.name}
+          </p>
+        </>
+      )}
 
       {/* Honeypot: hidden from people and assistive tech, tempting for bots. */}
       <div aria-hidden="true" className="absolute -start-[9999px] h-px w-px overflow-hidden">

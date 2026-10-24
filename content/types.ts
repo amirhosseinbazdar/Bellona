@@ -339,6 +339,8 @@ export interface Dict {
       messagePh: string;
       submit: string;
       sending: string;
+      /** Shown above the form when an offer button opened it, e.g. "Selected offer". */
+      offerLabel: string;
       success: string;
       /** Saved on our server because every delivery route was down; the reply may be slower. */
       stored: string;

@@ -39,7 +39,12 @@ export function Contact({
             </a>
           </p>
         </div>
-        <ContactForm locale={d.locale} copy={contact.form} defaultNeed={defaultNeed} />
+        <ContactForm
+          locale={d.locale}
+          copy={contact.form}
+          defaultNeed={defaultNeed}
+          offers={d.offers.packages.map((o) => ({ id: o.id, name: o.name, need: o.need }))}
+        />
       </div>
     </section>
   );

@@ -3,7 +3,7 @@ import type { Dict, OfferPackage } from "@/content/types";
 import { stepNum } from "@/lib/format";
 import { Icon } from "../Icon";
 import { RollText } from "../RollText";
-import { ArrowIcon, BookLink, Eyebrow, LLink, SectionHead } from "../ui";
+import { ArrowIcon, Eyebrow, LLink, SectionHead } from "../ui";
 import { Rich } from "../Rich";
 
 function OfferCard({ o, d, index }: { o: OfferPackage; d: Dict; index: number }) {
@@ -54,21 +54,16 @@ function OfferCard({ o, d, index }: { o: OfferPackage; d: Dict; index: number })
           ))}
         </ul>
       </div>
-      {free ? (
-        <BookLink d={d} className="btn btn-outline" track="offer_audit">
-          {o.cta}
-        </BookLink>
-      ) : (
-        <LLink
-          locale={locale}
-          href={`/contact?need=${o.need}`}
-          className={`btn ${dark ? "btn-primary" : "btn-outline"}`}
-          track={`offer_${o.id}`}
-        >
-          <RollText>{o.cta}</RollText>
-          {dark && <ArrowIcon />}
-        </LLink>
-      )}
+      {/* Solid button; opens the contact form with this offer selected (ContactForm reads ?offer=). */}
+      <LLink
+        locale={locale}
+        href={`/contact?need=${o.need}&offer=${o.id}`}
+        className={`btn w-full gap-2 whitespace-nowrap px-4 text-base ${dark || free ? "btn-primary" : "btn-ink"}`}
+        track={`offer_${o.id}`}
+      >
+        <RollText>{o.cta}</RollText>
+        <ArrowIcon />
+      </LLink>
     </li>
   );
 }

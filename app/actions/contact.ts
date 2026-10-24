@@ -42,6 +42,7 @@ export async function submitLead(prev: LeadState, form: FormData): Promise<LeadS
   const parsed = leadSchema.safeParse({
     ...values,
     model: str("model") || undefined,
+    offer: str("offer") || undefined,
     industry: str("industry") || undefined,
     locale: str("locale"),
     page: str("page"),
@@ -107,6 +108,7 @@ async function deliver(lead: Lead) {
             `Email: ${lead.email}`,
             `Company: ${lead.company || "-"}`,
             `Needs: ${lead.needs.join(", ")}`,
+            `Offer: ${lead.offer || "-"}`,
             `Engagement model: ${lead.model || "-"}`,
             `Industry: ${lead.industry || "-"}`,
             `Language: ${lead.locale}`,

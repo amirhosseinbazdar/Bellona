@@ -874,6 +874,7 @@ export const en: Dict = {
       messagePh: "Where does it hurt? What would “done” look like?",
       submit: "Send request",
       sending: "Sending…",
+      offerLabel: "Selected offer",
       success: "Got it. Thanks, we'll be in touch.",
       stored: "Got it. Your message is saved on our server, but our notification link is down right now, so our reply may take a little longer than usual.",
       error: "Something went wrong on our side. Please email us at bellona.ai.team@gmail.com.",
