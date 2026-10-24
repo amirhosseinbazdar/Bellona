@@ -691,6 +691,29 @@ html.lenis {
   line-height: 1.25;
   text-wrap: balance;
 }
+/* Rooyin set ~10% narrower (owner: "a bit less wide"): a horizontal scale on the outermost display element
+   only (nested ones scale with it; the footer's SVG wordmark is excluded). Letter shapes and Persian joins are
+   untouched. Uses the standalone `scale` property so it composes with the reveal animation's transform.
+   Anchored at the inline start (right in RTL), or at the centre where the block is centred. */
+:lang(fa) :is(h1, h2:not(.t-eyebrow), .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .t-num, .fa-display):not(text):not(:is(h1, h2, .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .t-num, .fa-display) *) {
+  scale: 0.9 1;
+}
+/* Block headings are laid out 1/0.9 wider so lines break at the narrowed width; after the scale the box is
+   back to its original size. (Not for inline-sized display text such as the wordmark or big numbers.) */
+:lang(fa) :is(h1, h2:not(.t-eyebrow)):not(.sr-only):not(:is(h1, h2, .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .t-num, .fa-display) *) {
+  width: calc(100% / 0.9);
+}
+:lang(fa) :is(h1, h2, .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .t-num, .fa-display) {
+  transform-origin: right center;
+}
+:lang(fa) .text-center :is(h1, h2, .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .t-num, .fa-display) {
+  transform-origin: center;
+}
+@media (min-width: 1024px) {
+  :lang(fa) .lg\:text-start :is(h1, h2, .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .t-num, .fa-display) {
+    transform-origin: right center;
+  }
+}
 /* The emphasised word: orange (it is always 28px+ here, so #FF5500 passes on light and dark). */
 :lang(fa) :is(h1, h2, .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .fa-display) :is(.accent, .accent-ink) {
   color: var(--color-orange);
