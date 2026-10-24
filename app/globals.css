@@ -677,12 +677,15 @@ html.lenis {
 
 /* Display last, so it wins every tie with the role rules above. */
 /* Display face (Rooyin): Regular. Its Bold is ~30% wider and reads stretched. Never synthesised;
-   emphasis inside it is colour only. */
+   emphasis inside it is colour only. A thin outline in the text colour thickens the strokes (owner
+   asked for "a bit bolder") without changing letter widths; it is drawn under the fill. */
 :lang(fa) :is(h1, h2:not(.t-eyebrow), .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .t-num, .fa-display),
 :lang(fa) :is(h1, h2:not(.t-eyebrow), .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .t-num, .fa-display) * {
   font-family: var(--font-fa-display);
   font-weight: 400;
   font-synthesis: none;
+  -webkit-text-stroke: 0.035em currentColor;
+  paint-order: stroke fill;
 }
 :lang(fa) :is(h1, h2:not(.t-eyebrow), .t-hero, .t-h1, .t-h2, .t-h2-sm, .t-h3, .fa-display) {
   line-height: 1.25;
