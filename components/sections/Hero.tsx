@@ -36,14 +36,14 @@ export function Hero({ d }: { d: Dict }) {
       <IsoGrid className="hero-floor absolute inset-0 hidden size-full lg:block" decor={locale === "fa" ? "left" : "right"} cubes={false} />
       <div className="mx-auto grid max-w-[1360px] items-center gap-2 px-4 pt-8 sm:px-6 lg:min-h-[min(760px,calc(100svh-104px))] lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:py-4">
         <div className="hero-in relative z-10 flex flex-col items-center gap-5 text-center sm:gap-6 lg:items-start lg:gap-5 lg:text-start">
-          <p className="tagline t-eyebrow inline-flex items-center gap-2.5 rounded-full border border-line bg-paper px-4 py-2 text-muted">
+          <p className="tagline t-eyebrow inline-flex items-center gap-2.5 text-muted">
             <MiniCube className="size-3.5" />
             {hero.tagline}
           </p>
           <h1 id="hero-title" className="t-hero text-balance">
             <Rich text={hero.title} />
           </h1>
-          <p className="t-lead max-w-[600px] text-body">{hero.sub}</p>
+          <p className="t-lead max-w-[520px] text-[17px] text-body lg:text-lg">{hero.sub}</p>
           <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
             <LLink locale={locale} href="/contact?need=unsure" className="btn btn-primary" track="hero_start">
               <RollText>{hero.primary}</RollText>
@@ -53,7 +53,7 @@ export function Hero({ d }: { d: Dict }) {
               <RollText>{hero.secondary}</RollText>
             </LLink>
           </div>
-          <ul className="inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-1 rounded-[28px] bg-surface px-5 py-3 text-[15px] text-body sm:rounded-full">
+          <ul className="inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-muted lg:justify-start">
             {[{ value: digits(shipped, locale), label: hero.projectsLabel }, ...hero.stats].map((s, i) => (
               <li key={s.label} className="flex items-center gap-4">
                 {i > 0 && <span aria-hidden="true" className="hidden size-1 rounded-full bg-muted-dark sm:block" />}

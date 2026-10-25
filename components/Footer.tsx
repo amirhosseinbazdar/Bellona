@@ -93,17 +93,17 @@ export function Footer({ d }: { d: Dict }) {
           </ul>
         </div>
         {/* Decorative giant wordmark, drawn as SVG so it isn't treated as body text. */}
-        {/* EN is stretched to the full width; the Persian (pixel) wordmark keeps its natural proportions,
-            so it is set larger in a taller frame instead. */}
+        {/* EN is stretched to the full width; the Persian (Lalezar) wordmark keeps its natural proportions,
+            so it is set larger in a taller frame, deep enough for the dot under ب. */}
         <svg
-          viewBox={locale === "en" ? "0 0 1000 230" : "0 0 1000 335"}
+          viewBox={locale === "en" ? "0 0 1000 230" : "0 0 1000 372"}
           aria-hidden="true"
           focusable="false"
           className="w-full select-none fill-graphite"
         >
           <text
             x="500"
-            y={locale === "en" ? 196 : 258}
+            y={locale === "en" ? 196 : 236}
             textAnchor="middle"
             {...(locale === "en" ? { textLength: 990, lengthAdjust: "spacingAndGlyphs" } : {})}
             className={`fa-display font-extrabold ${locale === "en" ? "text-[250px]" : "text-[360px]"}`}

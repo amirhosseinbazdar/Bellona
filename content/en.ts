@@ -137,7 +137,7 @@ export const en: Dict = {
   hero: {
     tagline: "BUILD · AUTOMATE · GROW",
     title: "Websites that sell. **AI that follows up.**",
-    sub: "At Bellona Agency we design and hand-code your website or platform, connect it to AI automation that answers and follows up every lead in seconds, then grow the traffic that feeds it. One engineering team, from first sketch to first sale.",
+    sub: "We hand-code your website or platform, connect it to AI that answers every lead in seconds, then grow the traffic that feeds it.",
     primary: "Get a free growth audit",
     secondary: "See our work",
     projectsLabel: "projects shipped",
