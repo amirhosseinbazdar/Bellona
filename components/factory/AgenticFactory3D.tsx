@@ -369,7 +369,8 @@ function initMachineScene(
     renderer.setSize(frameWidth(), frameHeight())
     renderer.outputColorSpace = THREE.SRGBColorSpace
     renderer.toneMapping = THREE.ACESFilmicToneMapping
-    renderer.toneMappingExposure = 1.16
+    // Embedded on a light page backdrop: a touch less exposure so whites don't glare.
+    renderer.toneMappingExposure = embedded ? 1.02 : 1.16
     renderer.shadowMap.enabled = true
     renderer.shadowMap.type = THREE.PCFSoftShadowMap
     renderer.localClippingEnabled = true
@@ -399,7 +400,7 @@ function initMachineScene(
     scene.environmentIntensity = 0.78
     room.dispose()
     pmrem.dispose()
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x1f1f1f, 1.9))
+    scene.add(new THREE.HemisphereLight(0xffffff, embedded ? 0x8c8a85 : 0x1f1f1f, embedded ? 1.6 : 1.9))
     const key = new THREE.DirectionalLight(0xffffff, 4.4)
     key.position.set(-4, 12, 7)
     key.castShadow = true
@@ -412,7 +413,7 @@ function initMachineScene(
     const rim = new THREE.DirectionalLight(0xffffff, 3.4)
     rim.position.set(3, 7, -8)
     scene.add(rim)
-    const warm = new THREE.PointLight(0xff7a33, 30, 20, 2)
+    const warm = new THREE.PointLight(0xff7a33, embedded ? 9 : 30, 20, 2)
     warm.position.set(-4, 5, 3)
     scene.add(warm)
     const front = new THREE.DirectionalLight(0xffffff, 1)
@@ -434,7 +435,7 @@ function initMachineScene(
       amber: mat(0xf97316, 0.62, 0.3),
       ivory: mat(0xffffff, 0.35, 0.34),
       copper: mat(0xc2410c, 0.9, 0.28),
-      light: mat(0xff5500, 0.2, 0.25, { emissive: 0xff5500, emissiveIntensity: 1.3 }),
+      light: mat(0xff5500, 0.2, 0.25, { emissive: 0xff5500, emissiveIntensity: embedded ? 0.55 : 1.3 }),
       sage: mat(0xf4f4f2, 0.3, 0.3, { emissive: 0xd4d4d4, emissiveIntensity: 0.9 }),
       glass: mat(0xa3a3a3, 0.45, 0.16, { transparent: true, opacity: 0.19, depthWrite: false }),
     }
@@ -691,7 +692,7 @@ function initMachineScene(
       group.position.fromArray(d.pos)
       machine.add(group)
       const tone = new THREE.Color(STATION_COLORS[d.id])
-      const glowMat = new THREE.MeshStandardMaterial({ color: tone, emissive: tone, emissiveIntensity: 0.5, metalness: 0.2, roughness: 0.25 })
+      const glowMat = new THREE.MeshStandardMaterial({ color: tone, emissive: tone, emissiveIntensity: embedded ? 0.25 : 0.5, metalness: 0.2, roughness: 0.25 })
       box(group, 2.05, 0.12, 1.78, 0, 0.03, 0, M.dark, 0.1)
       box(group, 1.97, 0.03, 1.7, 0, 0.12, 0, glowMat, 0.09)
       box(group, 2.03, 0.17, 1.75, 0, 0.215, 0, M.body, 0.1)
@@ -1314,12 +1315,12 @@ function initMachineScene(
       camera.aspect = width / height
       // In a hero frame a shifted frustum centres the object in the right 58 %;
       // a contained frame keeps the machine in the middle of its own box.
-      camera.setViewOffset(width, height, mobile || !heroFrame ? 0 : -width * 0.21, mobile || embedded ? 0 : height * 0.025, width, height)
+      camera.setViewOffset(width, height, mobile || !heroFrame ? 0 : -width * 0.21, embedded ? (heroFrame ? 0 : height * 0.05) : mobile ? 0 : height * 0.025, width, height)
       const aspect = width / height
       const availableWidth = mobile ? 0.91 : heroFrame || !embedded ? Math.min(0.55, aspect > 2 ? 0.54 : 0.57) : 0.94
       const horizontalFit = 17.3 / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * aspect * availableWidth)
       const verticalFit = 11.5 / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * (embedded ? 0.85 : 0.62))
-      baseDistance = (Math.max(horizontalFit, verticalFit) * (mobile ? 0.97 : 1)) / (heroFrame ? (mobile ? 1.15 : 1.45) : embedded ? 1.1 : 1)
+      baseDistance = (Math.max(horizontalFit, verticalFit) * (mobile ? 0.97 : 1)) / (heroFrame ? (mobile ? 1.15 : 1.45) : embedded ? 1.12 : 1)
       controls.maxDistance = Math.max(55, baseDistance * 1.6)
       camera.updateProjectionMatrix()
       setCameraGoal()
@@ -2163,8 +2164,12 @@ const STYLES = String.raw`
 .agentic-factory-3d.embed .debug-ui {
   display: none !important;
 }
+.agentic-factory-3d.embed {
+  color-scheme: light;
+  background: radial-gradient(ellipse at 50% 42%, #fbfbfa 0%, #f2f1ee 55%, #e4e3df 100%);
+}
 .agentic-factory-3d.embed .vignette {
-  background: radial-gradient(ellipse at 50% 48%, transparent 45%, rgba(13, 13, 13, 0.5) 100%);
+  background: radial-gradient(ellipse at 50% 48%, transparent 55%, rgba(13, 13, 13, 0.06) 100%);
 }
 @media (max-width: 900px) {
   .agentic-factory-3d .topbar {

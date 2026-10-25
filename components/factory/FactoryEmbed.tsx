@@ -58,14 +58,14 @@ export function FactoryEmbed({ locale, unavailable }: { locale: Locale; unavaila
   };
 
   const fallback = (
-    <div className="flex h-full items-center justify-center p-8 text-center text-muted-dark">{unavailable}</div>
+    <div className="flex h-full items-center justify-center p-8 text-center text-muted">{unavailable}</div>
   );
 
   return (
     <div className="flex flex-col gap-4">
       <div
         ref={box}
-        className={`relative h-[clamp(360px,52vw,600px)] overflow-hidden rounded-[32px] bg-ink ${locale === "fa" ? "font-fa" : "font-sans"}`}
+        className={`relative h-[clamp(360px,52vw,600px)] overflow-hidden rounded-[32px] border border-line bg-surface ${locale === "fa" ? "font-fa" : "font-sans"}`}
       >
         {loaded ? (
           <Boundary fallback={fallback}>
