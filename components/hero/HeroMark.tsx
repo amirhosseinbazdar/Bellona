@@ -130,9 +130,9 @@ export function HeroMark({ className }: { className?: string }) {
       focusable="false"
     >
       <g className="bm-slab">
-        <polygon points="100,113.3 175.7,157 100,200.7 24.3,157" fill="#F97316" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
-        <polygon points="24.3,168 100,211.7 100,200.7 24.3,157" fill="#FF5500" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
-        <polygon points="175.7,168 100,211.7 100,200.7 175.7,157" fill="#0D0D0D" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="100,113.3 175.7,157 100,200.7 24.3,157" className="hm-top" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="24.3,168 100,211.7 100,200.7 24.3,157" className="hm-left" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="175.7,168 100,211.7 100,200.7 175.7,157" className="hm-right" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
         <polyline points="38.3,155.8 72.1,175.4 74.9,183" fill="none" stroke="#FFFFFF" strokeWidth="1.8" />
         <polyline points="161.7,155.8 125.9,176.6 123.1,184.1" fill="none" stroke="#FFFFFF" strokeWidth="1.8" />
       </g>
@@ -141,22 +141,22 @@ export function HeroMark({ className }: { className?: string }) {
       <circle className="bm-via" cx="76.5" cy="186.7" r="2.6" fill="none" stroke="#0D0D0D" strokeWidth="1.8" />
       <circle className="bm-via" cx="121.5" cy="187.8" r="2.6" fill="none" stroke="#0D0D0D" strokeWidth="1.8" />
       <g className="bm-bottom">
-        <polygon points="60.2,111 100,88 139.8,111 100,134" fill="#F97316" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
-        <polygon points="60.2,111 100,134 100,180 60.2,157" fill="#FF5500" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
-        <polygon points="100,134 139.8,111 139.8,157 100,180" fill="#0D0D0D" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="60.2,111 100,88 139.8,111 100,134" className="hm-top" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="60.2,111 100,134 100,180 60.2,157" className="hm-left" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="100,134 139.8,111 139.8,157 100,180" className="hm-right" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
       </g>
       <g className="bm-top">
-        <polygon points="60.2,43 100,20 139.8,43 100,66" fill="#F97316" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
-        <polygon points="60.2,43 100,66 100,112 60.2,89" fill="#FF5500" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
-        <polygon points="100,66 139.8,43 139.8,89 100,112" fill="#0D0D0D" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="60.2,43 100,20 139.8,43 100,66" className="hm-top" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="60.2,43 100,66 100,112 60.2,89" className="hm-left" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="100,66 139.8,43 139.8,89 100,112" className="hm-right" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
       </g>
       <g className="bm-ghost" aria-hidden="true">
-        <polygon points="60.2,111 100,88 139.8,111 100,134" fill="#F97316" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
-        <polygon points="60.2,111 100,134 100,180 60.2,157" fill="#FF5500" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
-        <polygon points="100,134 139.8,111 139.8,157 100,180" fill="#0D0D0D" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="60.2,111 100,88 139.8,111 100,134" className="hm-top" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="60.2,111 100,134 100,180 60.2,157" className="hm-left" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="100,134 139.8,111 139.8,157 100,180" className="hm-right" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
       </g>
       <g className="bm-wedge">
-        <polygon points="60.2,89 79.2,100 60.2,111" fill="#FF5500" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
+        <polygon points="60.2,89 79.2,100 60.2,111" className="hm-left" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" />
       </g>
     </svg>
   );

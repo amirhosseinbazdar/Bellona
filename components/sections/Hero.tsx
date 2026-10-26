@@ -31,7 +31,7 @@ export function Hero({ d }: { d: Dict }) {
   const { hero, locale } = d;
   const shipped = projects.filter((p) => p.status === "published").length;
   return (
-    <section aria-labelledby="hero-title" className="relative overflow-hidden">
+    <section aria-labelledby="hero-title" className="hero-soft relative overflow-hidden">
       {/* Desktop: one floor behind the whole hero, fading out under the text (globals.css, .hero-floor). */}
       <IsoGrid className="hero-floor absolute inset-0 hidden size-full lg:block" decor={locale === "fa" ? "left" : "right"} cubes={false} />
       <div className="mx-auto grid max-w-[1360px] items-center gap-2 px-4 pt-8 sm:px-6 lg:min-h-[min(760px,calc(100svh-104px))] lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:py-4">
