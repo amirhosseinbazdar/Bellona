@@ -553,30 +553,6 @@
   mask-image: linear-gradient(to bottom, transparent, #000 28%, #000 80%, transparent);
 }
 
-/* Hero palette (owner: "less in your face"): the cube mark, the cubes around it and the floor traces use a
-   softer orange and charcoal instead of the full brand #FF5500 / #0D0D0D. Same shapes, calmer colour. */
-.hero-soft {
-  --hm-top: #f5a46f;
-  --hm-left: #ea8048;
-  --hm-right: #2b2b2b;
-}
-.hm-top,
-.hero-soft svg .fill-orange-light {
-  fill: var(--hm-top, #f97316);
-}
-.hm-left,
-.hero-soft svg .fill-orange {
-  fill: var(--hm-left, #ff5500);
-}
-.hm-right,
-.hero-soft svg .fill-ink {
-  fill: var(--hm-right, #0d0d0d);
-}
-.hero-soft svg .stroke-orange {
-  stroke: var(--hm-left);
-  opacity: 0.7;
-}
-
 /* Paused until Motion adds .anim-on once the page is idle, so they don't compete with first load. */
 .iso-float {
   animation: isoFloat 4.8s ease-in-out infinite paused;
